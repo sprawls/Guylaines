@@ -33,24 +33,25 @@ public class XpOnCollision : MonoBehaviour {
             int XpType = XpInfo.XpType;
             if (XpType > 0)
             {
-                float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
+                //float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
+                float distX = Mathf.Abs(collision.gameObject.transform.position.x - playerObj.transform.position.x);
                 string xpText="";
-                float xpStrenght=30-dist;
+                int xpStrenght = (int)(25 - distX);
                 switch(XpType)
                 {
                     case 1:
-                        
-                        xpText+="Speed xp: "+dist;
+
+                        xpText += "Speed xp: " + xpStrenght;
                         break;
                     case 2:
-                        xpText+="Handle xp: "+dist;
+                        xpText += "Handle xp: " + xpStrenght;
                         break;
                     case 3:
-                        xpText+="Energie xp: "+dist;
+                        xpText += "Energie xp: " + xpStrenght;
                         break;
 
                 }
-                XpInfo.glow(dist);
+                XpInfo.glow(xpStrenght);
 
                 Debug.Log("Collided with : " + collision.gameObject + " - " + xpText);
             }
