@@ -10,6 +10,7 @@
         this.Second = second;
     }
 
+    public bool Empty { get { return First == null && Second == null; } }
     public T First { get; set; }
     public U Second { get; set; }
 };
