@@ -11,7 +11,8 @@ public class ShipControl : MonoBehaviour {
 	////////////////////////// Forward Speed //////////////////////////
 	public float forwardSpeed;
 
-	private float speedIncrementPerSecond = 0.2f;
+    private float speedIncrementPerLevel = 0.01f;
+	private float speedIncrementPerSecond = 0.0f;
 	private float startSpeed = 0.5f;
 	////////////////////////// Side Speed //////////////////////////
 	public float sideSpeed; //lerp from 0 to maxSideSpeed using curSideSpeedMultiplier as "t"
@@ -25,12 +26,16 @@ public class ShipControl : MonoBehaviour {
 
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
+	private RotatingPlatform rotatePlatform;
+	private Translation translation;
 
 
 
 
-
-	// Use this for initialization
+	void Awake() {
+		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
+		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
+	}
 	void Start () {
 		forwardSpeed = startSpeed;
 	}
@@ -38,7 +43,7 @@ public class ShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Calculate Forward Speed
-		forwardSpeed += (speedIncrementPerSecond * Time.deltaTime);
+        forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
 		if(Input.GetAxis("Horizontal") != 0) 
@@ -113,9 +118,13 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	public IEnumerator DeathAnimation() {
+		//move camera
+		rotatePlatform.ManuallyRotate(75,2f,1);
+		translation.Activate();
+
 		yield return new WaitForSeconds(0.05f);
 		Time.timeScale = 0.05f;
-		yield return new WaitForSeconds(3f*(Time.timeScale)); // 
+		yield return new WaitForSeconds(1.5f*(Time.timeScale)); // 
 		Time.timeScale = 1f;
 		slowMoEnded = true;
 

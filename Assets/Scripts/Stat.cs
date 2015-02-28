@@ -18,10 +18,10 @@ public class Stat {
 		Level = 1;
     }
 
-    public void addXP(int value)
+    public void addXP(float value)
     {
 		XP += (int)(value * Multiplier);
-		Level += XP / XP_TO_LEVEL;
+		Level = 1 + XP / XP_TO_LEVEL;
 	}
 
     public int Level
