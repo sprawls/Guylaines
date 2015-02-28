@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveCameraFromSpeed : MonoBehaviour {
 
-	public ShipControl shipControl;
+	private ShipControl shipControl;
 	public float startDistance;
 	public float endDistance;
 	public float speedForMax = 5f;
@@ -12,6 +12,11 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	private float curSpeed;
 
 	// Use this for initialization
+	void Awake() {
+		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+		shipControl = playerObj.GetComponentInChildren<ShipControl>();
+	}
+
 	void Start () {
 		cameraAngle = transform.localPosition;
 	}

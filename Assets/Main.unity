@@ -2259,7 +2259,7 @@ GameObject:
   - 114: {fileID: 1297453607}
   m_Layer: 0
   m_Name: Ship Prefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3548,6 +3548,26 @@ Prefab:
       propertyPath: shipControl
       value: 
       objectReference: {fileID: 1297453607}
+    - target: {fileID: 11481098, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
+      propertyPath: rotateX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481098, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
+      propertyPath: rotateY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481098, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
+      propertyPath: rotateZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481098, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
+      propertyPath: maxRotation
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481098, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
+      propertyPath: isInverse
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7cfab7c7211fdb448bff6368f6cde71c, type: 2}
   m_RootGameObject: {fileID: 1575881338}
@@ -4708,8 +4728,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06a22252da5c2740a684f38d93060b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipControl: {fileID: 1297453607}
-  maxRotation: 12
+  rotateX: 0
+  rotateY: 1
+  rotateZ: 0
+  maxRotation: 15
+  isInverse: 1
 --- !u!1 &1582689593
 GameObject:
   m_ObjectHideFlags: 0
@@ -4811,7 +4834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b963aeb92ae224492033067b3d7b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipControl: {fileID: 1297453607}
   startDistance: 1
   endDistance: 2
   speedForMax: 5
