@@ -74,7 +74,7 @@ public class ShipControl : MonoBehaviour {
 
 		}
 
-		Debug.Log (curSideSpeedMultiplier);
+		//Debug.Log (curSideSpeedMultiplier);
 	}
 
 	void ChangeSideSpeed(float axis) { //Change side speed when a key is pressed
