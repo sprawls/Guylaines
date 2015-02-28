@@ -3,15 +3,16 @@ using System.Collections.Generic;
 
 public class Chunk : MonoBehaviour {
 
-	public Material PlaneMaterial;
-
     private Vector2 _bottomLeft;
     private Vector2 _topRight;
     private TerrainGenerator tg;
 	// Use this for initialization
 
-    public List<GameObject> availablePrefab;
-    public int layerMin = 0;
+    public GameObject floor;
+    public List<ChunkObject> availablePrefab;
+    
+    public int layerMin;
+    public int currentLayer;
     
 	void Start () {
         name = "Chunk";
@@ -20,21 +21,12 @@ public class Chunk : MonoBehaviour {
         AddFloor();
         PopulateChunk(); 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     virtual public void AddFloor()
     {
-        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        GameObject plane = Instantiate(floor) as GameObject;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
-		//Change Plane's color
-		MeshRenderer planeRenderer = (MeshRenderer) plane.GetComponent<MeshRenderer>();
-		if(PlaneMaterial != null) planeRenderer.material = PlaneMaterial;
-
 
         plane.transform.localPosition = new Vector3(middle.x, -4, middle.y);
         plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
@@ -45,15 +37,24 @@ public class Chunk : MonoBehaviour {
     virtual public void PopulateChunk()
     { 
         int count = availablePrefab.Count;
-        for (int i = 0; i < 100; i++)
+        int maxPoints = currentLayer * 20 + 100;
+        
+        int points = 0;
+        while(points<maxPoints)
         {
-            GameObject go = Instantiate(availablePrefab[i % 2]) as GameObject;
+
+            ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
             
             float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
             float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
 
+            
+            
             go.transform.localPosition = new Vector3(x, 0, y);
+            go.transform.localScale = new Vector3(tg.rand.Next(5, 15), tg.rand.Next(5,35), tg.rand.Next(0, 15));
             go.transform.parent = transform;
+
+            points += go.cost;
         }
     }
 

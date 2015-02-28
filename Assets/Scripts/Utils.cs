@@ -5,6 +5,7 @@ using System.Text;
 
 public static class Utils
 {
+
     public static float Range(this Random rnd, float min, float max)
     {
         double d = rnd.NextDouble();
