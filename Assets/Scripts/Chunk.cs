@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Chunk : MonoBehaviour {
 
+	public Material PlaneMaterial;
+
     private Vector2 _bottomLeft;
     private Vector2 _topRight;
     private TerrainGenerator tg;
@@ -29,6 +31,10 @@ public class Chunk : MonoBehaviour {
         GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
+		//Change Plane's color
+		MeshRenderer planeRenderer = (MeshRenderer) plane.GetComponent<MeshRenderer>();
+		if(PlaneMaterial != null) planeRenderer.material = PlaneMaterial;
+
 
         plane.transform.localPosition = new Vector3(middle.x, -4, middle.y);
         plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
