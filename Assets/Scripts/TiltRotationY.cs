@@ -51,7 +51,6 @@ public class TiltRotationY : MonoBehaviour {
 		distanceMultiplier *= Mathf.Sign(curSpeed);
 		if(isInverse) distanceMultiplier *= -1;
 
-		//Debug.Log (distanceMultiplier);
 		transform.localRotation = Quaternion.Euler(BaseRotation + new Vector3(0,distanceMultiplier,0));
 	}
 
