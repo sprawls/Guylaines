@@ -10,21 +10,21 @@ public class XpInformation : MonoBehaviour {
         _xpType = Random.Range(0, 4);
         lightObj = GetComponent<Light>();
         meshRend = GetComponent<MeshRenderer>();
+        Color col = Color.white;
         switch (_xpType)
         {
             case 1:
-                lightObj.color = Color.red;
-                meshRend.material.color = Color.red;
+                col = Color.blue;
                 break;
             case 2:
-                lightObj.color = Color.blue;
-                meshRend.material.color = Color.blue;
+                col = Color.green;
                 break;
             case 3:
-                lightObj.color = Color.yellow;
-                meshRend.material.color = Color.yellow;
+                col = Color.yellow;
                 break;
         }
+        lightObj.color = col;
+        meshRend.material.color = col;
 	}
 
     public int XpType
@@ -35,7 +35,7 @@ public class XpInformation : MonoBehaviour {
 
     public void glow(float value)
     {
-        lightObj.intensity = 10+(value);
+        lightObj.intensity = 10+(value*5);
     }
 	
 	// Update is called once per frame

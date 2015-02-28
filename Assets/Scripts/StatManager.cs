@@ -38,15 +38,15 @@ public class StatManager : MonoBehaviour {
 	void HandleDebugKeys() {
 		if (Input.GetKeyDown(KeyCode.F))
 		{
-			_speed.addXP(90);
+			_speed.addXP(98);
 		}
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			_handling.addXP(90);
+			_handling.addXP(98);
 		}
 		if (Input.GetKeyDown(KeyCode.H))
 		{
-			_energy.addXP(90);
+			_energy.addXP(98);
 		}
 	}
 
