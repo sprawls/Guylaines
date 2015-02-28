@@ -2,47 +2,61 @@
 
 public class Stat {
 
-    private int _level = 1;
-    private int _xp = 0;
-    private int _XpToLevel=10;
-    private float _multi = 1;
-    public Stat(float multi)
+	private StatWidget _widget;
+
+    private int _level;
+    private int _xp;
+    private int _XpToLevel;
+    private float _multi;
+
+    public Stat(float multi, StatWidget widget)
     {
-        _multi = multi;
+		_widget = widget;
+		
+		Multiplier = multi;
+		XpToLevel = 10;
+		XP = 0;
+		Level = 1;
     }
 
-    public void XpAdd(int value)
+    public void addXP(int value)
     {
-        _xp += (int)(value*_multi);
-        while(_xp>=XpToLevel)
-        {
-            _xp -= XpToLevel;
-            _level++;
-        }
-    }
+		XP += (int)(value * Multiplier);
+		while (XP >= XpToLevel) {
+			XP -= XpToLevel;
+			Level++;
+		}
+	}
 
-    public int GetLevel
+    public int Level
     {
         get { return this._level; } 
+		private set {
+			_level = value;
+			_widget.level = value;
+		}
     }
 
-    public int GetXp
-    {
-        get { return this._xp; } 
+    public int XP {
+        get { return this._xp; }
+		private set {
+			this._xp = value;
+			_widget.setXP (value, this._XpToLevel);
+		}
     }
 
-    public float Multiplicator
+    public float Multiplier
     {
         get { return this._multi; }
-        set { this._multi = value; }
+        set {
+			this._multi = value;
+			_widget.multiplier = value;
+		}
     } 
 
-    public int XpToLevel 
+    public int XpToLevel
     { 
         get { return this._XpToLevel; } 
         set { this._XpToLevel = value; } 
     } 
-
-
-
 }
