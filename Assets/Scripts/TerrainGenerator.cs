@@ -23,10 +23,12 @@ public class TerrainGenerator : MonoBehaviour
     private int layer = 0;
 
     private List<ChunkPair> chunks = new List<ChunkPair>();
-
+    void Awake()
+    {
+        rand = new Rand(seed);
+    }
 	// Use this for initialization
 	void Start () {
-        rand = new Rand(seed);
         
         player = GameObject.Find("Ship Prefab");
 
