@@ -240,6 +240,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 454368}
+  - 114: {fileID: 11484296}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -1129,6 +1130,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 408488}
+  - {fileID: 494778}
   m_Father: {fileID: 474962}
   m_RootOrder: 1
 --- !u!4 &454376
@@ -1155,7 +1157,6 @@ Transform:
   m_Children:
   - {fileID: 454362}
   - {fileID: 454368}
-  - {fileID: 494778}
   m_Father: {fileID: 454366}
   m_RootOrder: 0
 --- !u!4 &494774
@@ -1183,8 +1184,8 @@ Transform:
   - {fileID: 413790}
   - {fileID: 494774}
   - {fileID: 413788}
-  m_Father: {fileID: 474962}
-  m_RootOrder: 2
+  m_Father: {fileID: 454368}
+  m_RootOrder: 1
 --- !u!20 &2054376
 Camera:
   m_ObjectHideFlags: 1
@@ -2210,7 +2211,7 @@ MonoBehaviour:
   rotateY: 1
   rotateZ: 0
   maxRotation: 3
-  isInverse: 1
+  isInverse: 0
 --- !u!114 &11474962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2231,6 +2232,22 @@ MonoBehaviour:
   stabilizingControlratio: .5
   sideSpeedLimit: .5
   maxTiltAngle: 10
+--- !u!114 &11484296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06a22252da5c2740a684f38d93060b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 1
+  maxRotation: 6
+  isInverse: 1
 --- !u!124 &12454376
 Behaviour:
   m_ObjectHideFlags: 1
