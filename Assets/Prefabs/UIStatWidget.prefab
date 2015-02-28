@@ -248,6 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8ef69f8f9df4ec98ad678a7f229223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelText: {fileID: 11494896}
+  multiplierText: {fileID: 0}
+  xpSlider: {fileID: 0}
 --- !u!114 &11494882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,7 +343,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: .157000005
+  m_Value: .449999988
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -400,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .156862736, g: .156862751, b: .156862751, a: .274509817}
+  m_Color: {r: 1, g: 1, b: 1, a: .235294119}
   m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -460,7 +463,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPEED
+  m_Text: 'SPEED
+
+'
 --- !u!222 &22207658
 CanvasRenderer:
   m_ObjectHideFlags: 1

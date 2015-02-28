@@ -60,6 +60,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22450570}
+  - 114: {fileID: 11474916}
   m_Layer: 0
   m_Name: SpeedWidget
   m_TagString: Untagged
@@ -366,6 +367,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22450594}
+  - 114: {fileID: 11474914}
   m_Layer: 0
   m_Name: HandlingWidget
   m_TagString: Untagged
@@ -381,6 +383,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22450596}
+  - 114: {fileID: 11474912}
   m_Layer: 0
   m_Name: EnergyWidget
   m_TagString: Untagged
@@ -400,6 +403,7 @@ GameObject:
   - 114: {fileID: 11450594}
   - 114: {fileID: 11450596}
   - 114: {fileID: 11450598}
+  - 114: {fileID: 11474918}
   m_Layer: 5
   m_Name: Stats UI
   m_TagString: Untagged
@@ -431,6 +435,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 450618}
   - 114: {fileID: 11450600}
+  - 114: {fileID: 11473486}
   m_Layer: 0
   m_Name: Ship Prefab 1
   m_TagString: Player
@@ -2389,6 +2394,64 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11473486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33389c39d4f8c439fb0131d0f58f1677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11474912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8ef69f8f9df4ec98ad678a7f229223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11474914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8ef69f8f9df4ec98ad678a7f229223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11474916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8ef69f8f9df4ec98ad678a7f229223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11474918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb94e4bf42ba4bae98576972b1fe0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedWidget: {fileID: 11474916}
+  handlingWidget: {fileID: 11474914}
+  energyWidget: {fileID: 11474912}
 --- !u!124 &12450642
 Behaviour:
   m_ObjectHideFlags: 1
