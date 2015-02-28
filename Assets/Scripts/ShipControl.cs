@@ -119,7 +119,7 @@ public class ShipControl : MonoBehaviour {
 
 	public IEnumerator DeathAnimation() {
 		//move camera
-		rotatePlatform.ManuallyRotate(75,2f,1);
+		rotatePlatform.ManuallyRotate(-75,2f,1);
 		translation.Activate();
 
 		yield return new WaitForSeconds(0.05f);
