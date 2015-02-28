@@ -5,7 +5,7 @@ public class Chunk : MonoBehaviour {
 
     private Vector2 _bottomLeft;
     private Vector2 _topRight;
-    private TerrainGenerator tg;
+    public TerrainGenerator tg { get; private set; }
 	// Use this for initialization
 
     public GameObject floor;
@@ -13,6 +13,7 @@ public class Chunk : MonoBehaviour {
     public List<ChunkObject> availablePrefab;
     
     public int layerMin;
+    public int layerMax;
     public int currentLayer;
     
 	void Start () {
@@ -38,6 +39,10 @@ public class Chunk : MonoBehaviour {
 
     virtual public void PopulateItem()
     {
+        if(availableItem.Count <= 0)
+        {
+            return;
+        }
         int maxPoints = currentLayer * 10 + 20;
 
         for (int i = 0; i < maxPoints; i++)
@@ -54,7 +59,11 @@ public class Chunk : MonoBehaviour {
     }
 
     virtual public void PopulateChunk()
-    { 
+    {
+        if (availablePrefab.Count <= 0)
+        {
+            return;
+        }
         int maxPoints = currentLayer * 20 + 100;
         
         int points = 0;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Rand = System.Random;
 using System.Collections.Generic;
+using System.Linq;
 
 using ChunkPair = Pair<Chunk,Chunk>;
 
@@ -20,9 +21,13 @@ public class TerrainGenerator : MonoBehaviour
     public  List<Chunk> ChunkSpecifier;
 
     private int index;
+    
+
+
     public int layer = 0;
 
     private List<ChunkPair> chunks = new List<ChunkPair>();
+
     void Awake()
     {
         rand = new Rand(seed);
@@ -31,6 +36,14 @@ public class TerrainGenerator : MonoBehaviour
 	void Start () {
         
         player = GameObject.Find("Ship Prefab");
+        ChunkSpecifier.Sort(delegate(Chunk c1, Chunk c2)
+        {
+            if (c1.layerMin < c2.layerMin) return -1;
+            if (c1.layerMin == c2.layerMin) return 0;
+            return 1;
+        });
+
+
 
         initChunk();
 	}
@@ -117,7 +130,7 @@ public class TerrainGenerator : MonoBehaviour
             Vector2 bl = l.First.bottomLeft + move;
             Vector2 tr = l.First.topRight + move;
 
-            l.Second = Create(bl, tr);
+            l.Second = Create(bl, tr,true);
             updated = true;
         }
 
@@ -153,7 +166,7 @@ public class TerrainGenerator : MonoBehaviour
             Vector2 bl = r.First.bottomLeft + move;
             Vector2 tr = r.First.topRight + move;
 
-            r.Second = Create(bl, tr);
+            r.Second = Create(bl, tr,true);
             updated = true;
         }
 
@@ -168,7 +181,7 @@ public class TerrainGenerator : MonoBehaviour
         Chunk f = c.First;
         if (c.Second == null && f.top < player.transform.localPosition.z + loadDistance)
         {
-            c.Second = Create(new Vector2(f.left, f.bottom + +sizeChunk), new Vector2(f.right, f.top + sizeChunk));
+            c.Second = Create(new Vector2(f.left, f.bottom + +sizeChunk), new Vector2(f.right, f.top + sizeChunk), true);
             currentChunk = c;
         }
     }
@@ -284,14 +297,30 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private Chunk Create(Vector2 bottomLeft, Vector2 topRight)
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer = false)
     {
-        Chunk c = Instantiate(ChunkSpecifier.OneAtRandom(rand)) as Chunk;
+        Chunk c = Instantiate(LegalChunk(nextLayer?layer+1:layer).OneAtRandom(rand)) as Chunk;
         
         //Chunk c = newObject.GetComponent<Chunk>();
         c.SetBound(bottomLeft, topRight);
         c.currentLayer = layer;
 
         return c;
+    }
+
+    private int lastOkChunk;
+    private List<Chunk> LegalChunk(int layer)
+    {
+
+        ChunkSpecifier = ChunkSpecifier.Where(delegate(Chunk c)
+        {
+            return layer <= c.layerMax || c.layerMax < 0;
+        }).ToList();
+
+        return ChunkSpecifier.TakeWhile(delegate(Chunk c)
+        {
+            return layer >= c.layerMin;
+        }).ToList();
+        
     }
 }

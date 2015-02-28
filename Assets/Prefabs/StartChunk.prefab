@@ -1,53 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &131040
+--- !u!1 &148088
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 431040}
-  - 114: {fileID: 11431040}
+  - 4: {fileID: 448088}
+  - 114: {fileID: 11448088}
   m_Layer: 0
-  m_Name: BasicChunk
+  m_Name: StartChunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &431040
+--- !u!4 &448088
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131040}
+  m_GameObject: {fileID: 148088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 236.57811, y: 40.3503418, z: 319.853638}
+  m_LocalPosition: {x: -88.9272842, y: -129.14296, z: 506.678833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11431040
+--- !u!114 &11448088
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131040}
+  m_GameObject: {fileID: 148088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc91c8ca9cffcd47800d5b007eff5e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 21a8fc1296788e14fa2ef222ad5a4411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 140762, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
-  availableItem:
-  - {fileID: 11477432, guid: 9adf47a16b808b24481a4071fbcde100, type: 2}
+  availableItem: []
   availablePrefab:
-  - {fileID: 11420664, guid: 0a76dcc640a3eb14aa353c6cf1967c75, type: 2}
   - {fileID: 11429624, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
-  layerMin: 1
-  layerMax: -1
+  layerMin: 0
+  layerMax: 0
   currentLayer: 0
+  freeZoneLength: 200
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -57,6 +56,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 131040}
+  m_RootGameObject: {fileID: 148088}
   m_IsPrefabParent: 1
   m_IsExploded: 1
