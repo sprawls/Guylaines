@@ -57,7 +57,7 @@ public class ShipControl : MonoBehaviour {
 			StabilizeSideSpeed();
 
 		//Check isTilting
-		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false) {
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false) {
 			isSuperTilting = true;
 			StartCoroutine (SuperTiltPlanner());
 		}
