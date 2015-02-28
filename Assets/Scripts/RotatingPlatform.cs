@@ -24,7 +24,7 @@ public class RotatingPlatform : MonoBehaviour {
 
 
 	void Start () {
-		StartCoroutine (RotateTimer ());
+		if (interval > 0 ) StartCoroutine (RotateTimer ());
 		if (randomize == true) StartCoroutine(RandomizeRotation());
 	}
 	
@@ -32,6 +32,11 @@ public class RotatingPlatform : MonoBehaviour {
 	public void ManuallyRotate(float angle,float time,int direction) {
 		StartCoroutine (RotatePlatform(transform,angle,time,direction));
 	}
+
+    public void ManuallyRotate()
+    {
+        StartCoroutine(RotatePlatform(transform, rotationAngle, rotationTime, rotationDirection));
+    }
 
 	IEnumerator RotateTimer() {
 		while (true) {
