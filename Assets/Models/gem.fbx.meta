@@ -7,13 +7,18 @@ ModelImporter:
     100002: Cube
     100004: //RootNode
     100006: Lamp
+    100008: gem
     400000: Camera
     400002: Cube
     400004: //RootNode
     400006: Lamp
+    400008: gem
     2300000: Cube
+    2300002: gem
     3300000: Cube
+    3300002: gem
     4300000: Cube
+    4300002: gem
     7400000: Default Take
     9500000: //RootNode
   materials:
