@@ -59,7 +59,7 @@ public class ShipControl : MonoBehaviour {
 		//Check isTilting
 		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false) {
 			isSuperTilting = true;
-			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,180),tiltTimeAnimation));
+			StartCoroutine (SuperTiltPlanner());
 		}
 
 		//Move it
@@ -139,6 +139,27 @@ public class ShipControl : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
+	private IEnumerator SuperTiltPlanner() {
+		//START ANIMATION
+		StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,450),tiltTimeAnimation));
+		yield return new WaitForSeconds(tiltTimeAnimation);
+		//TILTED TIME
+		for(float i = 0; i< 1; i += Time.deltaTime/tiltTime) {
+			foreach (GameObject g in objectsToSuperTilt) {
+				if(g!= null) g.transform.localEulerAngles = new Vector3(0,0,90);
+			}
+			yield return null;
+		}
+		//END ANIMATION
+		//yield return new WaitForSeconds(tiltTime);
+		StartCoroutine (SuperTilt(new Vector3(0,0,90), new Vector3(0,0,0),tiltTimeAnimation));
+		yield return new WaitForSeconds(tiltTimeAnimation);
+		//COOLDOWN
+		yield return new WaitForSeconds(tiltCooldown);
+		isSuperTilting = false;
+
+	}
+
 	private IEnumerator SuperTilt(Vector3 startingRotation, Vector3 endRotation, float time) {
 		float step = 0f; //raw step
 		float rate = 1f/time; //amount to add to raw step
@@ -148,17 +169,21 @@ public class ShipControl : MonoBehaviour {
 			step += Time.deltaTime * rate; 
 			smoothStep = Mathf.SmoothStep(0f, 1f, step); // finding smooth step
 			foreach (GameObject g in objectsToSuperTilt) {
-				g.transform.localRotation = Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)));
-				/*
-				g.transform.localRotation = new Vector3 (Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)))),
-				                                         Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)))),
-				                                         Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep))))); //lerp position
-				                                         */
+				//if(g!= null) g.transform.localRotation = Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)));
+				if(g!= null) g.transform.localEulerAngles = Vector3.Lerp(startingRotation, endRotation, (smoothStep));
+
 			}
 			lastStep = smoothStep; //get previous last step
 			yield return null;
 		}
+		if(step > 1.0) {
+			foreach (GameObject g in objectsToSuperTilt) {
+				//if(g!= null) g.transform.localRotation = Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, 1f));
+				if(g!= null) g.transform.localEulerAngles = Vector3.Lerp(startingRotation, endRotation, 1);
+			}
+		}
 
 	}
+
 
 }
