@@ -44,7 +44,7 @@ MonoBehaviour:
   sizeChunk: 600
   loadDistance: 300
   ChunkSpecifier:
-  - {fileID: 131040, guid: 15cdb5f192cab2f4eb025c561dfb1c0d, type: 2}
+  - {fileID: 11431040, guid: 15cdb5f192cab2f4eb025c561dfb1c0d, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
