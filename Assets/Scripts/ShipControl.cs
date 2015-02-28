@@ -27,13 +27,14 @@ public class ShipControl : MonoBehaviour {
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
 	private RotatingPlatform rotatePlatform;
-
+	private Translation translation;
 
 
 
 
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
+		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
 	}
 	void Start () {
 		forwardSpeed = startSpeed;
@@ -117,10 +118,13 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	public IEnumerator DeathAnimation() {
-		rotatePlatform.ManuallyRotate(70,2.5f,1);
+		//move camera
+		rotatePlatform.ManuallyRotate(75,2f,1);
+		translation.Activate();
+
 		yield return new WaitForSeconds(0.05f);
 		Time.timeScale = 0.05f;
-		yield return new WaitForSeconds(3f*(Time.timeScale)); // 
+		yield return new WaitForSeconds(1.5f*(Time.timeScale)); // 
 		Time.timeScale = 1f;
 		slowMoEnded = true;
 
