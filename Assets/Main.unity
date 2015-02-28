@@ -5620,6 +5620,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11450600, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: objectsToSuperTilt.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 450618, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_LocalPosition.x
       value: .25
@@ -5736,6 +5740,14 @@ Prefab:
       propertyPath: zAxis
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 11450600, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: objectsToSuperTilt.Array.data[0]
+      value: 
+      objectReference: {fileID: 812014040}
+    - target: {fileID: 11450600, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: objectsToSuperTilt.Array.data[1]
+      value: 
+      objectReference: {fileID: 754296318}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
   m_RootGameObject: {fileID: 1297453605}
@@ -6182,6 +6194,11 @@ MonoBehaviour:
   sideSpeedLimit: .5
   maxTiltAngle: 10
   slowMoEnded: 0
+  tiltCooldown: 3
+  tiltTime: 1.5
+  objectsToSuperTilt:
+  - {fileID: 812014040}
+  - {fileID: 754296318}
 --- !u!114 &1297453608
 MonoBehaviour:
   m_ObjectHideFlags: 0

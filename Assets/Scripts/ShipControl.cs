@@ -29,7 +29,12 @@ public class ShipControl : MonoBehaviour {
 	private RotatingPlatform rotatePlatform;
 	private Translation translation;
 
-
+	////////////////////////// Tilt on Fire //////////////////////////
+	public float tiltCooldown = 3f;
+	public float tiltTime = 1.5f;
+	private float tiltTimeAnimation = 1f;
+	public GameObject[] objectsToSuperTilt;
+	private bool isSuperTilting = false;
 
 
 	void Awake() {
@@ -51,6 +56,11 @@ public class ShipControl : MonoBehaviour {
 		else
 			StabilizeSideSpeed();
 
+		//Check isTilting
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false) {
+			isSuperTilting = true;
+			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,180),tiltTimeAnimation));
+		}
 
 		//Move it
 		if(isDead == false) {
@@ -73,9 +83,6 @@ public class ShipControl : MonoBehaviour {
 
 			curSideSpeedMultiplier += Mathf.Sign(axis) * (stabilizingControlratio*control*Time.deltaTime);
 			curSideSpeedMultiplier = Mathf.Clamp(curSideSpeedMultiplier,-1,1);
-
-			//if(Mathf.Abs(sideSpeed) <= deadTiltZone) sideSpeed = 0;
-			//if(Mathf.Abs(curSideSpeedMultiplier) <= deadTiltZone) curSideSpeedMultiplier = 0;
 
 			sideSpeed = Mathf.Lerp(0, sideSpeedLimit, Mathf.Abs (curSideSpeedMultiplier));
 			sideSpeed *= Mathf.Sign(curSideSpeedMultiplier);
@@ -131,4 +138,27 @@ public class ShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(5f);
 		Application.LoadLevel(Application.loadedLevel);
 	}
+
+	private IEnumerator SuperTilt(Vector3 startingRotation, Vector3 endRotation, float time) {
+		float step = 0f; //raw step
+		float rate = 1f/time; //amount to add to raw step
+		float smoothStep = 0f; //current smooth step
+		float lastStep = 0f; //previous smooth step
+		while(step < 1f) { // until we're done
+			step += Time.deltaTime * rate; 
+			smoothStep = Mathf.SmoothStep(0f, 1f, step); // finding smooth step
+			foreach (GameObject g in objectsToSuperTilt) {
+				g.transform.localRotation = Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)));
+				/*
+				g.transform.localRotation = new Vector3 (Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)))),
+				                                         Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep)))),
+				                                         Quaternion.Euler(Vector3.Lerp(startingRotation, endRotation, (smoothStep))))); //lerp position
+				                                         */
+			}
+			lastStep = smoothStep; //get previous last step
+			yield return null;
+		}
+
+	}
+
 }
