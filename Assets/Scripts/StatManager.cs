@@ -13,7 +13,6 @@ public class StatManager : MonoBehaviour {
 	}
 
 	void Start () {
-        Debug.Log(UIManager.Instance);
         _speed = new Stat(1, UIManager.Instance.speedWidget);
         _handling = new Stat(1, UIManager.Instance.handlingWidget);
         _energy = new Stat(2, UIManager.Instance.energyWidget);
@@ -36,15 +35,15 @@ public class StatManager : MonoBehaviour {
 	}
 
 	void HandleDebugKeys() {
-		if (Input.GetKeyDown(KeyCode.F))
+		if (Input.GetKey(KeyCode.F))
 		{
 			_speed.addXP(98);
 		}
-		if (Input.GetKeyDown(KeyCode.G))
+		if (Input.GetKey(KeyCode.G))
 		{
 			_handling.addXP(98);
 		}
-		if (Input.GetKeyDown(KeyCode.H))
+		if (Input.GetKey(KeyCode.H))
 		{
 			_energy.addXP(98);
 		}
