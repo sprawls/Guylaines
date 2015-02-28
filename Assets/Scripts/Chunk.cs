@@ -28,7 +28,7 @@ public class Chunk : MonoBehaviour {
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
 
-        plane.transform.localPosition = new Vector3(middle.x, -4, middle.y);
+        plane.transform.localPosition = new Vector3(middle.x, 0, middle.y);
         plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
 
         plane.transform.parent = transform;
@@ -51,7 +51,7 @@ public class Chunk : MonoBehaviour {
             
             
             go.transform.localPosition = new Vector3(x, 0, y);
-            go.transform.localScale = new Vector3(tg.rand.Next(5, 15), tg.rand.Next(5,35), tg.rand.Next(0, 15));
+            go.transform.localScale = new Vector3(tg.rand.Range(1.0f, 3.0f), tg.rand.Range(1.0f, 3.0f), tg.rand.Range(1.0f, 3.0f));
             go.transform.parent = transform;
 
             points += go.cost;

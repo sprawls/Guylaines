@@ -22,6 +22,10 @@ public static class Utils
         {
             rnd = new Random();
         }
+        if(lst.Count == 0)
+        {
+            return default(T);
+        }
         return lst[rnd.Next(lst.Count)];
     }
 }
