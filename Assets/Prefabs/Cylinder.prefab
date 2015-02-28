@@ -12,6 +12,7 @@ GameObject:
   - 136: {fileID: 13629624}
   - 23: {fileID: 2329624}
   - 108: {fileID: 10863168}
+  - 114: {fileID: 11406984}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Obstacle
@@ -28,7 +29,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 429624}
   - 114: {fileID: 11429624}
-  - 114: {fileID: 11492158}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -123,6 +123,17 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11406984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0e8690d1126eb4a907f818f9ba334a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11429624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,17 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
---- !u!114 &11492158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0e8690d1126eb4a907f818f9ba334a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &13629624
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -23,9 +23,11 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		curSpeed = shipControl.forwardSpeed;
-		float distanceMultiplier = Mathf.Min(speedForMax,curSpeed);
-		distanceMultiplier = Mathf.Lerp(startDistance,endDistance,distanceMultiplier/speedForMax);
-		transform.localPosition = cameraAngle*distanceMultiplier;
+		if(shipControl.isDead == false) {
+			curSpeed = shipControl.forwardSpeed;
+			float distanceMultiplier = Mathf.Min(speedForMax,curSpeed);
+			distanceMultiplier = Mathf.Lerp(startDistance,endDistance,distanceMultiplier/speedForMax);
+			transform.localPosition = cameraAngle*distanceMultiplier;
+		}
 	}
 }
