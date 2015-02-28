@@ -23,8 +23,8 @@ public class ShipControl : MonoBehaviour {
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
 
-
-
+	////////////////////////// Death //////////////////////////
+	[HideInInspector] public bool slowMoEnded = false;
 
 
 
@@ -104,10 +104,22 @@ public class ShipControl : MonoBehaviour {
 
 	public void Kill(){
 		isDead = true;
+		StartCoroutine(DeathAnimation());
 		Destroy(model.gameObject);
 	}
 
 	public void Spawn(){
 		isDead = false;
+	}
+
+	public IEnumerator DeathAnimation() {
+		yield return new WaitForSeconds(0.05f);
+		Time.timeScale = 0.05f;
+		yield return new WaitForSeconds(3f*(Time.timeScale)); // 
+		Time.timeScale = 1f;
+		slowMoEnded = true;
+
+		yield return new WaitForSeconds(5f);
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }
