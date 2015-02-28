@@ -16,7 +16,7 @@ public class GrazeOnCollision : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision collision) {
-		if(collision.gameObject.tag == "Obstacle") {
+		if(collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Floor") {
 			//Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
 			GameObject newParticles = (GameObject)Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
