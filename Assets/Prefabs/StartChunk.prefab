@@ -40,7 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 140762, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
-  availableItem: []
+  availableItem:
+  - {fileID: 11404742, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
   availablePrefab:
   - {fileID: 11429624, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
   layerMin: 0
