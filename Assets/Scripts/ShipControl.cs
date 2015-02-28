@@ -13,7 +13,7 @@ public class ShipControl : MonoBehaviour {
 
     private float speedIncrementPerLevel = 0.01f;
 	private float speedIncrementPerSecond = 0.0f;
-	private float startSpeed = 0.5f;
+	private float startSpeed = 2.0f;
 	////////////////////////// Side Speed //////////////////////////
 	public float sideSpeed; //lerp from 0 to maxSideSpeed using curSideSpeedMultiplier as "t"
 	public float tiltAngle;
