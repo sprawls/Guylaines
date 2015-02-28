@@ -4995,7 +4995,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &812014040
 GameObject:
   m_ObjectHideFlags: 0
@@ -9768,6 +9768,10 @@ Prefab:
     - target: {fileID: 2050642, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: far clip plane
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450640, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
