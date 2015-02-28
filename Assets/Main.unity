@@ -12,12 +12,12 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
-  m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: .00999999978
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_Fog: 1
+  m_FogColor: {r: .0735294223, g: .06758219, b: .06758219, a: 1}
+  m_FogMode: 1
+  m_FogDensity: .5
+  m_LinearFogStart: 350
+  m_LinearFogEnd: 500
   m_AmbientLight: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
@@ -2503,6 +2503,52 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!1 &252451068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 160576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+  m_PrefabInternal: {fileID: 921019532}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 252451070}
+  - 114: {fileID: 252451069}
+  m_Layer: 0
+  m_Name: TerrainGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &252451069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11460576, guid: 391944d3a12bd554b9ab3537105e8e9f,
+    type: 2}
+  m_PrefabInternal: {fileID: 921019532}
+  m_GameObject: {fileID: 252451068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f51177fb7958ee42a2a7173f74e1374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  forcedWidth: 0
+  sizeChunk: 600
+  loadDistance: 300
+  ChunkSpecifier:
+  - {fileID: 131040, guid: 15cdb5f192cab2f4eb025c561dfb1c0d, type: 2}
+--- !u!4 &252451070
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+  m_PrefabInternal: {fileID: 921019532}
+  m_GameObject: {fileID: 252451068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 236.57811, y: 40.3503418, z: 319.853638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &269773855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5253,6 +5299,50 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 2053122044}
   m_GameObject: {fileID: 883735388}
+--- !u!1001 &921019532
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 236.57811
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 40.3503418
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 319.853638
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 460576, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 391944d3a12bd554b9ab3537105e8e9f, type: 2}
+  m_RootGameObject: {fileID: 252451068}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &946408636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8645,7 +8735,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -9617,63 +9707,67 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22450608, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .870999992
       objectReference: {fileID: 0}
     - target: {fileID: 22450608, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450620, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .870999992
       objectReference: {fileID: 0}
     - target: {fileID: 22450620, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .870999992
       objectReference: {fileID: 0}
     - target: {fileID: 22450620, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450590, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .449999988
       objectReference: {fileID: 0}
     - target: {fileID: 22450590, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450604, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .449999988
       objectReference: {fileID: 0}
     - target: {fileID: 22450604, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .449999988
       objectReference: {fileID: 0}
     - target: {fileID: 22450604, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450618, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .157000005
       objectReference: {fileID: 0}
     - target: {fileID: 22450618, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450578, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .157000005
       objectReference: {fileID: 0}
     - target: {fileID: 22450578, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .157000005
       objectReference: {fileID: 0}
     - target: {fileID: 22450578, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050642, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: far clip plane
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}

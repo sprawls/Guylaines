@@ -19,10 +19,11 @@ public class GrazeOnCollision : MonoBehaviour {
 		if(collision.gameObject.tag == "Obstacle") {
 			Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
-			//Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
+			Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
 		}
 	}
 
+	/*
 	void OnCollisionStay(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle") {
 			Debug.Log ("Grazed with : "  + collision.gameObject);
@@ -32,4 +33,5 @@ public class GrazeOnCollision : MonoBehaviour {
 		}
 		
 	}
+	*/
 }
