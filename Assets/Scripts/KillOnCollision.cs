@@ -3,6 +3,7 @@ using System.Collections;
 
 public class KillOnCollision : MonoBehaviour {
 
+	public GameObject DeathParticles;
 	private ShipControl shipControl;
 	// Use this for initialization
 	void Awake() {
@@ -23,6 +24,7 @@ public class KillOnCollision : MonoBehaviour {
 		if(collision.gameObject.tag == "Obstacle") {
 			Debug.Log ("Collided with : "  + collision.gameObject);
 			shipControl.Kill();
+			Instantiate(DeathParticles,transform.position, Quaternion.identity);
 		}
 
 	}

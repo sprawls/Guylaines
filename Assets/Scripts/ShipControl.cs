@@ -4,6 +4,7 @@ using System.Collections;
 public class ShipControl : MonoBehaviour {
 
 	////////////////////////// General //////////////////////////
+	public Transform modelAndCam;
 	public Transform model;
 	public MoveCameraFromSpeed cameraScript;
 	public bool isDead = false;
@@ -96,13 +97,14 @@ public class ShipControl : MonoBehaviour {
 		newTilt *= Mathf.Sign(-sideSpeed);
 
 		//Apply new Tilt
-		model.localRotation = Quaternion.Euler(new Vector3(0,0,newTilt));
+		modelAndCam.localRotation = Quaternion.Euler(new Vector3(0,0,newTilt));
 
 	}
 
 
 	public void Kill(){
 		isDead = true;
+		Destroy(model.gameObject);
 	}
 
 	public void Spawn(){
