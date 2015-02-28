@@ -5,6 +5,7 @@ using System.Text;
 
 public static class Utils
 {
+
     public static float Range(this Random rnd, float min, float max)
     {
         double d = rnd.NextDouble();
@@ -20,6 +21,10 @@ public static class Utils
         if(rnd == null)
         {
             rnd = new Random();
+        }
+        if(lst.Count == 0)
+        {
+            return default(T);
         }
         return lst[rnd.Next(lst.Count)];
     }

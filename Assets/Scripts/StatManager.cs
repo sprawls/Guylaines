@@ -2,7 +2,7 @@
 using System.Collections;
 public class StatManager : MonoBehaviour {
 
-	public static StatManager Instance { get; private set; }
+    public static StatManager Instance { get; private set; }
 
     private Stat _speed;
     private Stat _handling;

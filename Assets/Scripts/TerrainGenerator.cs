@@ -17,10 +17,10 @@ public class TerrainGenerator : MonoBehaviour
     //Reference to the player
     private GameObject player;
 
-    public  List<GameObject> ChunkSpecifier;
+    public  List<Chunk> ChunkSpecifier;
 
     private int index;
-    private int layer = 0;
+    public int layer = 0;
 
     private List<ChunkPair> chunks = new List<ChunkPair>();
     void Awake()
@@ -286,10 +286,11 @@ public class TerrainGenerator : MonoBehaviour
 
     private Chunk Create(Vector2 bottomLeft, Vector2 topRight)
     {
-        GameObject newObject = Instantiate(ChunkSpecifier.OneAtRandom(rand)) as GameObject;
-
-        Chunk c = newObject.GetComponent<Chunk>();
+        Chunk c = Instantiate(ChunkSpecifier.OneAtRandom(rand)) as Chunk;
+        
+        //Chunk c = newObject.GetComponent<Chunk>();
         c.SetBound(bottomLeft, topRight);
+        c.currentLayer = layer;
 
         return c;
     }
