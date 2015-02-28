@@ -44,7 +44,7 @@ MonoBehaviour:
   availablePrefab:
   - {fileID: 11471610, guid: 2b17786cc938ce842b37b6e6cf1461ef, type: 2}
   layerMin: 3
-  layerMax: -10
+  layerMax: 9
   currentLayer: 0
 --- !u!1001 &100100000
 Prefab:
