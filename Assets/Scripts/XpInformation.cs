@@ -8,8 +8,8 @@ public class XpInformation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _xpType = Random.Range(0, 4);
-        lightObj = GetComponent<Light>();
-        meshRend = GetComponent<MeshRenderer>();
+        lightObj = GetComponentInChildren<Light>();
+        meshRend = GetComponentInChildren<MeshRenderer>();
         Color col = Color.white;
         switch (_xpType)
         {
