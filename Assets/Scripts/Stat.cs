@@ -21,7 +21,7 @@ public class Stat {
     public void addXP(int value)
     {
 		XP += (int)(value * Multiplier);
-		Level += XP / XP_TO_LEVEL;
+		Level = 1 + XP / XP_TO_LEVEL;
 	}
 
     public int Level
