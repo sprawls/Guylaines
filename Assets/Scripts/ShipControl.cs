@@ -21,7 +21,7 @@ public class ShipControl : MonoBehaviour {
 
 	public float maxTiltAngle = 5;
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
-
+	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
 
 
 
@@ -57,11 +57,24 @@ public class ShipControl : MonoBehaviour {
 		if(sideSpeed > 0) axis = -1;
 		else axis = 1;
 
-		curSideSpeedMultiplier += Mathf.Sign(axis) * (stabilizingControlratio*control*Time.deltaTime);
-		curSideSpeedMultiplier = Mathf.Clamp(curSideSpeedMultiplier,-1,1);
+		if(Mathf.Abs(sideSpeed) <= deadTiltZone) {
+			sideSpeed = 0;
+			curSideSpeedMultiplier = 0;
+		} else {
+		
 
-		sideSpeed = Mathf.Lerp(0, sideSpeedLimit, Mathf.Abs (curSideSpeedMultiplier));
-		sideSpeed *= Mathf.Sign(curSideSpeedMultiplier);
+			curSideSpeedMultiplier += Mathf.Sign(axis) * (stabilizingControlratio*control*Time.deltaTime);
+			curSideSpeedMultiplier = Mathf.Clamp(curSideSpeedMultiplier,-1,1);
+
+			//if(Mathf.Abs(sideSpeed) <= deadTiltZone) sideSpeed = 0;
+			//if(Mathf.Abs(curSideSpeedMultiplier) <= deadTiltZone) curSideSpeedMultiplier = 0;
+
+			sideSpeed = Mathf.Lerp(0, sideSpeedLimit, Mathf.Abs (curSideSpeedMultiplier));
+			sideSpeed *= Mathf.Sign(curSideSpeedMultiplier);
+
+		}
+
+		Debug.Log (curSideSpeedMultiplier);
 	}
 
 	void ChangeSideSpeed(float axis) { //Change side speed when a key is pressed

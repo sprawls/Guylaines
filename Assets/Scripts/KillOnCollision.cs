@@ -13,7 +13,7 @@ public class KillOnCollision : MonoBehaviour {
 	
 	}
 
-	void OnCollisionEnter() {
-
+	void OnCollisionEnter(Collision collision) {
+		Debug.Log ("Collided with : "  + collision.gameObject);
 	}
 }
