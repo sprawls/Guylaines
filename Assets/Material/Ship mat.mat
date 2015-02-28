@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Ship mat
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -52,7 +52,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: .0651089177
       data:
         first:
           name: _EmissionLM
@@ -65,7 +65,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .941176474, g: .567474067, b: .567474067, a: 1}
+        second: {r: 1, g: .176470578, b: .176470578, a: 1}
       data:
         first:
           name: _SpecColor
@@ -74,3 +74,7 @@ Material:
         first:
           name: _ReflectColor
         second: {r: 1, g: 1, b: 1, a: .5}
+      data:
+        first:
+          name: _Emission
+        second: {r: 0, g: 0, b: 0, a: 0}
