@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 
 public class Stat {
+	public const int XP_TO_LEVEL = 100;
 
 	private StatWidget _widget;
 
     private int _level;
     private int _xp;
-    private int _XpToLevel;
     private float _multi;
 
     public Stat(float multi, StatWidget widget)
@@ -14,7 +14,6 @@ public class Stat {
 		_widget = widget;
 		
 		Multiplier = multi;
-		XpToLevel = 10;
 		XP = 0;
 		Level = 1;
     }
@@ -22,10 +21,7 @@ public class Stat {
     public void addXP(int value)
     {
 		XP += (int)(value * Multiplier);
-		while (XP >= XpToLevel) {
-			XP -= XpToLevel;
-			Level++;
-		}
+		Level += XP / XP_TO_LEVEL;
 	}
 
     public int Level
@@ -41,7 +37,7 @@ public class Stat {
         get { return this._xp; }
 		private set {
 			this._xp = value;
-			_widget.setXP (value, this._XpToLevel);
+			_widget.setXP (value);
 		}
     }
 
@@ -52,11 +48,5 @@ public class Stat {
 			this._multi = value;
 			_widget.multiplier = value;
 		}
-    } 
-
-    public int XpToLevel
-    { 
-        get { return this._XpToLevel; } 
-        set { this._XpToLevel = value; } 
-    } 
+    }
 }
