@@ -11,7 +11,8 @@ public class ShipControl : MonoBehaviour {
 	////////////////////////// Forward Speed //////////////////////////
 	public float forwardSpeed;
 
-	private float speedIncrementPerSecond = 0.2f;
+    private float speedIncrementPerLevel = 0.01f;
+	private float speedIncrementPerSecond = 0.0f;
 	private float startSpeed = 0.5f;
 	////////////////////////// Side Speed //////////////////////////
 	public float sideSpeed; //lerp from 0 to maxSideSpeed using curSideSpeedMultiplier as "t"
@@ -41,7 +42,7 @@ public class ShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Calculate Forward Speed
-		forwardSpeed += (speedIncrementPerSecond * Time.deltaTime);
+        forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
 		if(Input.GetAxis("Horizontal") != 0) 
