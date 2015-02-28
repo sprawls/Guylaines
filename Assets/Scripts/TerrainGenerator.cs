@@ -297,7 +297,11 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer = false)
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight)
+    {
+        return Create(bottomLeft, topRight, false);
+    }
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer)
     {
         Chunk c = Instantiate(LegalChunk(nextLayer?layer+1:layer).OneAtRandom(rand)) as Chunk;
         
