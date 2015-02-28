@@ -187,7 +187,7 @@ public class TerrainGenerator : MonoBehaviour
     }
     void switchLayer()
     {
-        if(player.transform.localPosition.z > currentChunk.First.top)
+        if(player.transform.position.z -20 > currentChunk.First.top)
         {
             chunks = chunks.ConvertAll(ChunkSwitcher);
             layer++;
@@ -297,7 +297,11 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer = false)
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight)
+    {
+        return Create(bottomLeft, topRight, false);
+    }
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer)
     {
         Chunk c = Instantiate(LegalChunk(nextLayer?layer+1:layer).OneAtRandom(rand)) as Chunk;
         

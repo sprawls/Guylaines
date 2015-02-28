@@ -78,7 +78,7 @@ public class Chunk : MonoBehaviour {
             
             
             go.transform.localPosition = new Vector3(x, 0, y);
-            go.transform.localScale = new Vector3(tg.rand.Range(1.0f, 3.0f), tg.rand.Range(1.0f, 3.0f), tg.rand.Range(1.0f, 3.0f));
+            go.ScaleToSomethingFun(tg.rand, 1, 3);
             go.transform.parent = transform;
 
             points += go.cost;
