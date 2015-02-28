@@ -41,8 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 140762, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
   availablePrefab:
-  - {fileID: 11447014, guid: e03bdb7357957bd4f9b4d186332f595c, type: 2}
-  - {fileID: 11497064, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
+  - {fileID: 11423132, guid: 0a76dcc640a3eb14aa353c6cf1967c75, type: 2}
+  - {fileID: 11429624, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
   layerMin: 0
   currentLayer: 0
 --- !u!1001 &100100000
