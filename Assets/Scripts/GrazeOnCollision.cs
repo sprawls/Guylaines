@@ -15,11 +15,13 @@ public class GrazeOnCollision : MonoBehaviour {
 	
 	}
 
-	void OnCollisionEnter(Collision collision) {
+	void OnCollisionStay(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle") {
 			Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
-			Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
+			GameObject newParticles = (GameObject)Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
+			newParticles.transform.parent = transform;
+
 		}
 	}
 

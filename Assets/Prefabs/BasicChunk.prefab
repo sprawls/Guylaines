@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc91c8ca9cffcd47800d5b007eff5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlaneMaterial: {fileID: 2100000, guid: 80d8df1bdf686b94bb5f9b69f1937efa, type: 2}
   availablePrefab:
   - {fileID: 172916, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
   - {fileID: 158602, guid: e03bdb7357957bd4f9b4d186332f595c, type: 2}
