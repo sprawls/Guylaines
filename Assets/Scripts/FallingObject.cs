@@ -21,7 +21,7 @@ public class FallingObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        float distance = Vector3.Distance(player.localPosition, transform.localPosition);
+        float distance = Vector3.Distance(player.position, transform.position);
 
         /*
         Debug.Log("Start");
@@ -33,9 +33,9 @@ public class FallingObject : MonoBehaviour {
         
 	    if(!fallen && rp != null && distance < fallDistance)
         {
-            
+            Debug.Log("Tournation");
             fallen = true;
-            rp.ManuallyRotate(90,2,1);
+            rp.ManuallyRotate();
         }
 	}
 }
