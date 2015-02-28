@@ -187,7 +187,7 @@ public class TerrainGenerator : MonoBehaviour
     }
     void switchLayer()
     {
-        if(player.transform.localPosition.z > currentChunk.First.top)
+        if(player.transform.position.z -20 > currentChunk.First.top)
         {
             chunks = chunks.ConvertAll(ChunkSwitcher);
             layer++;
