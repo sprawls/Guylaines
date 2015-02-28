@@ -40,7 +40,7 @@ public class Chunk : MonoBehaviour {
     {
         int maxPoints = currentLayer * 10 + 20;
 
-        for (int i = 0; i < 0; i++)
+        for (int i = 0; i < maxPoints; i++)
         {
 
             Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
