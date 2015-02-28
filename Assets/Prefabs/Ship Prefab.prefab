@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &154362
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -45,6 +45,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 454366}
+  - 114: {fileID: 11474962}
   m_Layer: 0
   m_Name: Ship Prefab
   m_TagString: Untagged
@@ -54,7 +55,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &154368
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -137,6 +138,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &174962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 474962}
+  m_Layer: 0
+  m_Name: Model and Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &454362
 Transform:
   m_ObjectHideFlags: 1
@@ -144,10 +160,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154362}
   m_LocalRotation: {x: .073021777, y: 0, z: 0, w: .997330368}
-  m_LocalPosition: {x: 0, y: 1.75, z: -3.33999991}
+  m_LocalPosition: {x: 0, y: 1.75, z: -3.34000015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 454366}
+  m_Father: {fileID: 474962}
   m_RootOrder: 0
 --- !u!4 &454364
 Transform:
@@ -171,8 +187,7 @@ Transform:
   m_LocalPosition: {x: .25, y: -.430000007, z: -6.28999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 454362}
-  - {fileID: 454368}
+  - {fileID: 474962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &454368
@@ -190,7 +205,7 @@ Transform:
   - {fileID: 454372}
   - {fileID: 454374}
   - {fileID: 454376}
-  m_Father: {fileID: 454366}
+  m_Father: {fileID: 474962}
   m_RootOrder: 1
 --- !u!4 &454370
 Transform:
@@ -240,6 +255,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 454368}
   m_RootOrder: 4
+--- !u!4 &474962
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 454362}
+  - {fileID: 454368}
+  m_Father: {fileID: 454366}
+  m_RootOrder: 0
 --- !u!20 &2054376
 Camera:
   m_ObjectHideFlags: 1
@@ -284,7 +313,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a63e38623e5fa4488aef879c18093e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -304,7 +333,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a63e38623e5fa4488aef879c18093e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -324,7 +353,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a63e38623e5fa4488aef879c18093e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -344,7 +373,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a63e38623e5fa4488aef879c18093e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -453,6 +482,23 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11474962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399fa3bc336503547b12e4372087c52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 174962}
+  cameraScript: {fileID: 0}
+  forwardSpeed: 0
+  sideSpeed: 0
+  tiltAngle: 0
+  control: 0
 --- !u!124 &12454376
 Behaviour:
   m_ObjectHideFlags: 1
