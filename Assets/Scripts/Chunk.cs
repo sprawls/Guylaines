@@ -9,8 +9,20 @@ public class Chunk : MonoBehaviour {
 
 
 	void Start () {
+        name = "Chunk";
         TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
         Debug.Log("Start Chunk");
+        //*
+        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        Vector2 middle = (_bottomLeft + _topRight) / 2;
+        Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
+
+        Debug.Log(scale.ToString());
+        plane.transform.localPosition = new Vector3(middle.x, -4 , middle.y);
+        plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
+
+        plane.transform.parent = transform;
+         //*/
         for (int i = 0; i < 100; i++)
         {
             GameObject go = Instantiate(tg.availablePrefab[0]) as GameObject;
