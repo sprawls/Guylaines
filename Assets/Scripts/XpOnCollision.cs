@@ -4,7 +4,7 @@ using System.Collections;
 public class XpOnCollision : MonoBehaviour {
 
 
-    public GameObject DeathParticles;
+    public GameObject GlowParticul;
     private ShipControl shipControl;
     private GameObject playerObj;
     // Use this for initialization
@@ -29,12 +29,13 @@ public class XpOnCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Obstacle")
         {
-            int XpType = collision.gameObject.GetComponent<XpInformation>().XpType;
+            XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
+            int XpType = XpInfo.XpType;
             if (XpType > 0)
             {
                 float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
                 string xpText="";
-                float xpStrenght=25-dist;
+                float xpStrenght=30-dist;
                 switch(XpType)
                 {
                     case 1:
@@ -49,10 +50,11 @@ public class XpOnCollision : MonoBehaviour {
                         break;
 
                 }
+                XpInfo.glow(dist);
+
                 Debug.Log("Collided with : " + collision.gameObject + " - " + xpText);
             }
 
-            //Instantiate(DeathParticles, transform.position, Quaternion.identity);
         }
 
     }

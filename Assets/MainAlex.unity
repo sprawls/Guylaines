@@ -7094,7 +7094,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .917647064, g: .917647064, b: .917647064, a: 1}
   m_Intensity: .5
   m_Range: 10
   m_SpotAngle: 30
@@ -9281,7 +9281,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782550545}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 22.1000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 631308085}
@@ -9296,7 +9296,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 25, y: 25, z: 1}
+  m_Size: {x: 30, y: 30, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1782550548
 Rigidbody:
@@ -9324,7 +9324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6131c751f21f64f92ee5dd01fa97ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathParticles: {fileID: 100000, guid: 542f86e4e34b523499e0f073b1355e1a, type: 2}
+  GlowParticul: {fileID: 100000, guid: 29f2844e1d89a4ed09e527cd2039d6ea, type: 2}
 --- !u!1 &1786362122
 GameObject:
   m_ObjectHideFlags: 0

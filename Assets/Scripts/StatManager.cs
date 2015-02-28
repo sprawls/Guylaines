@@ -7,13 +7,14 @@ public class StatManager : MonoBehaviour {
     private Stat energy;
 
 	void Start () {
+        Debug.Log(UIManager.Instance);
         speed = new Stat(1, UIManager.Instance.speedWidget);
         handling = new Stat(1, UIManager.Instance.handlingWidget);
         energy = new Stat(2, UIManager.Instance.energyWidget);
 	}
 
 	void Update () {
-		HandleDebugKeys ();        
+		HandleDebugKeys();        
 	}
 
 	void HandleDebugKeys() {

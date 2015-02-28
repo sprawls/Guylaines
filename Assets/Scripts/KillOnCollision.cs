@@ -22,7 +22,7 @@ public class KillOnCollision : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle") {
-			Debug.Log ("Collided with : "  + collision.gameObject);
+			//Debug.Log ("Collided with : "  + collision.gameObject);
 			shipControl.Kill();
 			Instantiate(DeathParticles,transform.position, Quaternion.identity);
 		}
