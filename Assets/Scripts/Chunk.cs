@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Chunk : MonoBehaviour {
 
     private Vector2 _bottomLeft;
     private Vector2 _topRight;
+    private TerrainGenerator tg;
 	// Use this for initialization
 
+    public List<GameObject> availablePrefab;
+    public int layerMin = 0;
     
 	void Start () {
         name = "Chunk";
+        tg = FindObjectOfType<TerrainGenerator>();
 
-        addFloor();
-        addElems(); 
+        AddFloor();
+        PopulateChunk(); 
 	}
 	
 	// Update is called once per frame
@@ -20,7 +24,7 @@ public class Chunk : MonoBehaviour {
 	
 	}
 
-    void addFloor()
+    virtual public void AddFloor()
     {
         GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         Vector2 middle = (_bottomLeft + _topRight) / 2;
@@ -32,31 +36,25 @@ public class Chunk : MonoBehaviour {
         plane.transform.parent = transform;
     }
 
-    void addElems()
-    {
-        TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
-        int count = tg.availablePrefab.Count;
+    virtual public void PopulateChunk()
+    { 
+        int count = availablePrefab.Count;
         for (int i = 0; i < 100; i++)
         {
-            GameObject go = Instantiate(tg.availablePrefab[i%2]) as GameObject;
-
-            float x = Random.Range(_bottomLeft.x, _topRight.x);
-            float y = Random.Range(_bottomLeft.y, _topRight.y);
+            GameObject go = Instantiate(availablePrefab[i % 2]) as GameObject;
+            
+            float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
+            float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
 
             go.transform.localPosition = new Vector3(x, 0, y);
             go.transform.parent = transform;
         }
     }
 
-    public static Chunk Create(Vector2 bottomLeft, Vector2 topRight)
+    public void SetBound(Vector2 bl, Vector2 tr)
     {
-        GameObject newObject = new GameObject();
-        Chunk yourObject = newObject.AddComponent<Chunk>();
-
-        yourObject._bottomLeft = bottomLeft;
-        yourObject._topRight = topRight;
-
-        return yourObject;
+        _bottomLeft = bl;
+        _topRight = tr;
     }
 
     public float top { get { return _topRight.y; } }

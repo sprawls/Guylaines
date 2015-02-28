@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Rand = System.Random;
 using System.Collections.Generic;
 
 using ChunkPair = Pair<Chunk,Chunk>;
@@ -7,6 +8,8 @@ public class TerrainGenerator : MonoBehaviour
 {
     //Initialisation variable
     public int seed;
+    public Rand rand { get; private set; }
+    public int forcedWidth;
 
     public float sizeChunk = 50;
     public float loadDistance = 20;
@@ -14,28 +17,49 @@ public class TerrainGenerator : MonoBehaviour
     //Reference to the player
     private GameObject player;
 
-    public List<GameObject> availablePrefab;
+    public  List<GameObject> ChunkSpecifier;
 
     private int index;
+    private int layer = 0;
 
     private List<ChunkPair> chunks = new List<ChunkPair>();
 
 	// Use this for initialization
 	void Start () {
-        Random.seed = seed;
+        rand = new Rand(seed);
+        
         player = GameObject.Find("Ship Prefab");
 
-        Chunk c = Chunk.Create(new Vector2(-sizeChunk, 0), new Vector2(0, sizeChunk));
-        ChunkPair cp = new ChunkPair();
-        cp.First = c;
-        chunks.Add(cp);
-
-        c = Chunk.Create(new Vector2(0, 0), new Vector2(sizeChunk, sizeChunk));
-        cp = new ChunkPair();
-        cp.First = c;
-        chunks.Add(cp);
-        index = 1;
+        initChunk();
 	}
+
+    void initChunk()
+    {
+        if(forcedWidth > 0)
+        {
+            for(int i = -forcedWidth/2; i < forcedWidth / 2; i++)
+            {
+                Chunk c = Create(new Vector2(sizeChunk*i, 0), new Vector2(sizeChunk * (i+1), sizeChunk));
+                ChunkPair cp = new ChunkPair();
+                cp.First = c;
+                cp.Second = Create(new Vector2(sizeChunk * i, sizeChunk), new Vector2(sizeChunk * (i + 1), sizeChunk * 2));
+                chunks.Add(cp);
+            }
+        }
+        else
+        {
+            Chunk c = Create(new Vector2(-sizeChunk, 0), new Vector2(0, sizeChunk));
+            ChunkPair cp = new ChunkPair();
+            cp.First = c;
+            chunks.Add(cp);
+
+            c = Create(new Vector2(0, 0), new Vector2(sizeChunk, sizeChunk));
+            cp = new ChunkPair();
+            cp.First = c;
+            chunks.Add(cp);
+            index = 1;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -80,7 +104,7 @@ public class TerrainGenerator : MonoBehaviour
             bl += move;
             tr += move;
 
-            l.First = Chunk.Create(bl, tr);
+            l.First = Create(bl, tr);
             updated = true;
         }
 
@@ -91,7 +115,7 @@ public class TerrainGenerator : MonoBehaviour
             Vector2 bl = l.First.bottomLeft + move;
             Vector2 tr = l.First.topRight + move;
 
-            l.Second = Chunk.Create(bl, tr);
+            l.Second = Create(bl, tr);
             updated = true;
         }
 
@@ -116,7 +140,7 @@ public class TerrainGenerator : MonoBehaviour
             bl += move;
             tr += move;
 
-            r.First = Chunk.Create(bl, tr);
+            r.First = Create(bl, tr);
             updated = true;
         }
 
@@ -127,7 +151,7 @@ public class TerrainGenerator : MonoBehaviour
             Vector2 bl = r.First.bottomLeft + move;
             Vector2 tr = r.First.topRight + move;
 
-            r.Second = Chunk.Create(bl, tr);
+            r.Second = Create(bl, tr);
             updated = true;
         }
 
@@ -142,7 +166,7 @@ public class TerrainGenerator : MonoBehaviour
         Chunk f = c.First;
         if (c.Second == null && f.top < player.transform.localPosition.z + loadDistance)
         {
-            c.Second = Chunk.Create(new Vector2(f.left, f.bottom + +sizeChunk), new Vector2(f.right, f.top + sizeChunk));
+            c.Second = Create(new Vector2(f.left, f.bottom + +sizeChunk), new Vector2(f.right, f.top + sizeChunk));
             currentChunk = c;
         }
     }
@@ -150,19 +174,9 @@ public class TerrainGenerator : MonoBehaviour
     {
         if(player.transform.localPosition.z > currentChunk.First.top)
         {
-            chunks = chunks.ConvertAll(delegate(ChunkPair p)
-            {
-                if(p.First != null)
-                {
-                    Destroy(p.First.gameObject);
-                }
-                p.First = p.Second;
-                p.Second = null;
-                return p;
-            });
+            chunks = chunks.ConvertAll(ChunkSwitcher);
+            layer++;
         }
-
-
     }
 
     public ChunkPair currentChunk
@@ -230,5 +244,51 @@ public class TerrainGenerator : MonoBehaviour
                 index++;
             }
         }
+    }
+
+    private System.Converter<ChunkPair,ChunkPair> ChunkSwitcher
+    {
+        get
+        {
+            if(forcedWidth > 0)
+            {
+                Vector2 move = new Vector2(0, sizeChunk);
+                return delegate(ChunkPair p)
+                {
+                    if (p.First != null)
+                    {
+                        Destroy(p.First.gameObject);
+                    }
+                    p.First = p.Second;
+                    p.Second = Create(p.First.bottomLeft + move, p.First.topRight + move);
+
+                    return p;
+                };
+            }
+            else
+            {
+                return delegate(ChunkPair p)
+                {
+                    if (p.First != null)
+                    {
+                        Destroy(p.First.gameObject);
+                    }
+                    p.First = p.Second;
+
+                    p.Second = null;
+                    return p;
+                };
+            }
+        }
+    }
+
+    private Chunk Create(Vector2 bottomLeft, Vector2 topRight)
+    {
+        GameObject newObject = Instantiate(ChunkSpecifier.OneAtRandom(rand)) as GameObject;
+
+        Chunk c = newObject.GetComponent<Chunk>();
+        c.SetBound(bottomLeft, topRight);
+
+        return c;
     }
 }
