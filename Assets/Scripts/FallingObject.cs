@@ -33,7 +33,6 @@ public class FallingObject : MonoBehaviour {
         
 	    if(!fallen && rp != null && distance < fallDistance)
         {
-            Debug.Log("Tournation");
             fallen = true;
             rp.ManuallyRotate();
         }
