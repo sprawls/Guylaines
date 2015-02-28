@@ -7,38 +7,46 @@ public class Chunk : MonoBehaviour {
     private Vector2 _topRight;
 	// Use this for initialization
 
-
+    
 	void Start () {
         name = "Chunk";
-        TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
-        Debug.Log("Start Chunk");
-        //*
-        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        Vector2 middle = (_bottomLeft + _topRight) / 2;
-        Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
 
-        Debug.Log(scale.ToString());
-        plane.transform.localPosition = new Vector3(middle.x, -4 , middle.y);
-        plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
-
-        plane.transform.parent = transform;
-         //*/
-        for (int i = 0; i < 100; i++)
-        {
-            GameObject go = Instantiate(tg.availablePrefab[0]) as GameObject;
-            
-            float x = Random.Range(_bottomLeft.x, _topRight.x);
-            float y = Random.Range(_bottomLeft.y, _topRight.y);
-
-            go.transform.localPosition = new Vector3(x, 0, y);
-            go.transform.parent = transform;
-        }
+        addFloor();
+        addElems(); 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    void addFloor()
+    {
+        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        Vector2 middle = (_bottomLeft + _topRight) / 2;
+        Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
+
+        plane.transform.localPosition = new Vector3(middle.x, -4, middle.y);
+        plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
+
+        plane.transform.parent = transform;
+    }
+
+    void addElems()
+    {
+        TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
+        int count = tg.availablePrefab.Count;
+        for (int i = 0; i < 100; i++)
+        {
+            GameObject go = Instantiate(tg.availablePrefab[i%2]) as GameObject;
+
+            float x = Random.Range(_bottomLeft.x, _topRight.x);
+            float y = Random.Range(_bottomLeft.y, _topRight.y);
+
+            go.transform.localPosition = new Vector3(x, 0, y);
+            go.transform.parent = transform;
+        }
+    }
 
     public static Chunk Create(Vector2 bottomLeft, Vector2 topRight)
     {
