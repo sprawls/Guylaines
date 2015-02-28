@@ -25,12 +25,15 @@ public class ShipControl : MonoBehaviour {
 
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
+	private RotatingPlatform rotatePlatform;
 
 
 
 
 
-	// Use this for initialization
+	void Awake() {
+		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
+	}
 	void Start () {
 		forwardSpeed = startSpeed;
 	}
@@ -113,6 +116,7 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	public IEnumerator DeathAnimation() {
+		rotatePlatform.ManuallyRotate(70,2.5f,1);
 		yield return new WaitForSeconds(0.05f);
 		Time.timeScale = 0.05f;
 		yield return new WaitForSeconds(3f*(Time.timeScale)); // 
