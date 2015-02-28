@@ -34,18 +34,17 @@ public class XpOnCollision : MonoBehaviour {
             if (XpType > 0)
             {
                 float distX = Mathf.Abs(collision.gameObject.transform.position.x - playerObj.transform.position.x);
-                float xpStrenght = Time.deltaTime*10*(25.0f - distX);
-                Debug.Log(xpStrenght);
+                float xpStrength = Time.deltaTime*10*(25.0f - distX);
                 switch(XpType)
                 {
                     case 1:
-                        StatManager.Instance.Speed.addXP(xpStrenght);
+                        StatManager.Instance.Speed.addXP(xpStrength);
                         break;
                     case 2:
-                        StatManager.Instance.Handling.addXP(xpStrenght);
+                        StatManager.Instance.Handling.addXP(xpStrength);
                         break;
                     case 3:
-                        StatManager.Instance.Energy.addXP(xpStrenght);
+                        StatManager.Instance.Energy.addXP(xpStrength);
                         break;
 
                 }
