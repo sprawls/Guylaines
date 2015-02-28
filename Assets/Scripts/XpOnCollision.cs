@@ -4,7 +4,7 @@ using System.Collections;
 public class XpOnCollision : MonoBehaviour {
 
 
-    public GameObject DeathParticles;
+    public GameObject GlowParticul;
     private ShipControl shipControl;
     private GameObject playerObj;
     // Use this for initialization
@@ -29,30 +29,33 @@ public class XpOnCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Obstacle")
         {
-            int XpType = collision.gameObject.GetComponent<XpInformation>().XpType;
+            XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
+            int XpType = XpInfo.XpType;
             if (XpType > 0)
             {
-                float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
+                //float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
+                float distX = Mathf.Abs(collision.gameObject.transform.position.x - playerObj.transform.position.x);
                 string xpText="";
-                float xpStrenght=25-dist;
+                int xpStrenght = (int)(25 - distX);
                 switch(XpType)
                 {
                     case 1:
-                        
-                        xpText+="Speed xp: "+dist;
+
+                        xpText += "Speed xp: " + xpStrenght;
                         break;
                     case 2:
-                        xpText+="Handle xp: "+dist;
+                        xpText += "Handle xp: " + xpStrenght;
                         break;
                     case 3:
-                        xpText+="Energie xp: "+dist;
+                        xpText += "Energie xp: " + xpStrenght;
                         break;
 
                 }
+                XpInfo.glow(xpStrenght);
+
                 Debug.Log("Collided with : " + collision.gameObject + " - " + xpText);
             }
 
-            //Instantiate(DeathParticles, transform.position, Quaternion.identity);
         }
 
     }

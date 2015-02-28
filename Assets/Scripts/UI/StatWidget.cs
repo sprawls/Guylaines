@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class StatWidget : MonoBehaviour {
-
-	public Text levelText;
-	public Text multiplierText;
-	public Slider xpSlider;
+	
+	private Text levelText;
+	private Text multiplierText;
+	private Slider xpSlider;
 
 	public void Awake() {
 		levelText = transform.Find ("Level").GetComponent<Text>();

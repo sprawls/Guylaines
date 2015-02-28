@@ -1,36 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
 public class StatManager : MonoBehaviour {
-	
-    private Stat speed;
-    private Stat handling;
-    private Stat energy;
+
+    public static StatManager Instance { get; private set; }
+
+    private Stat _speed;
+    private Stat _handling;
+    private Stat _energy;
+
+	void Awake() {
+		Instance = this;
+	}
 
 	void Start () {
-        speed = new Stat(1, UIManager.Instance.speedWidget);
-        handling = new Stat(1, UIManager.Instance.handlingWidget);
-        energy = new Stat(2, UIManager.Instance.energyWidget);
+        Debug.Log(UIManager.Instance);
+        _speed = new Stat(1, UIManager.Instance.speedWidget);
+        _handling = new Stat(1, UIManager.Instance.handlingWidget);
+        _energy = new Stat(2, UIManager.Instance.energyWidget);
 	}
 
 	void Update () {
-		HandleDebugKeys ();        
+		HandleDebugKeys();        
+	}
+
+	public Stat Speed {
+		get { return _speed; }
+	}
+
+	public Stat Handling {
+		get { return _handling; }
+	}
+
+	public Stat Energy {
+		get { return _energy; }
 	}
 
 	void HandleDebugKeys() {
 		if (Input.GetKeyDown(KeyCode.F))
 		{
-			speed.addXP(9);
-			Debug.Log("Speed: LV:" + speed.Level + " XP:" + speed.XP);
+			_speed.addXP(9);
+			Debug.Log("Speed: LV:" + _speed.Level + " XP:" + _speed.XP);
 		}
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			handling.addXP(9);
-			Debug.Log("Handle: LV:" + handling.Level + " XP:" + handling.XP);
+			_handling.addXP(9);
+			Debug.Log("Handle: LV:" + _handling.Level + " XP:" + _handling.XP);
 		}
 		if (Input.GetKeyDown(KeyCode.H))
 		{
-			energy.addXP(9);
-			Debug.Log("Energy: LV:" + energy.Level + " XP:" + energy.XP);
+			_energy.addXP(9);
+			Debug.Log("Energy: LV:" + _energy.Level + " XP:" + _energy.XP);
 		}
 	}
+
+
 }

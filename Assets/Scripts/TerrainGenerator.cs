@@ -20,7 +20,7 @@ public class TerrainGenerator : MonoBehaviour
     public  List<Chunk> ChunkSpecifier;
 
     private int index;
-    private int layer = 0;
+    public int layer = 0;
 
     private List<ChunkPair> chunks = new List<ChunkPair>();
     void Awake()
