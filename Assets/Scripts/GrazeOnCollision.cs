@@ -28,7 +28,7 @@ public class GrazeOnCollision : MonoBehaviour {
 			Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
 			Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
-			GrazeSystem.Emit(50);
+			GrazeSystem.Emit(100);
 		}
 		
 	}
