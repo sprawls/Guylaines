@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour {
 	public StatWidget handlingWidget;
 	public StatWidget energyWidget;
 
-	public void Awake() {
+	void Awake() {
 		Instance = this;
 	}
 }

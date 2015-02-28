@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class StatWidget : MonoBehaviour {
-
+	
 	private Text levelText;
 	private Text multiplierText;
 	private Slider xpSlider;
