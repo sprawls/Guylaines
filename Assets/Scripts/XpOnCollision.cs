@@ -25,7 +25,7 @@ public class XpOnCollision : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Obstacle")
         {
@@ -33,9 +33,9 @@ public class XpOnCollision : MonoBehaviour {
             int XpType = XpInfo.XpType;
             if (XpType > 0)
             {
-                //float dist=Vector3.Distance(collision.gameObject.transform.position, playerObj.transform.position);
                 float distX = Mathf.Abs(collision.gameObject.transform.position.x - playerObj.transform.position.x);
-                int xpStrenght = (int)(25 - distX);
+                float xpStrenght = Time.deltaTime*10*(25.0f - distX);
+                Debug.Log(xpStrenght);
                 switch(XpType)
                 {
                     case 1:
@@ -49,7 +49,6 @@ public class XpOnCollision : MonoBehaviour {
                         break;
 
                 }
-                XpInfo.glow(xpStrenght);
             }
 
         }
