@@ -11,9 +11,9 @@ FBXHeaderExtension:  {
 		Year: 2015
 		Month: 02
 		Day: 27
-		Hour: 22
-		Minute: 47
-		Second: 43
+		Hour: 23
+		Minute: 51
+		Second: 44
 		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins build 20070228"
@@ -21,7 +21,7 @@ FBXHeaderExtension:  {
 		FlagPLE: 0
 	}
 }
-CreationTime: "2015-02-27 22:47:43:000"
+CreationTime: "2015-02-27 23:51:44:000"
 Creator: "Blender version 2.70 (sub 0)"
 
 ; Object definitions
@@ -395,7 +395,7 @@ Objects:  {
 		TypeFlags: "Light"
 		GeometryVersion: 124
 	}
-	Model: "Model::Cube", "Mesh" {
+	Model: "Model::gem", "Mesh" {
 		Version: 232
 		Properties60:  {
 			Property: "QuaternionInterpolate", "bool", "",0
@@ -1656,7 +1656,7 @@ Objects:  {
 		}
 		NbPoseNodes: 1
 		PoseNode:  {
-			Node: "Model::Cube"
+			Node: "Model::gem"
 			Matrix: 0.000000075497901,0.000000000000000,-1.000000000000000,0.000000000000000,-1.000000000000000,0.000000000000000,-0.000000075497901,0.000000000000000,0.000000000000000,1.000000000000000,0.000000000000000,0.000000000000000,-0.780204653739929,0.000000000000000,0.000000000000000,1.000000000000000
 		}
 	}
@@ -1678,7 +1678,7 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Relations:  {
-	Model: "Model::Cube", "Mesh" {
+	Model: "Model::gem", "Mesh" {
 	}
 	Model: "Model::Camera", "Camera" {
 	}
@@ -1708,10 +1708,10 @@ Relations:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	Connect: "OO", "Model::Cube", "Model::Scene"
+	Connect: "OO", "Model::gem", "Model::Scene"
 	Connect: "OO", "Model::Lamp", "Model::Scene"
 	Connect: "OO", "Model::Camera", "Model::Scene"
-	Connect: "OO", "Material::Material", "Model::Cube"
+	Connect: "OO", "Material::Material", "Model::gem"
 }
 ;Takes and animation section
 ;----------------------------------------------------
@@ -1725,7 +1725,7 @@ Takes:  {
 
 		;Models animation
 		;----------------------------------------------------
-		Model: "Model::Cube" {
+		Model: "Model::gem" {
 			Version: 1.1
 			Channel: "Transform" {
 				Channel: "T" {

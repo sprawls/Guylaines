@@ -6,6 +6,7 @@ public class ShipControl : MonoBehaviour {
 	////////////////////////// General //////////////////////////
 	public Transform model;
 	public MoveCameraFromSpeed cameraScript;
+	public bool isDead = false;
 	////////////////////////// Forward Speed //////////////////////////
 	public float forwardSpeed;
 
@@ -17,8 +18,6 @@ public class ShipControl : MonoBehaviour {
 	public float control; //change in sideSpeed per second( 1 means it takes 1sec to reach max sidespeed; 2 means it takes 0.5sec)
 	public float stabilizingControlratio = 0.5f; //When no key is pressed, ratio of the control the ship uses to stabilize
 	public float sideSpeedLimit = 0.5f;
-
-
 	public float maxTiltAngle = 5;
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
@@ -48,8 +47,11 @@ public class ShipControl : MonoBehaviour {
 
 
 		//Move it
-		transform.position += new Vector3(sideSpeed,0,forwardSpeed); //Move the ship
-		TiltShip(); //Tilt the ship
+		if(isDead == false) {
+			transform.position += new Vector3(sideSpeed,0,forwardSpeed); //Move the ship
+			TiltShip(); //Tilt the ship
+		}
+
 	}
 
 	void StabilizeSideSpeed() { //Stabilize the ship when no key is pressed
@@ -74,7 +76,7 @@ public class ShipControl : MonoBehaviour {
 
 		}
 
-		Debug.Log (curSideSpeedMultiplier);
+		//Debug.Log (curSideSpeedMultiplier);
 	}
 
 	void ChangeSideSpeed(float axis) { //Change side speed when a key is pressed
@@ -96,5 +98,14 @@ public class ShipControl : MonoBehaviour {
 		//Apply new Tilt
 		model.localRotation = Quaternion.Euler(new Vector3(0,0,newTilt));
 
+	}
+
+
+	public void Kill(){
+		isDead = true;
+	}
+
+	public void Spawn(){
+		isDead = false;
 	}
 }
