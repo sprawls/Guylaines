@@ -66,7 +66,12 @@ public class ItemUIBehaviour : MonoBehaviour {
 
 	public void CloseUI() {
         _uiIsActive = false;
-        transform.DORotate(new Vector3(0, 90, 0), 0.5f * Time.timeScale);
+        float timing = 0.5f;
+        if (Time.timeScale != 1)
+        {
+            timing *= Time.timeScale;
+        }
+        transform.DORotate(new Vector3(0, 90, 0), timing );
 		
 	}
 
@@ -93,6 +98,7 @@ public class ItemUIBehaviour : MonoBehaviour {
         DOTween.To(x => _speedWidget.value = x, 0, graphValues[0], 0.2f * Time.timeScale);
         DOTween.To(x => _handlingWidget.value = x, 0, graphValues[1], 0.2f * Time.timeScale);
         DOTween.To(x => _energyWidget.value = x, 0, graphValues[2], 0.2f * Time.timeScale);
+        
 	}
 
 	private void HandleInputs() {
@@ -104,10 +110,17 @@ public class ItemUIBehaviour : MonoBehaviour {
 			PickNewItem();
 		}
 
-		if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && !StatManager.Instance.controler.itemChoseLock)
+        {
 			StatManager.Instance.OnItemPick(_newItemIsPicked);
 		}
 	}
+
+    public void outOtimeAutoPick()
+    {
+        StatManager.Instance.OnItemPick(false);
+        CloseUI();
+    }
 
 	private void PickHeldItem() {
 		_newItemIsPicked = false;

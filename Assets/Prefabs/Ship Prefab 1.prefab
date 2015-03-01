@@ -5653,6 +5653,7 @@ MonoBehaviour:
   modelAndCam: {fileID: 450632}
   model: {fileID: 450628}
   cameraScript: {fileID: 11417368}
+  LNF: {fileID: 0}
   isDead: 0
   forwardSpeed: 0
   sideSpeed: 0
