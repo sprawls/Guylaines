@@ -8272,6 +8272,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8db191db9a5514094b374c25a24ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _runsRemaining: 3
+  _runsCollected: 0
+  _toNextRun: 0
+  _collectedEnergy: 0
+  _energyNeeded: 40
   _bestRun: 0
 --- !u!4 &793929363
 Transform:
@@ -8817,7 +8822,7 @@ GameObject:
   - 222: {fileID: 861330472}
   - 114: {fileID: 861330471}
   m_Layer: 0
-  m_Name: Distance
+  m_Name: Best
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19378,6 +19383,10 @@ Prefab:
     - target: {fileID: 11438586, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: maxShakeAmount
       value: .449999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 117480, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: m_Name
+      value: Best
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
