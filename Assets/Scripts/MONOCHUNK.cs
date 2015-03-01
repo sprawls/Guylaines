@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //Le MONOCHUNK s'attend que le prefab contienne un collider qui l'englobe
 public class MONOCHUNK : Chunk {
 
+    public List<ChunkObject> monoObject;
+
     public override IEnumerator PopulateChunk()
     {
         Bounds b = new Bounds();
-        ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
+        ChunkObject go = Instantiate(monoObject.OneAtRandom(tg.rand)) as ChunkObject;
         b= go.gameObject.GetComponent<Collider>().bounds;
         Vector3 s = b.size;
 
@@ -21,5 +24,8 @@ public class MONOCHUNK : Chunk {
 
         go.transform.parent = transform;
         yield return null;
+
+        maxPoints /= 2;
+        StartCoroutine(base.PopulateChunk());
     }
 }

@@ -17,6 +17,7 @@ public class Chunk : MonoBehaviour {
     public int layerMin;
     public int layerMax;
     public int currentLayer;
+    public int maxPoints;
 
     private bool populated = false;
     
@@ -26,7 +27,7 @@ public class Chunk : MonoBehaviour {
         Vector3 pos = new Vector3(left, 0, bottom);
         transform.position = pos;
         AddFloor();
-        
+        maxPoints = currentLayer * 2 + 100;
 	}
 
     void Update()
@@ -41,13 +42,11 @@ public class Chunk : MonoBehaviour {
 
     virtual public void AddFloor()
     {
-        Debug.Log(floors.Count);
         Floor plane = Instantiate(floors.OneAtRandom(tg.rand)) as Floor;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft);
 
         plane.middle = middle;
-        Debug.Log("Size: " + scale.ToString());
         plane.size = scale;
 
         plane.transform.parent = transform;
@@ -61,7 +60,6 @@ public class Chunk : MonoBehaviour {
         }
         else
         {
-            int maxPoints = currentLayer;
 
             for (int i = 0; i < 5; i++)
             {
@@ -87,9 +85,7 @@ public class Chunk : MonoBehaviour {
         }
         else
         {
-            int maxPoints = currentLayer * 2 + 100;
             
-        
             int points = 0;
             while(points<maxPoints)
             {

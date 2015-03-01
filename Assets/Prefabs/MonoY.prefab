@@ -44,11 +44,14 @@ MonoBehaviour:
   availableItem:
   - {fileID: 11424458, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
   availablePrefab:
-  - {fileID: 11415094, guid: 71df670c31d3fce4e97e3ec054521ecf, type: 2}
+  - {fileID: 11483008, guid: cc6c6fefa0e43ec4f8ce45e1b3ad56df, type: 2}
   NbOfUsedPrefab: 0
   layerMin: 6
   layerMax: -1
   currentLayer: 0
+  maxPoints: 0
+  monoObject:
+  - {fileID: 11415094, guid: 71df670c31d3fce4e97e3ec054521ecf, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
