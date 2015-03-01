@@ -10,6 +10,9 @@ public class StatWidget : MonoBehaviour {
 	private Slider _xpSlider;
 
 	private float _currentXP;
+	private int _currentLevel;
+	private Color _initialColor;
+	private Color _currentColor;
 	private TweenParams _tParams;
 
 	public void Awake() {
@@ -18,6 +21,7 @@ public class StatWidget : MonoBehaviour {
 		_xpSlider = transform.Find ("Left").Find ("Slider").GetComponent<Slider>();
 
 		_tParams = new TweenParams ().SetEase (Ease.OutCubic);
+		_initialColor = _levelText.color;
 	}
 
 	public void Update() {
@@ -25,7 +29,11 @@ public class StatWidget : MonoBehaviour {
 	}
 	
 	public int level {
-		set { _levelText.text = value.ToString("D4"); }
+		set {
+			_levelText.text = value.ToString("D4");
+			_levelText.color = Color.white;
+			_levelText.DOColor (_initialColor, 0.2f);
+		}
 	}
 
 	public float multiplier {

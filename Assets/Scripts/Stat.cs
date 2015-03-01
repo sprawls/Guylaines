@@ -6,6 +6,7 @@ public class Stat {
 	private StatWidget _widget;
 
     private int _level;
+	private int _prevLevel;
     private int _xp;
     private float _multi;
 
@@ -29,7 +30,10 @@ public class Stat {
         get { return this._level; } 
 		private set {
 			_level = value;
-			_widget.level = value;
+			if (_prevLevel != _level) {
+				_widget.level = value;
+			}
+			_prevLevel = _level;
 		}
     }
 

@@ -43,8 +43,6 @@ public class TerrainGenerator : MonoBehaviour
             return 1;
         });
 
-
-
         initChunk();
 	}
 
