@@ -24,7 +24,7 @@ public class ShipControl : MonoBehaviour {
 	public float maxTiltAngle = 5;
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
-    private bool slowMoActive = false;
+    public bool slowMoActive = false;
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
 	private RotatingPlatform rotatePlatform;
@@ -43,6 +43,7 @@ public class ShipControl : MonoBehaviour {
     private float old_speedIncrementPerLevel;
     private float old_startSpeed;
     private float old_sideSpeedLimit;
+    public bool itemChoseLock = true;
 	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
 	public ShakeShakeShake shakeshakeshake;
 	public float speedToConstantShake = 3f;
@@ -164,8 +165,9 @@ public class ShipControl : MonoBehaviour {
 	public void Kill(){
         if (!isDead)
         {
-
             isDead = true;
+			RunEndUIBehaviour.Instance.OnRunEnd();
+			ScoreUIBehaviour.Instance.TweenRunsOnRunEnd();
             StartCoroutine(DeathAnimation());
             Destroy(model.gameObject);
         }
@@ -189,8 +191,11 @@ public class ShipControl : MonoBehaviour {
 		//LNF.audio.pitch = 1f;
 		slowMoEnded = true;
 
-		yield return new WaitForSeconds(5f);
-		Application.LoadLevel(Application.loadedLevel);
+		// Reload if have runs left
+		if (StatManager.Instance.HaveRunsLeft) {
+			yield return new WaitForSeconds (5f);
+			Application.LoadLevel (Application.loadedLevel);
+		}
 	}
 
     public void StartBullteTime(float time)
@@ -211,11 +216,17 @@ public class ShipControl : MonoBehaviour {
         old_sideSpeedLimit = sideSpeedLimit;
         for (int i = 1; i < slowSmothness; i++)
         {
+
             Time.timeScale /= (bulletTimeDivisor);
+            LNF.audio.pitch = Mathf.Min(1, Time.timeScale*2);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
             ChangeSideSpeed(0);
+            if (i == slowSmothness / 2)
+            {
+                itemChoseLock = false;
+            }
             yield return new WaitForSeconds(0.0075f);
         }
         StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit,time));
@@ -237,18 +248,26 @@ public class ShipControl : MonoBehaviour {
             for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
             {
                 Time.timeScale *= (bulletTimeDivisor);
+                LNF.audio.pitch = Mathf.Min(1, Time.timeScale * 2);
                 speedIncrementPerLevel *= (bulletTimeDivisor);
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
                 ChangeSideSpeed(0);
+                if (i == 4)
+                {
+                    ItemUIBehaviour.Instance.outOtimeAutoPick();
+                }
                 yield return new WaitForSeconds(0.0005f);
             }
+
             speedIncrementPerLevel = old_speedIncrementPerLevel;
             startSpeed = old_startSpeed;
             sideSpeedLimit = old_sideSpeedLimit;
             ChangeSideSpeed(0);
             Time.timeScale = 1f;
+            LNF.audio.pitch = Time.timeScale;
             slowMoActive = false;
+            itemChoseLock = true;
             
    
     }
