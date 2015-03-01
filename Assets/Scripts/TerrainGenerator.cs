@@ -8,6 +8,7 @@ using ChunkPair = Pair<Chunk,Chunk>;
 public class TerrainGenerator : MonoBehaviour 
 {
     //Initialisation variable
+    public bool timeInitialization;
     public int seed;
     public Rand rand { get; private set; }
     public int forcedWidth;
@@ -30,7 +31,14 @@ public class TerrainGenerator : MonoBehaviour
 
     void Awake()
     {
-        rand = new Rand(seed);
+        if (timeInitialization)
+        {
+            rand = new Rand();
+        }
+        else
+        {
+            rand = new Rand(seed);
+        }
     }
 	// Use this for initialization
 	void Start () {
