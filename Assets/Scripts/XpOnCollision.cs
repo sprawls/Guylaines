@@ -27,7 +27,7 @@ public class XpOnCollision : MonoBehaviour {
 
     void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Obstacle" && !shipControl.isDead)
         {
             XpInformation XpInfo = collision.gameObject.GetComponent<XpInformation>();
             int XpType = XpInfo.XpType;
@@ -63,7 +63,7 @@ public class XpOnCollision : MonoBehaviour {
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Obstacle" && !shipControl.isDead)
         {
             XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
             int XpType = XpInfo.XpType;
