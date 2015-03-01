@@ -1193,7 +1193,7 @@ GameObject:
   - 222: {fileID: 22217480}
   - 114: {fileID: 11417478}
   m_Layer: 0
-  m_Name: Distance
+  m_Name: Best
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3806,7 +3806,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 125a4f7dd95bb9b42800fd79a2142818, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -3864,7 +3864,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 125a4f7dd95bb9b42800fd79a2142818, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -6011,6 +6011,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrazeParticles: {fileID: 178266, guid: 2b27fc8ee56f19c42aba49c332deb20f, type: 2}
   GrazeSystem: {fileID: 19850640}
+  isGrinding: 0
+  audioSource: {fileID: 0}
 --- !u!114 &11438618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7293,6 +7295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrazeParticles: {fileID: 178266, guid: 2b27fc8ee56f19c42aba49c332deb20f, type: 2}
   GrazeSystem: {fileID: 19850642}
+  isGrinding: 0
+  audioSource: {fileID: 0}
 --- !u!114 &11450626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7649,6 +7653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d5941cd1c7ad64cb4b3a56a286231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: .200000003
 --- !u!114 &11488304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7660,6 +7665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d5941cd1c7ad64cb4b3a56a286231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
 --- !u!122 &12248692
 Halo:
   m_ObjectHideFlags: 1
