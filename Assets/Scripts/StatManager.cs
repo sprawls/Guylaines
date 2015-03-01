@@ -16,8 +16,8 @@ public class StatManager : MonoBehaviour {
 	private ItemStats _tempItem;
 
     private ItemHolder holder;
-    private ShipControl controler;
-
+    public ShipControl controler;
+    public PlaySound soundPlayer;
 
     private bool quickMode = false;
 
@@ -28,6 +28,8 @@ public class StatManager : MonoBehaviour {
 	void Start () {
         controler = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
+        soundPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlaySound>();
+
         loadItem();
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
         _handling = new Stat(_item.handleMulti, UIManager.Instance.handlingWidget);
@@ -108,7 +110,7 @@ public class StatManager : MonoBehaviour {
 			_tempItem.EnergieMulti += pool;
 			break;
 		}
-
+        soundPlayer.playSlowMo();
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
             controler.StartBullteTime(2.0f);

@@ -23,7 +23,7 @@ public class ShipControl : MonoBehaviour {
 	public float maxTiltAngle = 5;
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
-    private bool slowMoActive = false;
+    public bool slowMoActive = false;
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
 	private RotatingPlatform rotatePlatform;
@@ -42,6 +42,7 @@ public class ShipControl : MonoBehaviour {
     private float old_speedIncrementPerLevel;
     private float old_startSpeed;
     private float old_sideSpeedLimit;
+    public bool itemChoseLock = true;
 	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
 	public ShakeShakeShake shakeshakeshake;
 	public float speedToConstantShake = 3f;
@@ -205,11 +206,16 @@ public class ShipControl : MonoBehaviour {
         old_sideSpeedLimit = sideSpeedLimit;
         for (int i = 1; i < slowSmothness; i++)
         {
+
             Time.timeScale /= (bulletTimeDivisor);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
             ChangeSideSpeed(0);
+            if (i == slowSmothness / 2)
+            {
+                itemChoseLock = false;
+            }
             yield return new WaitForSeconds(0.0075f);
         }
         StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit,time));
@@ -235,14 +241,20 @@ public class ShipControl : MonoBehaviour {
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
                 ChangeSideSpeed(0);
+                if (i == 4)
+                {
+                    ItemUIBehaviour.Instance.outOtimeAutoPick();
+                }
                 yield return new WaitForSeconds(0.0005f);
             }
+
             speedIncrementPerLevel = old_speedIncrementPerLevel;
             startSpeed = old_startSpeed;
             sideSpeedLimit = old_sideSpeedLimit;
             ChangeSideSpeed(0);
             Time.timeScale = 1f;
             slowMoActive = false;
+            itemChoseLock = true;
             
    
     }
