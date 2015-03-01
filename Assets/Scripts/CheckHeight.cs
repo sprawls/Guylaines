@@ -22,7 +22,6 @@ public class CheckHeight : MonoBehaviour {
 
         if (Physics.Raycast(groundingRay, out hit, 10f, floorLayerMask))
         {
-            Debug.Log("Hit");
 			targetHeight = hit.point.y + additionalHeight;
 			surfaceNormal = hit.normal;
 		}
@@ -51,6 +50,6 @@ public class CheckHeight : MonoBehaviour {
 		//apply heading rotation
 		transform.rotation = headingDelta * transform.rotation;
 		*/
-		Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
+		//Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
 	}
 }

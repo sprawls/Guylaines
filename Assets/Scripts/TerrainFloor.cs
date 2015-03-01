@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrainGen : MonoBehaviour {
+public class TerrainFloor : Floor {
 
+    Terrain ter;
 	// Use this for initialization
 	void Start () {
-        Terrain tc = GetComponent<Terrain>();
-        
+        ter = GetComponentInChildren<Terrain>();
+        transform.position = new Vector3(middle.x,0,middle.y);
+        ter.transform.localPosition = new Vector3(- size.x /2, 0,  - size.y/2);
 
-        TerrainData td = tc.terrainData;
+        TerrainData td = ter.terrainData;
+        Vector3 scale = td.size;
+        scale.x = this.size.x;
+        scale.z = this.size.y;
+        td.size = scale;
 
         updateTerrainData(ref td);
 
-        tc.terrainData = td;
+        ter.terrainData = td;
 	}
 
     private void generateHeightMap()
     {
-        Terrain ter = (Terrain)GetComponent(typeof(Terrain));
-        if (ter == null)
-        {
-            return;
-        }
         TerrainData terData = ter.terrainData;
 
         int Tw = terData.heightmapWidth;
@@ -56,23 +57,21 @@ public class TerrainGen : MonoBehaviour {
         }
 
         terData.SetHeights(0, 0, heightMap);
-        Vector3 pos = transform.position;
+        float offset = -mean * ter.terrainData.heightmapHeight;
+        Debug.Log("Offset: " + offset.ToString());
+
+        Vector3 pos = ter.transform.localPosition;
         pos.y = -mean * ter.terrainData.heightmapHeight;
-        transform.position = pos;
+        ter.transform.localPosition = pos;
     }
 	
     private void updateTerrainData(ref TerrainData terData)
     {
-            TerrainToolkit tk = GetComponent<TerrainToolkit>();
+            TerrainToolkit tk = GetComponentInChildren<TerrainToolkit>();
 
             tk.PerlinGenerator(5, 0.5f, 4, 1);
             generateHeightMap();
             tk.SmoothTerrain(1, 0.3f);
             generateHeightMap();
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
