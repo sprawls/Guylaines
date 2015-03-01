@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ScoreUIBehaviour : MonoBehaviour {
 	public static ScoreUIBehaviour Instance { get; private set; }
-
+	
 	private SectionSlider _runsSlider;
 	private Text _nextRunText;
 

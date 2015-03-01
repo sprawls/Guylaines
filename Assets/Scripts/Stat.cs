@@ -19,14 +19,16 @@ public class Stat {
 		Level = 1;
     }
 
-    public void addXP(float value)
-    {
+    public int addXP(float value) {
+		int prevLevel = _level;
+
 		XP += (int)(value * Multiplier);
 		Level = 1 + XP / XP_TO_LEVEL;
+
+		return _level - prevLevel;
 	}
 
-    public int Level
-    {
+    public int Level {
         get { return this._level; } 
 		private set {
 			_level = value;
