@@ -85,7 +85,9 @@ public class ShipControl : MonoBehaviour {
 	void CheckShake() {
 		if(forwardSpeed > speedToConstantShake) {
 			shakeshakeshake.noTimer = true;
-			//shakeshakeshake.SetShake(Mathf.Lerp (0,maxShakeAmount,forwardSpeed/speedForMaxShake));
+			float step = (forwardSpeed-speedToConstantShake)/(speedForMaxShake-speedToConstantShake);
+			step = Mathf.Clamp(step,0,1);
+			shakeshakeshake.SetShake(1,Mathf.Lerp (0,maxShakeAmount,step));
 		}
 	}
 
