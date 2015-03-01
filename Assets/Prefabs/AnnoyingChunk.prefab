@@ -39,12 +39,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc91c8ca9cffcd47800d5b007eff5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: {fileID: 140762, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
-  availableItem: []
+  floors:
+  - {fileID: 11421002, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
+  availableItem:
+  - {fileID: 11424458, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
   availablePrefab:
   - {fileID: 11471610, guid: 2b17786cc938ce842b37b6e6cf1461ef, type: 2}
-  layerMin: 3
-  layerMax: 9
+  NbOfUsedPrefab: 0
+  layerMin: 10
+  layerMax: -1
   currentLayer: 0
 --- !u!1001 &100100000
 Prefab:

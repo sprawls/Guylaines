@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Rand = System.Random;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +23,7 @@ public class TerrainGenerator : MonoBehaviour
     public  List<Chunk> ChunkSpecifier;
 
     private int index;
-    
+    private bool updating =false;
 
 
     public int layer = 0;
@@ -85,12 +86,16 @@ public class TerrainGenerator : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-		if(player == null) player = GameObject.Find("Ship Prefab");
-        generateLeftChunkIfNeeded();
-        generateRightChunckIfNeeded();
-        generateFrontChunckIfNeeded();
-        findCurrent();
-        switchLayer();
+        if (player == null) player = GameObject.Find("Ship Prefab");
+		else if(!updating)
+        {
+            generateLeftChunkIfNeeded();
+            generateRightChunckIfNeeded();
+            generateFrontChunckIfNeeded();
+            findCurrent();
+            switchLayer(); 
+        }
+        
 	}
 
     //Update index so that it point to the chunk which contain the player

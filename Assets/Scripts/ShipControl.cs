@@ -7,6 +7,7 @@ public class ShipControl : MonoBehaviour {
 	public Transform modelAndCam;
 	public Transform model;
 	public MoveCameraFromSpeed cameraScript;
+	public LNFManager LNF;
 	public bool isDead = false;
 	////////////////////////// Forward Speed //////////////////////////
 	public float forwardSpeed;
@@ -53,6 +54,7 @@ public class ShipControl : MonoBehaviour {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
 		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
 		shakeshakeshake = (ShakeShakeShake) gameObject.GetComponentInChildren<ShakeShakeShake>();
+		LNF = (LNFManager) GameObject.FindGameObjectWithTag("LNF").GetComponent<LNFManager>();
 	}
 	void Start () {
 		forwardSpeed = startSpeed;
@@ -163,6 +165,7 @@ public class ShipControl : MonoBehaviour {
 	public void Kill(){
         if (!isDead)
         {
+
             isDead = true;
             StartCoroutine(DeathAnimation());
             Destroy(model.gameObject);
