@@ -23,7 +23,14 @@ public class Stat {
 		int prevLevel = _level;
 
 		XP += (int)(value * Multiplier);
-		Level = 1 + XP / XP_TO_LEVEL;
+        if (Level < 9999)
+        {
+            Level = 1 + XP / XP_TO_LEVEL;
+        }
+        else
+        {
+            Level = 9999;
+        }
 
 		return _level - prevLevel;
 	}

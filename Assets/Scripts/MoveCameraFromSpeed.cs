@@ -12,6 +12,10 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	private float curSpeed;
 	public float temporarySpeed = 0;
 
+	//FOV
+	public float startFOV = 60;
+	public float endFOV = 45;
+
 	// Use this for initialization
 	void Awake() {
 		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -25,10 +29,14 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(shipControl.isDead == false) {
+			//Change Camera Lenght
 			curSpeed = shipControl.forwardSpeed + temporarySpeed;
 			float distanceMultiplier = Mathf.Min(speedForMax,curSpeed);
 			distanceMultiplier = Mathf.Lerp(startDistance,endDistance,distanceMultiplier/speedForMax);
 			transform.localPosition = cameraAngle*distanceMultiplier;
+			//Change FOV
+			float lerpedFOV = Mathf.Lerp(startFOV,endFOV,distanceMultiplier/speedForMax);
+			camera.fieldOfView = lerpedFOV;
 		}
 	}
 
