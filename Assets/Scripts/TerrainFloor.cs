@@ -4,6 +4,8 @@ using System.Collections;
 public class TerrainFloor : Floor {
 
     Terrain ter;
+    public float mean;
+    public float offset;
 	// Use this for initialization
 	void Start () {
         ter = GetComponentInChildren<Terrain>();
@@ -11,15 +13,18 @@ public class TerrainFloor : Floor {
         ter.transform.localPosition = new Vector3(- size.x /2, 0,  - size.y/2);
 
         TerrainData td = Instantiate(ter.terrainData) as TerrainData;
+
+        ter.terrainData = td;
+        GetComponentInChildren<TerrainCollider>().terrainData = td; ;
+
         Vector3 scale = td.size;
         scale.x = this.size.x;
         scale.z = this.size.y;
         td.size = scale;
 
-        updateTerrainData(ref td);
+        updateTerrainData();
 
-        ter.terrainData = td;
-        GetComponentInChildren<TerrainCollider>().terrainData = td; ;
+        
 	}
 
     private void generateHeightMap()
@@ -32,41 +37,39 @@ public class TerrainFloor : Floor {
 
         float acc = 0;
         int cpt = 0;
-        for(int i = 0; i < Tw; i++)
-        {
-            acc += heightMap[i, 0];
-            acc += heightMap[i, Th - 1];
-            cpt += 2;
-        }
-        for(int i = 1; i < Th-1; i++)
-        {
-            acc += heightMap[0, i];
-            acc += heightMap[Tw - 1, i];
-            cpt += 2;
-        }
-        float mean = acc / cpt;
-
         for (int i = 0; i < Tw; i++)
         {
-            heightMap[i, 0] = mean;
-            heightMap[i, Th - 1] = mean;
+            for(int j = 0 ;j < Th ; j++)
+            {
+                if(i < 2 || i > Tw - 3 || j < 2 || j > Th -3)
+                {
+                    acc += heightMap[i, j];
+                    cpt++;
+                }
+            }
         }
-        for (int i = 1; i < Th - 1; i++)
+
+        mean = acc / cpt;
+        for (int i = 0; i < Tw; i++)
         {
-            heightMap[0, i] = mean;
-            heightMap[Tw - 1, i] = mean;
+            for (int j = 0; j < Th; j++)
+            {
+                if (i < 2 || i > Tw - 3 || j < 2 || j > Th - 3)
+                {
+                    heightMap[i, j] = mean;
+                }
+            }
         }
 
         terData.SetHeights(0, 0, heightMap);
-        float offset = -mean * ter.terrainData.heightmapHeight;
-        Debug.Log("Offset: " + offset.ToString());
+        offset = -mean * terData.size.y;
 
-        Vector3 pos = ter.transform.localPosition;
-        pos.y = -mean * ter.terrainData.heightmapHeight;
-        ter.transform.localPosition = pos;
+        Vector3 pos = ter.transform.position;
+        pos.y = offset;
+        ter.transform.position = pos;
     }
 	
-    private void updateTerrainData(ref TerrainData terData)
+    private void updateTerrainData()
     {
             TerrainToolkit tk = GetComponentInChildren<TerrainToolkit>();
 
