@@ -17,10 +17,14 @@ public class Item : MonoBehaviour {
 
         if (Physics.Raycast(groundingRay, out hit, 25f, floorLayerMask))
         {
+            Debug.Log("hit");
+            Debug.Log(hit.point);
+            Debug.Log(transform.position);
+
             pos = hit.point;
-            pos.y += transform.position.y;
+            pos.y = pos.y + 2;
             transform.position = pos;
-            surfaceNormal = hit.normal;
+            Debug.Log(transform.position);
         }
     }
 }
