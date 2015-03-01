@@ -65,16 +65,10 @@ public class TerrainGen : MonoBehaviour {
     {
             TerrainToolkit tk = GetComponent<TerrainToolkit>();
 
-            tk.perlinFrequency = 5;
-            tk.perlinAmplitude = 0.5f;
-            tk.perlinOctaves = 4;
-            tk.perlinBlend = 1;
             tk.PerlinGenerator(5, 0.5f, 4, 1);
             generateHeightMap();
             tk.SmoothTerrain(1, 0.3f);
             generateHeightMap();
-            
-
     }
 
 	// Update is called once per frame
