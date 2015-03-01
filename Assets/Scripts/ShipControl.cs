@@ -115,9 +115,12 @@ public class ShipControl : MonoBehaviour {
 
 
 	public void Kill(){
-		isDead = true;
-		StartCoroutine(DeathAnimation());
-		Destroy(model.gameObject);
+        if (!isDead)
+        {
+            isDead = true;
+            StartCoroutine(DeathAnimation());
+            Destroy(model.gameObject);
+        }
 	}
 
 	public void Spawn(){
