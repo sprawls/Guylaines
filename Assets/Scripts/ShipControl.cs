@@ -184,8 +184,11 @@ public class ShipControl : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.05f);
 		Time.timeScale = 0.05f;
+		LNF.audio.pitch = 0.5f;
+		StartCoroutine(fadeOutSong());
 		yield return new WaitForSeconds(1.5f*(Time.timeScale)); // 
 		Time.timeScale = 1f;
+		//LNF.audio.pitch = 1f;
 		slowMoEnded = true;
 
 		// Reload if have runs left
@@ -301,6 +304,13 @@ public class ShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(tiltCooldown);
 		isSuperTilting = false;
 
+	}
+
+	private IEnumerator fadeOutSong() {
+		for(float i=1; i>=0; i-= Time.deltaTime/4f) {
+			LNF.audio.volume = i;
+			yield return null;
+		}
 	}
 
 	private IEnumerator SuperTilt(Vector3 startingRotation, Vector3 endRotation, float time) {
