@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Le MONOCHUNK s'attend que le prefab contienne un collider qui l'englobe
 public class MONOCHUNK : Chunk {
 
     public override void PopulateChunk()
@@ -10,14 +11,7 @@ public class MONOCHUNK : Chunk {
         b= go.gameObject.GetComponent<Collider>().bounds;
         Vector3 s = b.size;
 
-        Debug.Log(s);
-
         float neededSize = right - left;
-
-        Debug.Log(neededSize);
-
-
-
 
         go.transform.localPosition = new Vector3(left + neededSize / 2, 0, bottom + neededSize / 2);
         s.x = neededSize / s.x;
