@@ -18,7 +18,7 @@ public class MainMenuBehaviour : MonoBehaviour {
 	}
 
 	public void OnInstructions() {
-		Debug.Log ("Instructions");
+		//Debug.Log ("Instructions");
 	}
 
 	public void OnQuit() {

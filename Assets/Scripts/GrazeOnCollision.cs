@@ -17,7 +17,7 @@ public class GrazeOnCollision : MonoBehaviour {
 
 	void OnCollisionStay(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Floor") {
-			//Debug.Log ("Grazed with : "  + collision.gameObject);
+			////Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
 			GameObject newParticles = (GameObject)Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
 			newParticles.transform.parent = transform;
@@ -28,7 +28,7 @@ public class GrazeOnCollision : MonoBehaviour {
 	/*
 	void OnCollisionStay(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle") {
-			Debug.Log ("Grazed with : "  + collision.gameObject);
+			//Debug.Log ("Grazed with : "  + collision.gameObject);
 			Vector3 spawnPosition = collision.contacts[0].point;
 			Instantiate(GrazeParticles,spawnPosition, Quaternion.identity);
 			GrazeSystem.Emit(100);

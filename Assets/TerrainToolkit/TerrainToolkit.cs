@@ -617,7 +617,7 @@ public class TerrainToolkit : MonoBehaviour {
 			terData.SetHeights(Px, Py, heightMap);
 		}
 		catch (Exception e) {
-		 	Debug.LogError("A brush error occurred: "+e);
+		 	//Debug.LogError("A brush error occurred: "+e);
 		}
 	}
 	
@@ -662,7 +662,7 @@ public class TerrainToolkit : MonoBehaviour {
 					iterations = tidalIterations;
 					heightMap = fastErosion(heightMap, new Vector2(Tw, Th), iterations, erosionProgressDelegate);
 				} else {
-					Debug.LogError("Sea level does not intersect terrain object. Erosion operation failed.");
+					//Debug.LogError("Sea level does not intersect terrain object. Erosion operation failed.");
 				}
 				break;
 				case ErosionType.Wind:
@@ -676,7 +676,7 @@ public class TerrainToolkit : MonoBehaviour {
 			terData.SetHeights(0, 0, heightMap);
 		}
 		catch (Exception e) {
-			Debug.LogError("An error occurred: "+e);
+			//Debug.LogError("An error occurred: "+e);
 		}
 	}
 	
@@ -1688,7 +1688,7 @@ public class TerrainToolkit : MonoBehaviour {
 		splatPrototypes = terData.splatPrototypes;
 		int nTextures = splatPrototypes.Length;
 		if (nTextures < 2) {
-			Debug.LogError("Error: You must assign at least 2 textures.");
+			//Debug.LogError("Error: You must assign at least 2 textures.");
 			return;
 		}
 		textureProgressDelegate("Procedural Terrain Texture", "Generating height and slope maps. Please wait.", 0.1f);
@@ -1844,7 +1844,7 @@ public class TerrainToolkit : MonoBehaviour {
 			heightMapData = null;
 			slopeMapData = null;
 			splatMapData = null;
-			Debug.LogError("An error occurred: "+e);
+			//Debug.LogError("An error occurred: "+e);
 		}
 	}
 	
@@ -2439,32 +2439,32 @@ public class TerrainToolkit : MonoBehaviour {
 	
 	public void TextureTerrain(float[] slopeStops, float[] heightStops, Texture2D[] textures) {
 		if (slopeStops.Length != 2) {
-			Debug.LogError("Error: slopeStops must have 2 values");
+			//Debug.LogError("Error: slopeStops must have 2 values");
 			return;
 		}
 		if (heightStops.Length > 8) {
-			Debug.LogError("Error: heightStops must have no more than 8 values");
+			//Debug.LogError("Error: heightStops must have no more than 8 values");
 			return;
 		}
 		if (heightStops.Length % 2 != 0) {
-			Debug.LogError("Error: heightStops must have an even number of values");
+			//Debug.LogError("Error: heightStops must have an even number of values");
 			return;
 		}
 		int numTextures = textures.Length;
 		int numTexturesByStops = (heightStops.Length / 2) + 2;
 		if (numTextures != numTexturesByStops) {
-			Debug.LogError("Error: heightStops contains an incorrect number of values");
+			//Debug.LogError("Error: heightStops contains an incorrect number of values");
 			return;
 		}
 		foreach (float stop in slopeStops) {
 			if (stop < 0 || stop > 90) {
-				Debug.LogError("Error: The value of all slopeStops must be in the range 0.0 to 90.0");
+				//Debug.LogError("Error: The value of all slopeStops must be in the range 0.0 to 90.0");
 				return;
 			}
 		}
 		foreach (float stop in heightStops) {
 			if (stop < 0 || stop > 1) {
-				Debug.LogError("Error: The value of all heightStops must be in the range 0.0 to 1.0");
+				//Debug.LogError("Error: The value of all heightStops must be in the range 0.0 to 1.0");
 				return;
 			}
 		}

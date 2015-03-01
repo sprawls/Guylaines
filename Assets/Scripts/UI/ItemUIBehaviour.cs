@@ -47,16 +47,18 @@ public class ItemUIBehaviour : MonoBehaviour {
 	}
 
 	public void OpenUI(ItemStats newItem) {
-		_newItem = newItem;
+        if (!_uiIsActive)
+        {
+            _newItem = newItem;
+            _speedWidget.value = 0;
+            _handlingWidget.value = 0;
+            _energyWidget.value = 0;
 
-		_speedWidget.value = 0;
-		_handlingWidget.value = 0;
-		_energyWidget.value = 0;
+            transform.DORotate(new Vector3(0, 20, 0), 0.2f * Time.timeScale, 0).SetAs(_rotationTweenParams);
+            _uiIsActive = true;
 
-		transform.DORotate (new Vector3 (0, 20, 0), 0.2f*Time.timeScale, 0).SetAs (_rotationTweenParams);
-		_uiIsActive = true;
-
-		PickNewItem ();
+            PickNewItem();
+        }
 	}
 
 
@@ -84,9 +86,9 @@ public class ItemUIBehaviour : MonoBehaviour {
 			graphValues[i] /= maxDelta;
 		}
 
-		//Debug.Log (string.Format ("New item: {0} {1} {2}", _newItem.speedMulti, _newItem.handleMulti, _newItem.EnergieMulti));
-		//Debug.Log (string.Format ("Current item: {0} {1} {2}", currentItem.speedMulti, currentItem.handleMulti, currentItem.EnergieMulti));
-		//Debug.Log (string.Format ("Graph values: {0} {1} {2}", graphValues[0], graphValues[1], graphValues[2]));
+		////Debug.Log (string.Format ("New item: {0} {1} {2}", _newItem.speedMulti, _newItem.handleMulti, _newItem.EnergieMulti));
+		////Debug.Log (string.Format ("Current item: {0} {1} {2}", currentItem.speedMulti, currentItem.handleMulti, currentItem.EnergieMulti));
+		////Debug.Log (string.Format ("Graph values: {0} {1} {2}", graphValues[0], graphValues[1], graphValues[2]));
 
         DOTween.To(x => _speedWidget.value = x, 0, graphValues[0], 0.2f * Time.timeScale);
         DOTween.To(x => _handlingWidget.value = x, 0, graphValues[1], 0.2f * Time.timeScale);
