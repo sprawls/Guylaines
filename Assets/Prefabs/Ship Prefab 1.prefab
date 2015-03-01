@@ -208,6 +208,7 @@ GameObject:
   - 4: {fileID: 438572}
   - 114: {fileID: 11438586}
   - 114: {fileID: 11438588}
+  - 114: {fileID: 11466608}
   m_Layer: 0
   m_Name: Ship Prefab
   m_TagString: Player
@@ -1843,6 +1844,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &166606
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 466606}
+  - 114: {fileID: 11466606}
+  m_Layer: 0
+  m_Name: Main Camera Shake Obj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &424480
 Transform:
   m_ObjectHideFlags: 1
@@ -2027,13 +2044,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150550}
   m_LocalRotation: {x: .0654713064, y: 0, z: 0, w: .997854471}
-  m_LocalPosition: {x: 0, y: 1.98000002, z: -4.96999979}
+  m_LocalPosition: {x: 0, y: 1.98000002, z: -4.97000027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22450598}
   - {fileID: 460018}
   - {fileID: 448694}
-  m_Father: {fileID: 450632}
+  m_Father: {fileID: 466606}
   m_RootOrder: 0
 --- !u!4 &450610
 Transform:
@@ -2178,7 +2195,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 450608}
+  - {fileID: 466606}
   - {fileID: 450628}
   m_Father: {fileID: 438572}
   m_RootOrder: 0
@@ -2270,6 +2287,19 @@ Transform:
   m_Children:
   - {fileID: 450630}
   m_Father: {fileID: 450636}
+  m_RootOrder: 0
+--- !u!4 &466606
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 450608}
+  m_Father: {fileID: 450632}
   m_RootOrder: 0
 --- !u!20 &2050642
 Camera:
@@ -2801,6 +2831,7 @@ MonoBehaviour:
   objectsToSuperTilt:
   - {fileID: 150596}
   - {fileID: 163292}
+  shakeshakeshake: {fileID: 0}
 --- !u!114 &11438588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4693,6 +4724,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlowParticul: {fileID: 100000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
+--- !u!114 &11466606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc7a766ecb882a40ba95281847be806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTimer: 0
+  shakeTimeLeft: .400000006
+  shakeAmount: .449999988
+  timeDecreaseFactor: 1
+  shakeDecreseFactor: 1
+--- !u!114 &11466608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca9149540f8ea2448de1707cc4b7d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  additionalHeight: 2.75
 --- !u!114 &11474912
 MonoBehaviour:
   m_ObjectHideFlags: 1

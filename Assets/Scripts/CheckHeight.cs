@@ -25,9 +25,8 @@ public class CheckHeight : MonoBehaviour {
 			targetHeight = hit.point.y + additionalHeight;
 			surfaceNormal = hit.normal;
 		}
-        Debug.Log(groundingRay.origin.ToString() + " " + groundingRay.direction.ToString());
-		Debug.DrawRay(groundingRay.origin,groundingRay.direction*40,Color.yellow,5.0f);
-        
+		//Debug.DrawRay(groundingRay.origin,groundingRay.direction,Color.yellow);
+
 		//Change Height of ship
 		Vector3 targetPosition = new Vector3(transform.position.x,
 		                             targetHeight,

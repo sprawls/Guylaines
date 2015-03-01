@@ -36,10 +36,13 @@ public class ShipControl : MonoBehaviour {
 	public GameObject[] objectsToSuperTilt;
 	private bool isSuperTilting = false;
 
+	////////////////////////// Shake Shake Shake //////////////////////////
+	public ShakeShakeShake shakeshakeshake;
 
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
 		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
+		shakeshakeshake = (ShakeShakeShake) gameObject.GetComponentInChildren<ShakeShakeShake>();
 	}
 	void Start () {
 		forwardSpeed = startSpeed;
@@ -70,6 +73,8 @@ public class ShipControl : MonoBehaviour {
 			transform.position += new Vector3(sideSpeed,0,forwardSpeed); //Move the ship
 			TiltShip(); //Tilt the ship
 		}
+
+		//Add SHAKESHAKESHAKE on speed
 
 	}
 
