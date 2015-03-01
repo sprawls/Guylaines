@@ -1274,7 +1274,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 25
+      scalar: 45
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1289,7 +1289,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .600000024
+          value: .444444448
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1488,7 +1488,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 1000
+    cnt0: 2000
     cnt1: 1000
     cnt2: 1000
     cnt3: 30

@@ -20,7 +20,7 @@ public class MasterChief : FallingObject {
 
         GameObject go = Instantiate(RedAlert) as GameObject;
         go.transform.position = target;
-        go.transform.parent = transform;
+        //go.transform.parent = transform;
     }
 
 	public override void DoSomethingWhenNear()
