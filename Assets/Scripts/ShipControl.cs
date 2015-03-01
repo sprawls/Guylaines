@@ -163,6 +163,8 @@ public class ShipControl : MonoBehaviour {
         if (!isDead)
         {
             isDead = true;
+			RunEndUIBehaviour.Instance.OnRunEnd();
+			ScoreUIBehaviour.Instance.TweenRunsOnRunEnd();
             StartCoroutine(DeathAnimation());
             Destroy(model.gameObject);
         }
@@ -183,8 +185,11 @@ public class ShipControl : MonoBehaviour {
 		Time.timeScale = 1f;
 		slowMoEnded = true;
 
-		yield return new WaitForSeconds(5f);
-		Application.LoadLevel(Application.loadedLevel);
+		// Reload if have runs left
+		if (StatManager.Instance.HaveRunsLeft) {
+			yield return new WaitForSeconds (5f);
+			Application.LoadLevel (Application.loadedLevel);
+		}
 	}
 
     public void StartBullteTime(float time)
