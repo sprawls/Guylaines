@@ -12,7 +12,7 @@ GameObject:
   - 64: {fileID: 6440762}
   - 23: {fileID: 2340762}
   - 65: {fileID: 6585950}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicFloor
   m_TagString: Floor
   m_Icon: {fileID: 0}
