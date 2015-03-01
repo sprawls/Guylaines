@@ -10,6 +10,7 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	
 	private Vector3 cameraAngle;
 	private float curSpeed;
+	public float temporarySpeed = 0;
 
 	// Use this for initialization
 	void Awake() {
@@ -24,10 +25,26 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(shipControl.isDead == false) {
-			curSpeed = shipControl.forwardSpeed;
+			curSpeed = shipControl.forwardSpeed + temporarySpeed;
 			float distanceMultiplier = Mathf.Min(speedForMax,curSpeed);
 			distanceMultiplier = Mathf.Lerp(startDistance,endDistance,distanceMultiplier/speedForMax);
 			transform.localPosition = cameraAngle*distanceMultiplier;
 		}
 	}
+
+	public void AddIntensity(float amt, float time1, float time2) {
+		StartCoroutine(LerpIntensity(amt,time1,time2));
+	}
+	public IEnumerator LerpIntensity(float amt, float time1, float time2) {
+		for(float i =0; i<1; i+= Time.deltaTime/time1) {
+			temporarySpeed = Mathf.Lerp (0,amt,i);
+			yield return null;
+		}
+		for(float i =0; i<1; i+= Time.deltaTime/time2) {
+			temporarySpeed = Mathf.Lerp (amt,0,i);
+			yield return null;
+		}
+		temporarySpeed = 0;
+	}
+
 }

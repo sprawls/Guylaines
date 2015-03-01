@@ -21,6 +21,7 @@ public class FallingObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(player == null) player = GameObject.Find("Ship Prefab").transform;
 
         Vector3 p1 = player.position;
         Vector3 p2 = transform.position;

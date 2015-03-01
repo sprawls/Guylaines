@@ -10,10 +10,13 @@ public class LNFManager : MonoBehaviour {
 	public Material[] skyboxes;
 	public AudioClip[] songs;
 	public AudioClip[] drops;
+
+	private Intro intro;
 	
 	void Awake () {
 		_audio = GetComponent<AudioSource> ();
 		_pick = Random.Range (0, skyboxes.Length);
+		intro = (Intro) GameObject.FindGameObjectWithTag("intro").GetComponent<Intro>();
 
 		SelectSkybox ();
 		StartDrop ();
@@ -37,10 +40,14 @@ public class LNFManager : MonoBehaviour {
 		_audio.clip = drops [_pick];
 		_audio.Play();
 		_dropIsPlaying = true;
+
+
 	}
 
 	private void StartSong() {
 		_audio.clip = songs [_pick];
 		_audio.Play ();
+
+		if(intro != null) intro.StartGame();
 	}
 }
