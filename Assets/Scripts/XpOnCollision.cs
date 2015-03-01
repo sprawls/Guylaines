@@ -36,11 +36,11 @@ public class XpOnCollision : MonoBehaviour {
 
                 float distX = Mathf.Abs(/*collision.gameObject.transform.position.x*/collision.contacts[0].point.x - playerObj.transform.position.x);
                 float xpStrength = Time.deltaTime * 10 * (27.0f - distX);
-                if (distX < 10)
+                if (distX < 15)
                 {
-                    xpStrength += 25;
-                    if (distX < 5)
-                        xpStrength += 100;
+                    xpStrength += 50;
+                    if (distX < 8)
+                        xpStrength += 250;
                 }
                 //Debug.Log(distX);
                 switch (XpType)

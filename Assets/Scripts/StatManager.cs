@@ -78,7 +78,6 @@ public class StatManager : MonoBehaviour {
 					} else {
 						_tempItem.handleMulti += Mathf.Round (value);
 					}
-
 					pool -= Mathf.Round (value);
 				} else {
 					i--;
@@ -124,6 +123,7 @@ public class StatManager : MonoBehaviour {
 		if(newItemWasPicked)
         {
             saveItem(_tempItem);
+            _tempItem = new ItemStats(1, 1, 1);
         }
 		ItemUIBehaviour.Instance.CloseUI ();
     }
@@ -132,7 +132,6 @@ public class StatManager : MonoBehaviour {
     {
 
         holder.item = item;
-        Debug.Log(item.speedMulti+" - "+ item.handleMulti+" - "+ item.EnergieMulti);
         _item = item;
         applyItemStats();
     }
