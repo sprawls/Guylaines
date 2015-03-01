@@ -31,7 +31,6 @@ public class ChunkObject : MonoBehaviour
             Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
             
             Quaternion q=  Quaternion.LookRotation(proj, hit.normal);
-            Debug.Log(q);
             transform.rotation = q;
         }   
        
