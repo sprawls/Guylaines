@@ -28,6 +28,7 @@ GameObject:
   - 33: {fileID: 3383010}
   - 23: {fileID: 2383010}
   - 64: {fileID: 6483010}
+  - 114: {fileID: 11464794}
   m_Layer: 0
   m_Name: Pyramid
   m_TagString: Untagged
@@ -172,6 +173,17 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300002, guid: f58a4a8fcaa9c3044b65b6c700b233f2, type: 3}
+--- !u!114 &11464794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0e8690d1126eb4a907f818f9ba334a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11483008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +198,7 @@ MonoBehaviour:
   cost: 2
   sameXZ: 0
   sameXY: 0
+  cannotRotate: 0
 --- !u!114 &11483010
 MonoBehaviour:
   m_ObjectHideFlags: 1

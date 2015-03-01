@@ -1,29 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 public class BasicChunk : Chunk
 {
     public int freeZoneLength;
 
 
-    override public void PopulateChunk()
+    override public IEnumerator PopulateChunk()
     {
-        int maxPoints = currentLayer * 20 + 100;
-
-        int points = 0;
-        while (points < maxPoints)
+        if (availableItem.Count <= 0)
         {
+            yield return null;
+        }
+        else
+        {
+            int maxPoints = currentLayer * 20 + 100;
 
-            ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
+            int points = 0;
+            while (points < maxPoints)
+            {
 
-            float x = tg.rand.Range(left, right);
-            float y = tg.rand.Range(bottom + freeZoneLength, top);
+                ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
 
-            go.transform.localPosition = new Vector3(x, 0, y);
-            go.ScaleToSomethingFun(tg.rand, 1, 3);
-            go.transform.parent = transform;
+                float x = tg.rand.Range(left, right);
+                float y = tg.rand.Range(bottom + freeZoneLength, top);
 
-            points += go.cost;
+                go.transform.localPosition = new Vector3(x, 0, y);
+                go.ScaleToSomethingFun(tg.rand, 1, 3);
+                go.transform.parent = transform;
+
+                points += go.cost;
+                yield return null;
+            }
         }
     }
 }

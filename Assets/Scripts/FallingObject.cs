@@ -7,6 +7,7 @@ public class FallingObject : MonoBehaviour {
     public float fallDistance;
 
     private Transform player;
+    private ShipControl sc;
     private bool fallen = false;
 	// Use this for initialization
 	void Start () {
@@ -28,8 +29,19 @@ public class FallingObject : MonoBehaviour {
         p1.y = 0;
         p2.y = 0;
         float distance = Vector3.Distance(p1,p2);
+
+        float fall = fallDistance;
+
+        if(sc == null)
+        {
+            sc = player.gameObject.GetComponent<ShipControl>();
+        }
+        else
+        {
+            fall += sc.forwardSpeed * 25;
+        }
         
-	    if(!fallen && distance < fallDistance)
+	    if(!fallen && distance < fall)
         {
             fallen = true;
             DoSomethingWhenNear();
