@@ -10506,6 +10506,7 @@ GameObject:
   - 4: {fileID: 1297453606}
   - 114: {fileID: 1297453607}
   - 114: {fileID: 1297453608}
+  - 114: {fileID: 1297453609}
   m_Layer: 0
   m_Name: Ship Prefab
   m_TagString: Player
@@ -10569,6 +10570,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33389c39d4f8c439fb0131d0f58f1677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1297453609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297453605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca9149540f8ea2448de1707cc4b7d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  additionalHeight: 2.75
 --- !u!1 &1297522835
 GameObject:
   m_ObjectHideFlags: 0
