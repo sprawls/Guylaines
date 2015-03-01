@@ -3,11 +3,8 @@ using System.Collections;
 public class StatManager : MonoBehaviour {
 
     public static StatManager Instance { get; private set; }
-
-	private int _runsRemaining;
-	private float _toNextRun;
+	
 	private float _distance;
-	private int _runsCollected = 0;
 
     private Stat _speed;
     private Stat _handling;
@@ -35,9 +32,11 @@ public class StatManager : MonoBehaviour {
 
 		_tempItem = new ItemStats (1, 1, 1);
 
-		RunsRemaining = 3;
-		ToNextRun = 50 + 10*Mathf.Pow (_runsCollected, 2);
 		Distance = 0;
+
+		// Force UI update
+		RunsRemaining = RunsRemaining;
+		ToNextRun = holder._energyNeeded - holder._collectedEnergy;
 	}
 
 	void Update () {
@@ -111,7 +110,7 @@ public class StatManager : MonoBehaviour {
 
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
-            controler.StartBullteTime();
+            controler.StartBullteTime(2.0f);
 		} else {
 			saveItem(_tempItem);
 		}
@@ -163,7 +162,8 @@ public class StatManager : MonoBehaviour {
 		}
 		if (Input.GetKey(KeyCode.H))
 		{
-			_energy.addXP(98);
+			int levelsEarned = _energy.addXP(98);
+			AddToCollectedEnergy(levelsEarned);
 		}
 
 		if (Input.GetKeyDown (KeyCode.T)) {
@@ -174,7 +174,6 @@ public class StatManager : MonoBehaviour {
 	private void UpdateDistance() {
 		Distance = transform.position.z;
 		BestRun = Mathf.Max (BestRun, Distance);
-		Debug.Log (Distance);
 	}
 
 	public Stat Speed {
@@ -192,20 +191,39 @@ public class StatManager : MonoBehaviour {
 	public Stat Energy {
 		get { return _energy; }
 	}
+
+	public void AddToCollectedEnergy(float value) {
+		holder._collectedEnergy += value;
+
+		if (holder._collectedEnergy > holder._energyNeeded) {
+			RunsRemaining++;
+			holder._runsCollected++;
+			holder._collectedEnergy = holder._collectedEnergy % holder._energyNeeded;
+			holder._energyNeeded += 20;
+		}
+
+		// UI refresh
+		RunsRemaining = RunsRemaining;
+		ToNextRun = holder._energyNeeded - holder._collectedEnergy;
+	}
+
+	private float CollectedEnergyRatio {
+		get { return holder._collectedEnergy / holder._energyNeeded; }
+	}
 	
 	public int RunsRemaining {
-		get { return _runsRemaining; }
+		get { return holder._runsRemaining; }
 		private set {
-			_runsRemaining = value;
-			ScoreUIBehaviour.Instance.RunsRemaining = _runsRemaining + (1 - _toNextRun/(50 + 10*Mathf.Pow (_runsCollected, 2)));
+			holder._runsRemaining = value;
+			ScoreUIBehaviour.Instance.RunsRemaining = holder._runsRemaining + CollectedEnergyRatio;
 		}
 	}
 	
 	public float ToNextRun {
-		get { return _toNextRun; }
+		get { return holder._toNextRun; }
 		private set {
-			_toNextRun = value;
-			ScoreUIBehaviour.Instance.ToNextRun = _toNextRun;
+			holder._toNextRun = value;
+			ScoreUIBehaviour.Instance.ToNextRun = holder._toNextRun;
 		}
 	}
 	

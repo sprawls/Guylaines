@@ -41,11 +41,13 @@ public class Chunk : MonoBehaviour {
 
     virtual public void AddFloor()
     {
+        Debug.Log(floors.Count);
         Floor plane = Instantiate(floors.OneAtRandom(tg.rand)) as Floor;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft);
 
         plane.middle = middle;
+        Debug.Log("Size: " + scale.ToString());
         plane.size = scale;
 
         plane.transform.parent = transform;

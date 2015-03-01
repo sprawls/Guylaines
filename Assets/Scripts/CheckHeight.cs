@@ -49,6 +49,6 @@ public class CheckHeight : MonoBehaviour {
 		//apply heading rotation
 		transform.rotation = headingDelta * transform.rotation;
 		*/
-		//Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
+		////Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
 	}
 }

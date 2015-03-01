@@ -2,28 +2,16 @@
 using System.Collections;
 
 public class XpOnCollision : MonoBehaviour {
-
-
+	
     public GameObject GlowParticul;
     private ShipControl shipControl;
     private GameObject playerObj;
-    // Use this for initialization
+
     void Awake()
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
         shipControl = playerObj.GetComponentInChildren<ShipControl>();
     }
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void OnCollisionStay(Collision collision)
     {
@@ -42,7 +30,7 @@ public class XpOnCollision : MonoBehaviour {
                     if (distX < 8)
                         xpStrength += 250;
                 }
-                //Debug.Log(distX);
+                ////Debug.Log(distX);
                 switch (XpType)
                 {
                     case 1:
@@ -52,9 +40,9 @@ public class XpOnCollision : MonoBehaviour {
                         StatManager.Instance.Handling.addXP(xpStrength);
                         break;
                     case 3:
-                        StatManager.Instance.Energy.addXP(xpStrength);
+                        int levelsEarned = StatManager.Instance.Energy.addXP(xpStrength);
+						StatManager.Instance.AddToCollectedEnergy(levelsEarned);
                         break;
-
                 }
             }
 
