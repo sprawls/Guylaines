@@ -20,7 +20,8 @@ public class Chunk : MonoBehaviour {
 	void Start () {
         name = "Chunk";
         tg = FindObjectOfType<TerrainGenerator>();
-
+        Vector3 pos = new Vector3(left, 0, bottom);
+        transform.position = pos;
         AddFloor();
         PopulateChunk();
         PopulateItem();
@@ -28,13 +29,13 @@ public class Chunk : MonoBehaviour {
 
     virtual public void AddFloor()
     {
-        //Debug.Log(floors.Count);
+        Debug.Log(floors.Count);
         Floor plane = Instantiate(floors.OneAtRandom(tg.rand)) as Floor;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
         Vector2 scale = (_topRight - _bottomLeft); //Je comprend que dale pourquoi mais cela arrive...
 
         plane.middle = middle;
-        //Debug.Log("Size: " + scale.ToString());
+        Debug.Log("Size: " + scale.ToString());
         plane.size = scale;
 
         plane.transform.parent = transform;
