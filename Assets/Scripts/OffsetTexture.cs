@@ -12,7 +12,6 @@ public class OffsetTexture : MonoBehaviour {
 	void Update () {
         offset+=0.01f;
         MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-        Debug.Log(offset);
         mesh.material.SetTextureOffset("_MainTex", new Vector2(offset, 0.0f));
         mesh.material.SetTextureOffset("_BumpMap", new Vector2(offset, 0.0f));
 	}

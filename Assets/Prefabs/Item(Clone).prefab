@@ -28,6 +28,8 @@ GameObject:
   - 33: {fileID: 3304742}
   - 23: {fileID: 2304742}
   - 65: {fileID: 6504742}
+  - 114: {fileID: 11407680}
+  - 114: {fileID: 11489900}
   m_Layer: 0
   m_Name: gem
   m_TagString: Item
@@ -103,7 +105,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 2457d7b5e57403c4f884e8827ecb2a6b, type: 2}
+  - {fileID: 2100000, guid: c2a63e17142b2074ea23efd2900fab3a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -130,6 +132,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .0138635784, y: .0105218701, z: .0127552096}
   m_Center: {x: -.00410236977, y: .00341250491, z: -.00200176495}
+--- !u!114 &11407680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9542d9a6ba146ab40bb83f98ca4c26ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePower: 0
 --- !u!114 &11407800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,6 +172,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePower: 2
+--- !u!114 &11489900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc3597ac61c68d4288f6237b4734057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!122 &12204742
 Halo:
   m_ObjectHideFlags: 1

@@ -29,13 +29,20 @@ public class XpOnCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Obstacle")
         {
-            XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
+            XpInformation XpInfo = collision.gameObject.GetComponent<XpInformation>();
             int XpType = XpInfo.XpType;
             if (XpType > 0)
             {
                 float distX = Mathf.Abs(collision.gameObject.transform.position.x - playerObj.transform.position.x);
-                float xpStrength = Time.deltaTime*10*(25.0f - distX);
-                switch(XpType)
+                float xpStrength = Time.deltaTime * 25 * (27.0f - distX);
+                if (distX < 10)
+                {
+                    xpStrength += 25;
+                    if (distX < 5)
+                        xpStrength += 100;
+                }
+                //Debug.Log(distX);
+                switch (XpType)
                 {
                     case 1:
                         StatManager.Instance.Speed.addXP(xpStrength);
@@ -45,6 +52,33 @@ public class XpOnCollision : MonoBehaviour {
                         break;
                     case 3:
                         StatManager.Instance.Energy.addXP(xpStrength);
+                        break;
+
+                }
+            }
+
+        }
+
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
+            int XpType = XpInfo.XpType;
+            if (XpType > 0)
+            {
+                switch(XpType)
+                {
+                    case 1:
+                        StatManager.Instance.Speed.addXP(25);
+                        break;
+                    case 2:
+                        StatManager.Instance.Handling.addXP(25);
+                        break;
+                    case 3:
+                        StatManager.Instance.Energy.addXP(25);
                         break;
 
                 }
