@@ -5,7 +5,7 @@ public class ItemHolder : MonoBehaviour {
 
     private ItemStats _item= new ItemStats(1,1,1);
 
-	public int _runsRemaining = 3;
+	public int _runsRemaining = 4;
 	public float _runsCollected = 0;
 	public float _toNextRun;
 

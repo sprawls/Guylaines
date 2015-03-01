@@ -11,21 +11,10 @@ public class KillOnCollision : MonoBehaviour {
 		shipControl = playerObj.GetComponentInChildren<ShipControl>();
 	}
 
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnCollisionEnter(Collision collision) {
 		if(collision.gameObject.tag == "Obstacle") {
-			////Debug.Log ("Collided with : "  + collision.gameObject);
 			shipControl.Kill();
 			Instantiate(DeathParticles,transform.position, Quaternion.identity);
 		}
-
 	}
 }

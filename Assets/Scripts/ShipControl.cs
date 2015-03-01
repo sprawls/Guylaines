@@ -165,8 +165,9 @@ public class ShipControl : MonoBehaviour {
 	public void Kill(){
         if (!isDead)
         {
-
             isDead = true;
+			RunEndUIBehaviour.Instance.OnRunEnd();
+			ScoreUIBehaviour.Instance.TweenRunsOnRunEnd();
             StartCoroutine(DeathAnimation());
             Destroy(model.gameObject);
         }
@@ -187,8 +188,11 @@ public class ShipControl : MonoBehaviour {
 		Time.timeScale = 1f;
 		slowMoEnded = true;
 
-		yield return new WaitForSeconds(5f);
-		Application.LoadLevel(Application.loadedLevel);
+		// Reload if have runs left
+		if (StatManager.Instance.HaveRunsLeft) {
+			yield return new WaitForSeconds (5f);
+			Application.LoadLevel (Application.loadedLevel);
+		}
 	}
 
     public void StartBullteTime(float time)
@@ -211,6 +215,7 @@ public class ShipControl : MonoBehaviour {
         {
 
             Time.timeScale /= (bulletTimeDivisor);
+            LNF.audio.pitch = Mathf.Min(1, Time.timeScale*2);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
@@ -240,6 +245,7 @@ public class ShipControl : MonoBehaviour {
             for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
             {
                 Time.timeScale *= (bulletTimeDivisor);
+                LNF.audio.pitch = Mathf.Min(1, Time.timeScale * 2);
                 speedIncrementPerLevel *= (bulletTimeDivisor);
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
@@ -256,6 +262,7 @@ public class ShipControl : MonoBehaviour {
             sideSpeedLimit = old_sideSpeedLimit;
             ChangeSideSpeed(0);
             Time.timeScale = 1f;
+            LNF.audio.pitch = Time.timeScale;
             slowMoActive = false;
             itemChoseLock = true;
             
