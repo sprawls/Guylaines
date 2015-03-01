@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 404738}
   - 114: {fileID: 11407800}
   - 114: {fileID: 11424458}
-  - 114: {fileID: 11421766}
   m_Layer: 0
   m_Name: Item(Clone)
   m_TagString: Item
@@ -148,18 +147,6 @@ MonoBehaviour:
   delay: 0
   timefor90deg: 1
   rotates: 1
---- !u!114 &11421766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca9149540f8ea2448de1707cc4b7d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  additionalHeight: 2.75
 --- !u!114 &11424458
 MonoBehaviour:
   m_ObjectHideFlags: 1
