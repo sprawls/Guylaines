@@ -38,6 +38,9 @@ public class ShipControl : MonoBehaviour {
 
 	////////////////////////// Shake Shake Shake //////////////////////////
 	public ShakeShakeShake shakeshakeshake;
+	public float speedToConstantShake = 3f;
+	public float maxShakeAmount = 0.5f;
+	public float speedForMaxShake = 6f;
 
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
@@ -75,7 +78,15 @@ public class ShipControl : MonoBehaviour {
 		}
 
 		//Add SHAKESHAKESHAKE on speed
+		CheckShake();
+	}
 
+
+	void CheckShake() {
+		if(forwardSpeed > speedToConstantShake) {
+			shakeshakeshake.noTimer = true;
+			//shakeshakeshake.SetShake(Mathf.Lerp (0,maxShakeAmount,forwardSpeed/speedForMaxShake));
+		}
 	}
 
 	void UpdateControlStat() {

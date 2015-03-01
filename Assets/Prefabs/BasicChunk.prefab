@@ -39,7 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc91c8ca9cffcd47800d5b007eff5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: {fileID: 140762, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
+  floors:
+  - {fileID: 11486724, guid: 07eea556bec35b746a99dd3f82ef8d01, type: 2}
   availableItem:
   - {fileID: 11424458, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
   availablePrefab:

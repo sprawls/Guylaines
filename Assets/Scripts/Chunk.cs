@@ -8,7 +8,7 @@ public class Chunk : MonoBehaviour {
     public TerrainGenerator tg { get; private set; }
 	// Use this for initialization
 
-    public GameObject floor;
+    public List<Floor> floors;
     public List<Item> availableItem;
     public List<ChunkObject> availablePrefab;
 
@@ -28,12 +28,14 @@ public class Chunk : MonoBehaviour {
 
     virtual public void AddFloor()
     {
-        GameObject plane = Instantiate(floor) as GameObject;
+        Debug.Log(floors.Count);
+        Floor plane = Instantiate(floors.OneAtRandom(tg.rand)) as Floor;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
-        Vector2 scale = (_topRight - _bottomLeft) / 10; //Je comprend que dale pourquoi mais cela arrive...
+        Vector2 scale = (_topRight - _bottomLeft); //Je comprend que dale pourquoi mais cela arrive...
 
-        plane.transform.localPosition = new Vector3(middle.x, 0, middle.y);
-        plane.transform.localScale = new Vector3(scale.x, 1, scale.y);
+        plane.middle = middle;
+        Debug.Log("Size: " + scale.ToString());
+        plane.size = scale;
 
         plane.transform.parent = transform;
     }

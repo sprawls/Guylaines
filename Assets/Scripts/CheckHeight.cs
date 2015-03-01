@@ -20,11 +20,13 @@ public class CheckHeight : MonoBehaviour {
 		Vector3 surfaceNormal = new Vector3(0,0,0);
 	    Vector3 fwd = transform.forward;
 
-		if(Physics.Raycast(groundingRay,out hit,10f,floorLayerMask)) {
+        if (Physics.Raycast(groundingRay, out hit, 10f, floorLayerMask))
+        {
 			targetHeight = hit.point.y + additionalHeight;
 			surfaceNormal = hit.normal;
 		}
 		//Debug.DrawRay(groundingRay.origin,groundingRay.direction,Color.yellow);
+
 		//Change Height of ship
 		Vector3 targetPosition = new Vector3(transform.position.x,
 		                             targetHeight,
