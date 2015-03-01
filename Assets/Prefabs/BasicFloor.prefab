@@ -12,7 +12,6 @@ GameObject:
   - 64: {fileID: 6440762}
   - 23: {fileID: 2340762}
   - 65: {fileID: 6585950}
-  - 114: {fileID: 11454450}
   - 114: {fileID: 11421002}
   m_Layer: 10
   m_Name: BasicFloor
@@ -86,19 +85,6 @@ BoxCollider:
   m_Size: {x: 10, y: 2.22044605e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11421002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41662147cd3bec94fb8a1f8309133ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  middle: {x: 0, y: 0, z: 0}
-  size: {x: 0, y: 0}
---- !u!114 &11454450
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
