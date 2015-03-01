@@ -51,6 +51,7 @@ public class ShipControl : MonoBehaviour {
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
+		UpdateControlStat();
 		if(Input.GetAxis("Horizontal") != 0) 
 			ChangeSideSpeed(Input.GetAxis("Horizontal"));
 		else
@@ -69,6 +70,20 @@ public class ShipControl : MonoBehaviour {
 		}
 
 	}
+
+	void UpdateControlStat() {
+		control = (StatManager.Instance.Handling.Level / StatManager.Instance.Speed.Level);
+		control = Mathf.Clamp(control,1f,3f);
+		//Remove control by stat for test
+		control = 2f;
+		//Change side Speed limit
+		float LevelBonusSideSpeed = Mathf.Lerp (0f,8f,StatManager.Instance.Handling.Level/10000f);
+
+		sideSpeedLimit = 0.5f + LevelBonusSideSpeed;
+		//Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
+		
+	}
+
 
 	void StabilizeSideSpeed() { //Stabilize the ship when no key is pressed
 		int axis;
