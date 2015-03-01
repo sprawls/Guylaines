@@ -11,6 +11,8 @@ public class StatManager : MonoBehaviour {
 	private ItemStats _tempItem;
 
     private ItemHolder holder;
+    private ShipControl controler;
+
 
     private bool quickMode = false;
 
@@ -19,6 +21,7 @@ public class StatManager : MonoBehaviour {
 	}
 
 	void Start () {
+        controler = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
         loadItem();
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
@@ -114,12 +117,14 @@ public class StatManager : MonoBehaviour {
 
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
+            controler.StartBullteTime();
 		} else {
 			saveItem(_tempItem);
 		}
 	}
 
 	public void OnItemPick(bool newItemWasPicked) {
+        controler.callStopBullteTime(0.0f);
 		if(newItemWasPicked)
         {
             saveItem(_tempItem);
