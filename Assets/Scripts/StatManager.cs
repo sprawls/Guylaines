@@ -111,7 +111,7 @@ public class StatManager : MonoBehaviour {
 
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
-            controler.StartBullteTime();
+            controler.StartBullteTime(2.0f);
 		} else {
 			saveItem(_tempItem);
 		}
@@ -174,7 +174,7 @@ public class StatManager : MonoBehaviour {
 	private void UpdateDistance() {
 		Distance = transform.position.z;
 		BestRun = Mathf.Max (BestRun, Distance);
-		Debug.Log (Distance);
+		////Debug.Log (Distance);
 	}
 
 	public Stat Speed {

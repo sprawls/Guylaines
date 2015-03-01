@@ -42,7 +42,7 @@ public class XpOnCollision : MonoBehaviour {
                     if (distX < 8)
                         xpStrength += 250;
                 }
-                //Debug.Log(distX);
+                ////Debug.Log(distX);
                 switch (XpType)
                 {
                     case 1:

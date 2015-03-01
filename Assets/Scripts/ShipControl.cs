@@ -57,14 +57,16 @@ public class ShipControl : MonoBehaviour {
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
-		UpdateControlStat();
-		if(Input.GetAxis("Horizontal") != 0) 
-			ChangeSideSpeed(Input.GetAxis("Horizontal"));
-		else
-			StabilizeSideSpeed();
-
+        if (!slowMoActive)
+        {
+            UpdateControlStat();
+            if (Input.GetAxis("Horizontal") != 0)
+                ChangeSideSpeed(Input.GetAxis("Horizontal"));
+            else
+                StabilizeSideSpeed();
+        }
 		//Check isTilting
-		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false) {
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false&& !slowMoActive) {
 			isSuperTilting = true;
 			StartCoroutine (SuperTiltPlanner());
 		}
@@ -90,7 +92,7 @@ public class ShipControl : MonoBehaviour {
         {
             sideSpeedLimit = 0.5f + LevelBonusSideSpeed;
         }
-		//Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
+		////Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
 		
 	}
 
@@ -114,11 +116,11 @@ public class ShipControl : MonoBehaviour {
 
 		}
 
-		//Debug.Log (curSideSpeedMultiplier);
+		////Debug.Log (curSideSpeedMultiplier);
 	}
 
 	void ChangeSideSpeed(float axis) { //Change side speed when a key is pressed
-		//Debug.Log ("side Sped");
+		////Debug.Log ("side Sped");
 		curSideSpeedMultiplier += Mathf.Sign(axis) * (control*Time.deltaTime);
 		curSideSpeedMultiplier = Mathf.Clamp(curSideSpeedMultiplier,-1,1);
 
@@ -167,54 +169,64 @@ public class ShipControl : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
-    public void StartBullteTime()
+    public void StartBullteTime(float time)
     {
-        StartCoroutine(bulletTime());
+        if (!slowMoActive)
+        {
+            StartCoroutine(bulletTime(time));
+        }
     }
 
-    private IEnumerator bulletTime()
+    private IEnumerator bulletTime(float time)
     {
         yield return new WaitForSeconds(0.2f);
+        slowMoActive = true;
+        
         old_speedIncrementPerLevel = speedIncrementPerLevel;
         old_startSpeed = startSpeed;
         old_sideSpeedLimit = sideSpeedLimit;
-        slowMoActive = true;
         for (int i = 1; i < slowSmothness; i++)
         {
             Time.timeScale /= (bulletTimeDivisor);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
+            ChangeSideSpeed(0);
             yield return new WaitForSeconds(0.0075f);
         }
-        StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit,2.0f));
+        StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit,time));
     }
 
 
     public void callStopBullteTime(float time)
     {
-        StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit, time));
+        if (slowMoActive)
+        {
+            StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit, time));
+        }
     }
 
     private IEnumerator stopBulletTime(float old_speedIncrementPerLevel, float old_startSpeed, float old_sideSpeedLimit, float durr)
     {
-        if (slowMoActive)
-        {
+
             yield return new WaitForSeconds(durr * Time.timeScale);
-            for (int i = 1; i < slowSmothness / 2; i++)
+            for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
             {
                 Time.timeScale *= (bulletTimeDivisor);
                 speedIncrementPerLevel *= (bulletTimeDivisor);
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
+                ChangeSideSpeed(0);
                 yield return new WaitForSeconds(0.0005f);
             }
             speedIncrementPerLevel = old_speedIncrementPerLevel;
             startSpeed = old_startSpeed;
             sideSpeedLimit = old_sideSpeedLimit;
+            ChangeSideSpeed(0);
             Time.timeScale = 1f;
             slowMoActive = false;
-        }
+            
+   
     }
 
 	public void BarrelRoll(float degrees, float time) {

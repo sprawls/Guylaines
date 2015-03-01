@@ -58,7 +58,7 @@ public class TerrainFloor : Floor {
 
         terData.SetHeights(0, 0, heightMap);
         float offset = -mean * ter.terrainData.heightmapHeight;
-        Debug.Log("Offset: " + offset.ToString());
+        //Debug.Log("Offset: " + offset.ToString());
 
         Vector3 pos = ter.transform.localPosition;
         pos.y = -mean * ter.terrainData.heightmapHeight;
