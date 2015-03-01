@@ -16,9 +16,12 @@ public class GrowErect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale += new Vector3(rate*transform.localScale.x,rate/4f*transform.localScale.y,rate*transform.localScale.z);
-		rate += rate*0.02f;
-		//transform.localScale *= rate;
+        if (transform.localScale.x < 1000000)
+        {
+            transform.localScale += new Vector3(rate * transform.localScale.x, rate / 4f * transform.localScale.y, rate * transform.localScale.z);
+            rate += rate * 0.02f;
+            //transform.localScale *= rate;
+        }
 	}
 
 	private IEnumerator FadeOut(float fadeTime) {

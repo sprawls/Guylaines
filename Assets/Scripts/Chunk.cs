@@ -61,7 +61,7 @@ public class Chunk : MonoBehaviour {
         else
         {
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
 
                 Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;

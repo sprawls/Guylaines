@@ -217,7 +217,7 @@ public class StatManager : MonoBehaviour {
 			RunsRemaining++;
 			holder._runsCollected++;
 			holder._collectedEnergy = holder._collectedEnergy % holder._energyNeeded;
-			holder._energyNeeded += 20;
+            holder._energyNeeded = 2*(holder._runsCollected * holder._runsCollected) + 10 * holder._runsCollected + 20;
 		}
 
 		// UI refresh
