@@ -161,7 +161,13 @@ public class ShipControl : MonoBehaviour {
 		if(isSuperTilting == false) {
 			isSuperTilting = true;
 			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,degrees),time));
+			StartCoroutine(GiveBackSuperTilt(time));
 		}
+	}
+
+	private IEnumerator GiveBackSuperTilt(float time) {
+		yield return new WaitForSeconds(time);
+		isSuperTilting = false;
 	}
 
 	private IEnumerator SuperTiltPlanner() {
