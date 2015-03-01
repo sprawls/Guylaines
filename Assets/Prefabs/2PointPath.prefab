@@ -207,6 +207,7 @@ MonoBehaviour:
   cost: 2
   sameXZ: 1
   sameXY: 1
+  cannotRotate: 1
 --- !u!136 &13654412
 CapsuleCollider:
   m_ObjectHideFlags: 1
