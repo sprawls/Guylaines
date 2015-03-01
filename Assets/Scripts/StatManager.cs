@@ -14,7 +14,6 @@ public class StatManager : MonoBehaviour {
 
     private ItemHolder holder;
     public ShipControl controler;
-    public PlaySound soundPlayer;
 
     private bool quickMode = false;
 
@@ -25,7 +24,6 @@ public class StatManager : MonoBehaviour {
 	void Start () {
         controler = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
-        soundPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlaySound>();
 
         loadItem();
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
