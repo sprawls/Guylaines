@@ -72,7 +72,7 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	void UpdateControlStat() {
-		control = (StatManager.Instance.Handling.Level / StatManager.Instance.Speed.Level);
+		if(StatManager.Instance.Speed.Level != 0) control = (StatManager.Instance.Handling.Level / StatManager.Instance.Speed.Level);
 		control = Mathf.Clamp(control,1f,3f);
 		//Remove control by stat for test
 		control = 2f;
@@ -155,6 +155,13 @@ public class ShipControl : MonoBehaviour {
 
 		yield return new WaitForSeconds(5f);
 		Application.LoadLevel(Application.loadedLevel);
+	}
+
+	public void BarrelRoll(float degrees, float time) {
+		if(isSuperTilting == false) {
+			isSuperTilting = true;
+			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,degrees),time));
+		}
 	}
 
 	private IEnumerator SuperTiltPlanner() {

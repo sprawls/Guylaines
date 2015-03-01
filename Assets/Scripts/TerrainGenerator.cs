@@ -8,6 +8,7 @@ using ChunkPair = Pair<Chunk,Chunk>;
 public class TerrainGenerator : MonoBehaviour 
 {
     //Initialisation variable
+    public bool timeInitialization;
     public int seed;
     public Rand rand { get; private set; }
     public int forcedWidth;
@@ -30,7 +31,14 @@ public class TerrainGenerator : MonoBehaviour
 
     void Awake()
     {
-        rand = new Rand(seed);
+        if (timeInitialization)
+        {
+            rand = new Rand();
+        }
+        else
+        {
+            rand = new Rand(seed);
+        }
     }
 	// Use this for initialization
 	void Start () {
@@ -77,6 +85,7 @@ public class TerrainGenerator : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+		if(player == null) player = GameObject.Find("Ship Prefab");
         generateLeftChunkIfNeeded();
         generateRightChunckIfNeeded();
         generateFrontChunckIfNeeded();
@@ -185,7 +194,7 @@ public class TerrainGenerator : MonoBehaviour
     }
     void switchLayer()
     {
-        if(player.transform.position.z -20 > currentChunk.First.top)
+        if(player.transform.position.z -60 > currentChunk.First.top)
         {
             chunks = chunks.ConvertAll(ChunkSwitcher);
             layer++;
