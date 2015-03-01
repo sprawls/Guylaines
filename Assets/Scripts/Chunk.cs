@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Chunk : MonoBehaviour {
@@ -16,6 +17,8 @@ public class Chunk : MonoBehaviour {
     public int layerMin;
     public int layerMax;
     public int currentLayer;
+
+    private bool populated = false;
     
 	void Start () {
         name = "Chunk";
@@ -23,15 +26,24 @@ public class Chunk : MonoBehaviour {
         Vector3 pos = new Vector3(left, 0, bottom);
         transform.position = pos;
         AddFloor();
-        PopulateChunk();
-        PopulateItem();
+        
 	}
+
+    void Update()
+    {
+        if(!populated)
+        {
+            StartCoroutine(PopulateChunk());
+            StartCoroutine(PopulateItem());
+            populated = true;
+        }   
+    }
 
     virtual public void AddFloor()
     {
         Floor plane = Instantiate(floors.OneAtRandom(tg.rand)) as Floor;
         Vector2 middle = (_bottomLeft + _topRight) / 2;
-        Vector2 scale = (_topRight - _bottomLeft); //Je comprend que dale pourquoi mais cela arrive...
+        Vector2 scale = (_topRight - _bottomLeft);
 
         plane.middle = middle;
         plane.size = scale;
@@ -39,51 +51,60 @@ public class Chunk : MonoBehaviour {
         plane.transform.parent = transform;
     }
 
-    virtual public void PopulateItem()
+    virtual public IEnumerator PopulateItem()
     {
         if(availableItem.Count <= 0)
         {
-            return;
+            yield return null;
         }
-        int maxPoints = currentLayer ;
-
-        for (int i = 0; i < 5; i++)
+        else
         {
+            int maxPoints = currentLayer;
 
-            Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
-            go.basePower = currentLayer+1;
+            for (int i = 0; i < 5; i++)
+            {
 
-            float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
-            float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
+                Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
+                go.basePower = currentLayer + 1;
 
-            go.transform.localPosition = new Vector3(x, 0, y);
-            go.transform.parent = transform;
+                float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
+                float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
+
+                go.transform.localPosition = new Vector3(x, 0, y);
+                go.transform.parent = transform;
+                yield return null;
+            }
         }
     }
 
-    virtual public void PopulateChunk()
+    virtual public IEnumerator PopulateChunk()
     {
-        if (availablePrefab.Count <= 0)
+        if(availableItem.Count <= 0)
         {
-            return;
+            yield return null;
         }
-        int maxPoints = currentLayer * 20 + 100;
-        
-        int points = 0;
-        while(points<maxPoints)
+        else
         {
+            int maxPoints = currentLayer * 2 + 100;
+            
+        
+            int points = 0;
+            while(points<maxPoints)
+            {
 
-            ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
+                ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
             
-            float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
-            float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
+                float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
+                float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
             
             
-            go.transform.localPosition = new Vector3(x, 0, y);
-            go.ScaleToSomethingFun(tg.rand, 1, 4);
-            go.transform.parent = transform;
+                go.transform.localPosition = new Vector3(x, 0, y);
+                go.ScaleToSomethingFun(tg.rand, 1, 4);
+                go.transform.parent = transform;
 
-            points += go.cost;
+                points += go.cost;
+                yield return null;
+            }
         }
     }
 

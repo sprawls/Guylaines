@@ -6,11 +6,18 @@ public class TerrainFloor : Floor {
     Terrain ter;
     public float mean;
     public float offset;
-	// Use this for initialization
+	
+    // Use this for initialization
+
+    void Awake()
+    {
+        
+    }
+
 	void Start () {
         ter = GetComponentInChildren<Terrain>();
-        transform.position = new Vector3(middle.x,0,middle.y);
-        ter.transform.localPosition = new Vector3(- size.x /2, 0,  - size.y/2);
+        transform.position = new Vector3(middle.x, 0, middle.y);
+        ter.transform.localPosition = new Vector3(-size.x / 2, 0, -size.y / 2);
 
         TerrainData td = Instantiate(ter.terrainData) as TerrainData;
 
@@ -23,7 +30,6 @@ public class TerrainFloor : Floor {
         td.size = scale;
 
         updateTerrainData();
-
         
 	}
 

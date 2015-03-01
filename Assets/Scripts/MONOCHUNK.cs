@@ -4,7 +4,7 @@ using System.Collections;
 //Le MONOCHUNK s'attend que le prefab contienne un collider qui l'englobe
 public class MONOCHUNK : Chunk {
 
-    public override void PopulateChunk()
+    public override IEnumerator PopulateChunk()
     {
         Bounds b = new Bounds();
         ChunkObject go = Instantiate(availablePrefab.OneAtRandom(tg.rand)) as ChunkObject;
@@ -20,5 +20,6 @@ public class MONOCHUNK : Chunk {
         go.transform.localScale = s;
 
         go.transform.parent = transform;
+        yield return null;
     }
 }
