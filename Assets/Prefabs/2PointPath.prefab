@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e335c3f8c3a2d5499169c8d8d4fb135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 5
+  cost: 2
   sameXZ: 1
   sameXY: 1
 --- !u!136 &13654412

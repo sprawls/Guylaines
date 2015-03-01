@@ -7,19 +7,24 @@ public class MasterChief : FallingObject {
     private Vector3 angle;
     private Vector3 target;
 
+    public GameObject RedAlert;
+
     public override void init()
     {
         target = transform.position;
-        angle = new Vector3(Random.Range(-10,10), -10, Random.Range(-10,5));
+        angle = new Vector3(Random.Range(-5,5), -10, Random.Range(-5,5));
 
         transform.rotation = Quaternion.FromToRotation(-transform.up, angle);
        
         transform.position = target - (angle.normalized * speed);
+
+        GameObject go = Instantiate(RedAlert) as GameObject;
+        go.transform.position = target;
+        go.transform.parent = transform;
     }
 
 	public override void DoSomethingWhenNear()
     {
-        Debug.Log("Hey test");
         StartCoroutine(Goto());
     }
 
