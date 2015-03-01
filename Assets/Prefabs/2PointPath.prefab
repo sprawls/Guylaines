@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 454406}
   - 114: {fileID: 11454408}
   - 114: {fileID: 11482580}
+  - 114: {fileID: 11427726}
   m_Layer: 0
   m_Name: 2PointPath
   m_TagString: Untagged
@@ -146,6 +147,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154412}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11427726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca9149540f8ea2448de1707cc4b7d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  additionalHeight: 2.75
 --- !u!114 &11454408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +220,7 @@ MonoBehaviour:
   cost: 2
   sameXZ: 1
   sameXY: 1
+  cannotRotate: 1
 --- !u!136 &13654412
 CapsuleCollider:
   m_ObjectHideFlags: 1
