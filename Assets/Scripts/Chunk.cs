@@ -49,6 +49,7 @@ public class Chunk : MonoBehaviour {
         {
 
             Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
+            go.basePower = currentLayer;
 
             float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
             float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
@@ -74,7 +75,6 @@ public class Chunk : MonoBehaviour {
             
             float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
             float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
-
             
             
             go.transform.localPosition = new Vector3(x, 0, y);

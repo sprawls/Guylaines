@@ -301,11 +301,11 @@ public class TerrainGenerator : MonoBehaviour
     }
     private Chunk Create(Vector2 bottomLeft, Vector2 topRight, bool nextLayer)
     {
-        Chunk c = Instantiate(LegalChunk(nextLayer?layer+1:layer).OneAtRandom(rand)) as Chunk;
-        
-        //Chunk c = newObject.GetComponent<Chunk>();
+        int cur = nextLayer?layer+1:layer;
+        Chunk c = Instantiate(LegalChunk(cur).OneAtRandom(rand)) as Chunk;
+
         c.SetBound(bottomLeft, topRight);
-        c.currentLayer = layer;
+        c.currentLayer = cur;
 
         return c;
     }
