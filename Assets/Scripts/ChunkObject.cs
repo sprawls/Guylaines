@@ -9,7 +9,7 @@ public class ChunkObject : MonoBehaviour
     public bool sameXY;
     public bool cannotRotate;
 
-    public void Awake()
+    public void Start()
     {
         int floorLayerMask = 1 << 10;
         Vector3 pos = transform.position;

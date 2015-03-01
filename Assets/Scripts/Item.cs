@@ -5,7 +5,7 @@ public class Item : MonoBehaviour {
 
     public int basePower;
 
-    public void Awake()
+    public void Start()
     {
         int floorLayerMask = 1 << 10;
         Vector3 pos = transform.position;
@@ -18,7 +18,7 @@ public class Item : MonoBehaviour {
         if (Physics.Raycast(groundingRay, out hit, 25f, floorLayerMask))
         {
             pos = hit.point;
-            pos.y += 4;
+            pos.y += transform.position.y;
             transform.position = pos;
             surfaceNormal = hit.normal;
         }
