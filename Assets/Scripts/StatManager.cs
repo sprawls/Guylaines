@@ -13,7 +13,7 @@ public class StatManager : MonoBehaviour {
 	private ItemStats _tempItem;
 
     private ItemHolder holder;
-    public ShipControl controler;
+    public ShipControl controller;
 
     private bool quickMode = false;
 
@@ -22,7 +22,7 @@ public class StatManager : MonoBehaviour {
 	}
 
 	void Start () {
-        controler = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
 
         loadItem();
@@ -35,13 +35,31 @@ public class StatManager : MonoBehaviour {
 		Distance = 0;
 
 		// Force UI update
-		RunsRemaining = RunsRemaining;
+		RunsRemaining = RunsRemaining-1;
 		ToNextRun = holder._energyNeeded - holder._collectedEnergy;
 	}
 
 	void Update () {
 		HandleDebugKeys();
 		UpdateDistance ();
+
+		if (Input.GetButtonDown ("Quit")) {
+			Debug.Log ("Quit");
+		}
+
+		if (Input.GetButtonDown("Quit")) {
+			ReturnToMenu();
+		}
+	}
+
+	private void ReturnToMenu() {
+		RunsRemaining = 4;
+		holder._energyNeeded = 40;
+		holder._collectedEnergy = 0;
+		holder._bestRun = 0;
+		eraseItem ();
+		ToNextRun = holder._energyNeeded - holder._collectedEnergy;
+		Application.LoadLevel ("Menu");
 	}
 
     public void genererItem(float pool)
@@ -110,14 +128,14 @@ public class StatManager : MonoBehaviour {
         //soundPlayer.playSlowMo();
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
-            controler.StartBullteTime(2.0f);
+            controller.StartBullteTime(2.0f);
 		} else {
 			saveItem(_tempItem);
 		}
 	}
 
 	public void OnItemPick(bool newItemWasPicked) {
-        controler.callStopBullteTime(0.0f);
+        controller.callStopBullteTime(0.0f);
 		if(newItemWasPicked)
         {
             saveItem(_tempItem);
@@ -241,5 +259,9 @@ public class StatManager : MonoBehaviour {
 			holder._bestRun = value;
 			ScoreUIBehaviour.Instance.Best = holder._bestRun;
 		}
+	}
+
+	public bool HaveRunsLeft {
+		get { return (RunsRemaining > 1); }
 	}
 }

@@ -23,6 +23,10 @@ public class ScoreUIBehaviour : MonoBehaviour {
 		_bestText = distanceWidget.Find ("Best").GetComponent<Text> ();
 	}
 
+	public void TweenRunsOnRunEnd() {
+		_runsSlider.TweenRunsOnRunEnd ();
+	}
+
 	public float RunsRemaining {
 		set {
 			_runsSlider.value = value;

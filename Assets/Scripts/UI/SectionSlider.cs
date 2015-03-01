@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using System.Collections;
 
 public class SectionSlider : MonoBehaviour {
@@ -35,5 +36,9 @@ public class SectionSlider : MonoBehaviour {
 			}
 			tempValue -= 1;
 		}
+	}
+
+	public void TweenRunsOnRunEnd() {
+		DOTween.To (() => value, x => value = x, value - 1, 0.3f).SetEase (Ease.OutCubic);
 	}
 }

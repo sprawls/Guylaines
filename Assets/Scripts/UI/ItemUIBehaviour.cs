@@ -110,7 +110,7 @@ public class ItemUIBehaviour : MonoBehaviour {
 			PickNewItem();
 		}
 
-        if (Input.GetButtonDown("Fire1") && !StatManager.Instance.controler.itemChoseLock)
+        if (Input.GetButtonDown("Fire1") && !StatManager.Instance.controller.itemChoseLock)
         {
 			StatManager.Instance.OnItemPick(_newItemIsPicked);
 		}
