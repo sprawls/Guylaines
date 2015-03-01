@@ -23,7 +23,7 @@ public class ShipControl : MonoBehaviour {
 	public float maxTiltAngle = 5;
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
-
+    private bool slowMoActive = false;
 	////////////////////////// Death //////////////////////////
 	[HideInInspector] public bool slowMoEnded = false;
 	private RotatingPlatform rotatePlatform;
@@ -36,11 +36,17 @@ public class ShipControl : MonoBehaviour {
 	public GameObject[] objectsToSuperTilt;
 	private bool isSuperTilting = false;
 
-	////////////////////////// Shake Shake Shake //////////////////////////
+    private const float bulletTimeDivisor = 1.25f;
+    private const int slowSmothness = 15;
+
+    private float old_speedIncrementPerLevel;
+    private float old_startSpeed;
+    private float old_sideSpeedLimit;
+	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
 	public ShakeShakeShake shakeshakeshake;
 	public float speedToConstantShake = 3f;
 	public float maxShakeAmount = 0.5f;
-	public float speedForMaxShake = 6f;
+	public float speedForMaxShake = 12f;
 
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
@@ -53,20 +59,20 @@ public class ShipControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log(Input.gyro.attitude);
-
 		//Calculate Forward Speed
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
-		UpdateControlStat();
-		if(Input.GetAxis("Horizontal") != 0) 
-			ChangeSideSpeed(Input.GetAxis("Horizontal"));
-		else
-			StabilizeSideSpeed();
-
+        if (!slowMoActive)
+        {
+            UpdateControlStat();
+            if (Input.GetAxis("Horizontal") != 0)
+                ChangeSideSpeed(Input.GetAxis("Horizontal"));
+            else
+                StabilizeSideSpeed();
+        }
 		//Check isTilting
-		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false) {
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false&& !slowMoActive) {
 			isSuperTilting = true;
 			StartCoroutine (SuperTiltPlanner());
 		}
@@ -79,14 +85,16 @@ public class ShipControl : MonoBehaviour {
 
 		//Add SHAKESHAKESHAKE on speed
 		CheckShake();
-	}
 
+	}
 
 	void CheckShake() {
 		if(forwardSpeed > speedToConstantShake) {
 			shakeshakeshake.noTimer = true;
-			//shakeshakeshake.SetShake(Mathf.Lerp (0,maxShakeAmount,forwardSpeed/speedForMaxShake));
-		}
+			float step = (forwardSpeed-speedToConstantShake)/(speedForMaxShake-speedToConstantShake);
+			step = Mathf.Clamp(step,0f,1f);
+			shakeshakeshake.SetShake(1,Mathf.Lerp (0,maxShakeAmount,step));
+			}
 	}
 
 	void UpdateControlStat() {
@@ -97,8 +105,12 @@ public class ShipControl : MonoBehaviour {
 		//Change side Speed limit
 		float LevelBonusSideSpeed = Mathf.Lerp (0f,8f,StatManager.Instance.Handling.Level/10000f);
 
-		sideSpeedLimit = 0.5f + LevelBonusSideSpeed;
-		//Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
+        
+        if (!slowMoActive)
+        {
+            sideSpeedLimit = 0.5f + LevelBonusSideSpeed;
+        }
+		////Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
 		
 	}
 
@@ -122,11 +134,11 @@ public class ShipControl : MonoBehaviour {
 
 		}
 
-		//Debug.Log (curSideSpeedMultiplier);
+		////Debug.Log (curSideSpeedMultiplier);
 	}
 
 	void ChangeSideSpeed(float axis) { //Change side speed when a key is pressed
-		//Debug.Log ("side Sped");
+		////Debug.Log ("side Sped");
 		curSideSpeedMultiplier += Mathf.Sign(axis) * (control*Time.deltaTime);
 		curSideSpeedMultiplier = Mathf.Clamp(curSideSpeedMultiplier,-1,1);
 
@@ -174,6 +186,66 @@ public class ShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(5f);
 		Application.LoadLevel(Application.loadedLevel);
 	}
+
+    public void StartBullteTime(float time)
+    {
+        if (!slowMoActive)
+        {
+            StartCoroutine(bulletTime(time));
+        }
+    }
+
+    private IEnumerator bulletTime(float time)
+    {
+        yield return new WaitForSeconds(0.2f);
+        slowMoActive = true;
+        
+        old_speedIncrementPerLevel = speedIncrementPerLevel;
+        old_startSpeed = startSpeed;
+        old_sideSpeedLimit = sideSpeedLimit;
+        for (int i = 1; i < slowSmothness; i++)
+        {
+            Time.timeScale /= (bulletTimeDivisor);
+            speedIncrementPerLevel /= (bulletTimeDivisor);
+            startSpeed /= (bulletTimeDivisor);
+            sideSpeedLimit /= (bulletTimeDivisor);
+            ChangeSideSpeed(0);
+            yield return new WaitForSeconds(0.0075f);
+        }
+        StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit,time));
+    }
+
+
+    public void callStopBullteTime(float time)
+    {
+        if (slowMoActive)
+        {
+            StartCoroutine(stopBulletTime(old_speedIncrementPerLevel, old_startSpeed, old_sideSpeedLimit, time));
+        }
+    }
+
+    private IEnumerator stopBulletTime(float old_speedIncrementPerLevel, float old_startSpeed, float old_sideSpeedLimit, float durr)
+    {
+
+            yield return new WaitForSeconds(durr * Time.timeScale);
+            for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
+            {
+                Time.timeScale *= (bulletTimeDivisor);
+                speedIncrementPerLevel *= (bulletTimeDivisor);
+                startSpeed *= (bulletTimeDivisor);
+                sideSpeedLimit *= (bulletTimeDivisor);
+                ChangeSideSpeed(0);
+                yield return new WaitForSeconds(0.0005f);
+            }
+            speedIncrementPerLevel = old_speedIncrementPerLevel;
+            startSpeed = old_startSpeed;
+            sideSpeedLimit = old_sideSpeedLimit;
+            ChangeSideSpeed(0);
+            Time.timeScale = 1f;
+            slowMoActive = false;
+            
+   
+    }
 
 	public void BarrelRoll(float degrees, float time) {
 		if(isSuperTilting == false) {

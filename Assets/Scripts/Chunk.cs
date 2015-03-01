@@ -20,7 +20,8 @@ public class Chunk : MonoBehaviour {
 	void Start () {
         name = "Chunk";
         tg = FindObjectOfType<TerrainGenerator>();
-
+        Vector3 pos = new Vector3(left, 0, bottom);
+        transform.position = pos;
         AddFloor();
         PopulateChunk();
         PopulateItem();

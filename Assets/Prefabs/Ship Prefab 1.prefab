@@ -5550,7 +5550,7 @@ MonoBehaviour:
   shakeshakeshake: {fileID: 0}
   speedToConstantShake: 3
   maxShakeAmount: .5
-  speedForMaxShake: 6
+  speedForMaxShake: 12
 --- !u!114 &11438588
 MonoBehaviour:
   m_ObjectHideFlags: 1

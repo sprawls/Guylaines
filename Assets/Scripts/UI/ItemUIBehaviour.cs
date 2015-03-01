@@ -47,20 +47,27 @@ public class ItemUIBehaviour : MonoBehaviour {
 	}
 
 	public void OpenUI(ItemStats newItem) {
-		_newItem = newItem;
+        if (!_uiIsActive)
+        {
+            _newItem = newItem;
+            _speedWidget.value = 0;
+            _handlingWidget.value = 0;
+            _energyWidget.value = 0;
 
-		_speedWidget.value = 0;
-		_handlingWidget.value = 0;
-		_energyWidget.value = 0;
+            transform.DORotate(new Vector3(0, 20, 0), 0.2f * Time.timeScale, 0).SetAs(_rotationTweenParams);
+            _uiIsActive = true;
 
-		transform.DORotate (new Vector3 (0, 20, 0), 0.5f, 0).SetAs (_rotationTweenParams);
-		_uiIsActive = true;
-		PickNewItem ();
+            PickNewItem();
+        }
 	}
 
+
+    
+
 	public void CloseUI() {
-		transform.DORotate (new Vector3 (0, 90, 0), 0.5f);
-		_uiIsActive = false;
+        _uiIsActive = false;
+        transform.DORotate(new Vector3(0, 90, 0), 0.5f * Time.timeScale);
+		
 	}
 
 	public void TweenItemValues() {
@@ -79,13 +86,13 @@ public class ItemUIBehaviour : MonoBehaviour {
 			graphValues[i] /= maxDelta;
 		}
 
-		Debug.Log (string.Format ("New item: {0} {1} {2}", _newItem.speedMulti, _newItem.handleMulti, _newItem.EnergieMulti));
-		Debug.Log (string.Format ("Current item: {0} {1} {2}", currentItem.speedMulti, currentItem.handleMulti, currentItem.EnergieMulti));
-		Debug.Log (string.Format ("Graph values: {0} {1} {2}", graphValues[0], graphValues[1], graphValues[2]));
+		////Debug.Log (string.Format ("New item: {0} {1} {2}", _newItem.speedMulti, _newItem.handleMulti, _newItem.EnergieMulti));
+		////Debug.Log (string.Format ("Current item: {0} {1} {2}", currentItem.speedMulti, currentItem.handleMulti, currentItem.EnergieMulti));
+		////Debug.Log (string.Format ("Graph values: {0} {1} {2}", graphValues[0], graphValues[1], graphValues[2]));
 
-		DOTween.To (x => _speedWidget.value = x, 0, graphValues [0], 0.2f);
-		DOTween.To (x => _handlingWidget.value = x, 0, graphValues [1], 0.2f);
-		DOTween.To (x => _energyWidget.value = x, 0, graphValues [2], 0.2f);
+        DOTween.To(x => _speedWidget.value = x, 0, graphValues[0], 0.2f * Time.timeScale);
+        DOTween.To(x => _handlingWidget.value = x, 0, graphValues[1], 0.2f * Time.timeScale);
+        DOTween.To(x => _energyWidget.value = x, 0, graphValues[2], 0.2f * Time.timeScale);
 	}
 
 	private void HandleInputs() {
@@ -108,11 +115,11 @@ public class ItemUIBehaviour : MonoBehaviour {
 		Vector3 heldPos = _heldItemPanel.rectTransform.anchoredPosition3D;
 		Vector3 newPos = _newItemPanel.rectTransform.anchoredPosition3D;
 
-		_heldItemPanel.DOColor (selectedColor, pickAnimDuration);
-		_heldItemPanel.rectTransform.DOAnchorPos3D (new Vector3(heldPos.x, heldPos.y, -selectedZ), pickAnimDuration);
+        _heldItemPanel.DOColor(selectedColor, pickAnimDuration * Time.timeScale);
+        _heldItemPanel.rectTransform.DOAnchorPos3D(new Vector3(heldPos.x, heldPos.y, -selectedZ), pickAnimDuration * Time.timeScale);
 
-		_newItemPanel.DOColor (normalColor, pickAnimDuration);
-		_newItemPanel.rectTransform.DOAnchorPos3D (new Vector3(newPos.x, newPos.y, 0), pickAnimDuration);
+        _newItemPanel.DOColor(normalColor, pickAnimDuration * Time.timeScale);
+        _newItemPanel.rectTransform.DOAnchorPos3D(new Vector3(newPos.x, newPos.y, 0), pickAnimDuration * Time.timeScale);
 	}
 
 	private void PickNewItem() {
@@ -121,10 +128,10 @@ public class ItemUIBehaviour : MonoBehaviour {
 		Vector3 heldPos = _heldItemPanel.rectTransform.anchoredPosition3D;
 		Vector3 newPos = _newItemPanel.rectTransform.anchoredPosition3D;
 
-		_heldItemPanel.DOColor (normalColor, pickAnimDuration);
-		_heldItemPanel.rectTransform.DOAnchorPos3D (new Vector3(heldPos.x, heldPos.y, 0), pickAnimDuration);
+        _heldItemPanel.DOColor(normalColor, pickAnimDuration * Time.timeScale);
+        _heldItemPanel.rectTransform.DOAnchorPos3D(new Vector3(heldPos.x, heldPos.y, 0), pickAnimDuration * Time.timeScale);
 
-		_newItemPanel.DOColor (selectedColor, pickAnimDuration);
-		_newItemPanel.rectTransform.DOAnchorPos3D (new Vector3(newPos.x, newPos.y, -selectedZ), pickAnimDuration);
+        _newItemPanel.DOColor(selectedColor, pickAnimDuration * Time.timeScale);
+        _newItemPanel.rectTransform.DOAnchorPos3D(new Vector3(newPos.x, newPos.y, -selectedZ), pickAnimDuration * Time.timeScale);
 	}
 }
