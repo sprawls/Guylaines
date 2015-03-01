@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 487164}
   - 114: {fileID: 11486724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RandomTerrain
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   middle: {x: 0, y: 0, z: 0}
   size: {x: 0, y: 0}
+  mean: 0
+  offset: 0
 --- !u!114 &11487166
 MonoBehaviour:
   m_ObjectHideFlags: 1
