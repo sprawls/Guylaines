@@ -43,10 +43,12 @@ public class ShipControl : MonoBehaviour {
 	}
 	void Start () {
 		forwardSpeed = startSpeed;
+        Input.gyro.enabled = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(Input.gyro.attitude);
 		//Calculate Forward Speed
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
