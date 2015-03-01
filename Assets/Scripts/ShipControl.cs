@@ -157,6 +157,13 @@ public class ShipControl : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
+	public void BarrelRoll(float degrees, float time) {
+		if(isSuperTilting == false) {
+			isSuperTilting = true;
+			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,degrees),time));
+		}
+	}
+
 	private IEnumerator SuperTiltPlanner() {
 		//START ANIMATION
 		StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,450),tiltTimeAnimation));
