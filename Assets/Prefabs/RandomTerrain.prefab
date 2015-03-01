@@ -98,7 +98,7 @@ MonoBehaviour:
   m_LightmapSize: 1024
   m_DrawTreesAndFoliage: 1
   m_CollectDetailPatches: 1
-  m_MaterialTemplate: {fileID: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: d0ae5a4cd1a960d43afaae15a1aca197, type: 2}
 --- !u!114 &11487168
 MonoBehaviour:
   m_ObjectHideFlags: 1
