@@ -24,7 +24,7 @@ public class CheckHeight : MonoBehaviour {
 			targetHeight = hit.point.y + additionalHeight;
 			surfaceNormal = hit.normal;
 		}
-		Debug.DrawRay(groundingRay.origin,groundingRay.direction,Color.yellow);
+		//Debug.DrawRay(groundingRay.origin,groundingRay.direction,Color.yellow);
 		//Change Height of ship
 		Vector3 targetPosition = new Vector3(transform.position.x,
 		                             targetHeight,
@@ -47,6 +47,6 @@ public class CheckHeight : MonoBehaviour {
 		//apply heading rotation
 		transform.rotation = headingDelta * transform.rotation;
 		*/
-		Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
+		//Debug.Log ("transform rotation" +transform.rotation + "          rotation : " + surfaceNormal);
 	}
 }
