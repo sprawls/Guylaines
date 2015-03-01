@@ -50,7 +50,7 @@ public class Chunk : MonoBehaviour {
         {
 
             Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
-            go.basePower = currentLayer;
+            go.basePower = currentLayer+1;
 
             float x = tg.rand.Range(_bottomLeft.x, _topRight.x);
             float y = tg.rand.Range(_bottomLeft.y, _topRight.y);
