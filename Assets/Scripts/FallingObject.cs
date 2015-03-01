@@ -20,7 +20,7 @@ public class FallingObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if(player == null) player = GameObject.Find("Ship Prefab").transform;
         float distance = Vector3.Distance(player.position, transform.position);
 
         /*
