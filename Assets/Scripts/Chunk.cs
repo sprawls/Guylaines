@@ -11,7 +11,8 @@ public class Chunk : MonoBehaviour {
     public GameObject floor;
     public List<Item> availableItem;
     public List<ChunkObject> availablePrefab;
-    
+
+    public int NbOfUsedPrefab;
     public int layerMin;
     public int layerMax;
     public int currentLayer;
@@ -45,7 +46,7 @@ public class Chunk : MonoBehaviour {
         }
         int maxPoints = currentLayer ;
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 5; i++)
         {
 
             Item go = Instantiate(availableItem.OneAtRandom(tg.rand)) as Item;
@@ -78,7 +79,7 @@ public class Chunk : MonoBehaviour {
             
             
             go.transform.localPosition = new Vector3(x, 0, y);
-            go.ScaleToSomethingFun(tg.rand, 1, 3);
+            go.ScaleToSomethingFun(tg.rand, 1, 4);
             go.transform.parent = transform;
 
             points += go.cost;
