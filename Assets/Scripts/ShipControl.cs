@@ -211,6 +211,7 @@ public class ShipControl : MonoBehaviour {
         {
 
             Time.timeScale /= (bulletTimeDivisor);
+            LNF.audio.pitch = Mathf.Min(1, Time.timeScale*2);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
@@ -240,6 +241,7 @@ public class ShipControl : MonoBehaviour {
             for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
             {
                 Time.timeScale *= (bulletTimeDivisor);
+                LNF.audio.pitch = Mathf.Min(1, Time.timeScale * 2);
                 speedIncrementPerLevel *= (bulletTimeDivisor);
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
@@ -256,6 +258,7 @@ public class ShipControl : MonoBehaviour {
             sideSpeedLimit = old_sideSpeedLimit;
             ChangeSideSpeed(0);
             Time.timeScale = 1f;
+            LNF.audio.pitch = Time.timeScale;
             slowMoActive = false;
             itemChoseLock = true;
             
