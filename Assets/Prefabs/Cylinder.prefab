@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
+  sameXZ: 1
+  sameXY: 0
 --- !u!136 &13629624
 CapsuleCollider:
   m_ObjectHideFlags: 1
