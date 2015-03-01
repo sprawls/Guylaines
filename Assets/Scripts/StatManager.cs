@@ -4,6 +4,11 @@ public class StatManager : MonoBehaviour {
 
     public static StatManager Instance { get; private set; }
 
+	private int _runsRemaining;
+	private float _toNextRun;
+	private float _distance;
+	private int _runsCollected = 0;
+
     private Stat _speed;
     private Stat _handling;
     private Stat _energy;
@@ -11,6 +16,8 @@ public class StatManager : MonoBehaviour {
 	private ItemStats _tempItem;
 
     private ItemHolder holder;
+    private ShipControl controler;
+
 
     private bool quickMode = false;
 
@@ -19,6 +26,7 @@ public class StatManager : MonoBehaviour {
 	}
 
 	void Start () {
+        controler = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
         loadItem();
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
@@ -26,28 +34,17 @@ public class StatManager : MonoBehaviour {
         _energy = new Stat(_item.EnergieMulti, UIManager.Instance.energyWidget);
 
 		_tempItem = new ItemStats (1, 1, 1);
+
+		RunsRemaining = 3;
+		ToNextRun = 50 + 10*Mathf.Pow (_runsCollected, 2);
+		Distance = 0;
 	}
 
 	void Update () {
-		HandleDebugKeys();        
+		HandleDebugKeys();
+		UpdateDistance ();
 	}
 
-	public Stat Speed {
-		get { return _speed; }
-	}
-
-    public ItemStats ItemStat {
-        get { return _item; }
-    }
-
-	public Stat Handling {
-		get { return _handling; }
-	}
-
-	public Stat Energy {
-		get { return _energy; }
-	}
-	
     public void genererItem(float pool)
     {
 		bool speedPicked = false;
@@ -114,12 +111,14 @@ public class StatManager : MonoBehaviour {
 
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
+            controler.StartBullteTime();
 		} else {
 			saveItem(_tempItem);
 		}
 	}
 
 	public void OnItemPick(bool newItemWasPicked) {
+        controler.callStopBullteTime(0.0f);
 		if(newItemWasPicked)
         {
             saveItem(_tempItem);
@@ -148,6 +147,11 @@ public class StatManager : MonoBehaviour {
         _item = holder.item;
     }
 
+	public void eraseItem()
+	{
+		holder.item = new ItemStats(1, 1, 1);
+	}
+	
 	void HandleDebugKeys() {
 		if (Input.GetKey(KeyCode.F))
 		{
@@ -167,11 +171,57 @@ public class StatManager : MonoBehaviour {
 		}
 	}
 
+	private void UpdateDistance() {
+		Distance = transform.position.z;
+		BestRun = Mathf.Max (BestRun, Distance);
+		Debug.Log (Distance);
+	}
 
-    public void eraseItem()
-    {
-        holder.item = new ItemStats(1, 1, 1);
-    }
-
-
+	public Stat Speed {
+		get { return _speed; }
+	}
+	
+	public ItemStats ItemStat {
+		get { return _item; }
+	}
+	
+	public Stat Handling {
+		get { return _handling; }
+	}
+	
+	public Stat Energy {
+		get { return _energy; }
+	}
+	
+	public int RunsRemaining {
+		get { return _runsRemaining; }
+		private set {
+			_runsRemaining = value;
+			ScoreUIBehaviour.Instance.RunsRemaining = _runsRemaining + (1 - _toNextRun/(50 + 10*Mathf.Pow (_runsCollected, 2)));
+		}
+	}
+	
+	public float ToNextRun {
+		get { return _toNextRun; }
+		private set {
+			_toNextRun = value;
+			ScoreUIBehaviour.Instance.ToNextRun = _toNextRun;
+		}
+	}
+	
+	public float Distance {
+		get { return _distance; }
+		private set {
+			_distance = Mathf.Max (0, value);
+			ScoreUIBehaviour.Instance.Distance = _distance;
+		}
+	}
+	
+	public float BestRun {
+		get { return holder._bestRun; }
+		private set {
+			holder._bestRun = value;
+			ScoreUIBehaviour.Instance.Best = holder._bestRun;
+		}
+	}
 }

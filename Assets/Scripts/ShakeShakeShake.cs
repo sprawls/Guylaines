@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ShakeShakeShake : MonoBehaviour {
 
+	private ShipControl shipControl;
 	//is Shaking constantly
 	public bool noTimer = false;
 	// How long the object should shake for.
@@ -16,6 +17,8 @@ public class ShakeShakeShake : MonoBehaviour {
 
 
 	void Awake() {
+		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+		shipControl = playerObj.GetComponentInChildren<ShipControl>();
 	}
 
 	void OnEnable() {
@@ -23,11 +26,13 @@ public class ShakeShakeShake : MonoBehaviour {
 	}
 	
 	void Update() {
-		ReduceTimeLeft();
-		ReduceIntensity();
+		if(noTimer == false) ReduceTimeLeft();
+		if(noTimer == false) ReduceIntensity();
 
-		if(shakeAmount > 0 && shakeTimeLeft >0) {
+		if(shakeAmount > 0 && shakeTimeLeft >0 && shipControl.isDead == false) {
 			transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+		} else {
+			transform.localPosition = originalPos;
 		}
 	}
 
