@@ -11,6 +11,11 @@ public class MenuCameraBehaviour : MonoBehaviour {
 			MainMenuBehaviour.Instance.EnterGame ();
 		}
 
+        if (Input.GetAxis("Fire1") != 0)
+        {
+            MainMenuBehaviour.Instance.EnterGame();
+        }
+
 		transform.Rotate (0, Time.deltaTime * _rotateSpeed, 0);
 	}
 
