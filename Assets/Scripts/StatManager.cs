@@ -114,7 +114,7 @@ public class StatManager : MonoBehaviour {
 		}
 
 		if (!quickMode) {
-			ItemUIBehaviour.Instance.OpenUI ();
+			ItemUIBehaviour.Instance.OpenUI (_tempItem);
 		} else {
 			saveItem(_tempItem);
 		}
@@ -161,6 +161,10 @@ public class StatManager : MonoBehaviour {
 		if (Input.GetKey(KeyCode.H))
 		{
 			_energy.addXP(98);
+		}
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			genererItem (5);
 		}
 	}
 

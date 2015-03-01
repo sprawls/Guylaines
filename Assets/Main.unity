@@ -8663,7 +8663,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450618, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 150574, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_Name
@@ -8787,6 +8787,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438606, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448690, guid: 58b29a4f2df4258409986c393ddc7cd5, type: 2}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
