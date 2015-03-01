@@ -42,10 +42,16 @@ public class ShipControl : MonoBehaviour {
     private float old_speedIncrementPerLevel;
     private float old_startSpeed;
     private float old_sideSpeedLimit;
+	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
+	public ShakeShakeShake shakeshakeshake;
+	public float speedToConstantShake = 3f;
+	public float maxShakeAmount = 0.5f;
+	public float speedForMaxShake = 12f;
 
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
 		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
+		shakeshakeshake = (ShakeShakeShake) gameObject.GetComponentInChildren<ShakeShakeShake>();
 	}
 	void Start () {
 		forwardSpeed = startSpeed;
@@ -75,6 +81,18 @@ public class ShipControl : MonoBehaviour {
 			TiltShip(); //Tilt the ship
 		}
 
+		//Add SHAKESHAKESHAKE on speed
+		CheckShake();
+
+	}
+
+	void CheckShake() {
+		if(forwardSpeed > speedToConstantShake) {
+			shakeshakeshake.noTimer = true;
+			float step = (forwardSpeed-speedToConstantShake)/(speedForMaxShake-speedToConstantShake);
+			step = Mathf.Clamp(step,0f,1f);
+			shakeshakeshake.SetShake(1,Mathf.Lerp (0,maxShakeAmount,step));
+			}
 	}
 
 	void UpdateControlStat() {
