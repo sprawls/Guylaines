@@ -10,13 +10,6 @@ public class ItemHolder : MonoBehaviour {
         set { this._item = value; }
     }
 
-   /* public ItemStats clone()
-    {
-        return _item;
-        Destroy(gameObject);
-
-    }*/
-
 	void Awake() {
         if (GameObject.FindGameObjectWithTag("Holder") == null)
         {

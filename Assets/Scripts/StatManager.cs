@@ -8,10 +8,11 @@ public class StatManager : MonoBehaviour {
     private Stat _handling;
     private Stat _energy;
     private ItemStats _item;
+	private ItemStats _tempItem;
 
     private ItemHolder holder;
 
-    private bool quickMode = true;
+    private bool quickMode = false;
 
 	void Awake() {
 		Instance = this;
@@ -23,6 +24,8 @@ public class StatManager : MonoBehaviour {
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
         _handling = new Stat(_item.handleMulti, UIManager.Instance.handlingWidget);
         _energy = new Stat(_item.EnergieMulti, UIManager.Instance.energyWidget);
+
+		_tempItem = new ItemStats (1, 1, 1);
 	}
 
 	void Update () {
@@ -44,110 +47,85 @@ public class StatManager : MonoBehaviour {
 	public Stat Energy {
 		get { return _energy; }
 	}
-
-
-
-    public void choisirItem(float pool)
+	
+    public void genererItem(float pool)
     {
-        bool speedPicked = false;
-        bool hendlePicked = false;
-        bool energiePicked = false;
+		bool speedPicked = false;
+		bool hendlePicked = false;
+		bool energiePicked = false;
 
-        ItemStats tempItem = new ItemStats(1,1,1);
-        for (int i = 0; i < 3; i++)
-        {
-            float value = Random.Range(0.0f, pool);
-            switch (Random.Range(1, 4))
-            {
-                case 1:
-                    if (!speedPicked)
-                    {
-                        speedPicked = true;
-                        if (quickMode)
-                        {
-                            tempItem.speedMulti += Mathf.Max(Mathf.Round(value), _speed.Multiplier);
-                        }
-                        else
-                        {
-                            tempItem.speedMulti +=  Mathf.Round(value); 
-                        }
-                        pool -= Mathf.Round(value);
-                    }
-                    else
-                    {
-                        i--;
-                    }
-                    break;
-                case 2:
-                    if (!hendlePicked)
-                    {
-                        hendlePicked = true;
-                        if (quickMode)
-                        {
-                            tempItem.handleMulti  += Mathf.Max( Mathf.Round(value), _handling.Multiplier);
-                        }
-                        else
-                        {
-                            tempItem.handleMulti +=  Mathf.Round(value);
-                        }
+		for (int i = 0; i < 3; i++) {
+			float value = Random.Range (0.0f, pool);
+			switch (Random.Range (1, 4)) {
+			case 1:
+				if (!speedPicked) {
+					speedPicked = true;
+					if (quickMode) {
+						_tempItem.speedMulti += Mathf.Max (Mathf.Round (value), _speed.Multiplier);
+					} else {
+						_tempItem.speedMulti += Mathf.Round (value); 
+					}
+					pool -= Mathf.Round (value);
+				} else {
+					i--;
+				}
+				break;
+			case 2:
+				if (!hendlePicked) {
+					hendlePicked = true;
+					if (quickMode) {
+						_tempItem.handleMulti += Mathf.Max (Mathf.Round (value), _handling.Multiplier);
+					} else {
+						_tempItem.handleMulti += Mathf.Round (value);
+					}
 
-                        pool -= Mathf.Round(value);
-                    }
-                    else
-                    {
-                        i--;
-                    }
-                    break;
-                case 3:
-                    if (!energiePicked)
-                    {
-                        energiePicked = true;
-                        if (quickMode)
-                        {
-                            tempItem.EnergieMulti += Mathf.Max( Mathf.Round(value), _energy.Multiplier);
-                        }
-                        else
-                        {
-                            tempItem.EnergieMulti +=  Mathf.Round(value);
-                        }
-                        pool -= Mathf.Round(value);
-                    }
-                    else
-                    {
-                        i--;
-                    }
-                    break;
-            }
+					pool -= Mathf.Round (value);
+				} else {
+					i--;
+				}
+				break;
+			case 3:
+				if (!energiePicked) {
+					energiePicked = true;
+					if (quickMode) {
+						_tempItem.EnergieMulti += Mathf.Max (Mathf.Round (value), _energy.Multiplier);
+					} else {
+						_tempItem.EnergieMulti += Mathf.Round (value);
+					}
+					pool -= Mathf.Round (value);
+				} else {
+					i--;
+				}
+				break;
+			}
             
-        }
-        pool = Mathf.Round(pool);
-        switch (Random.Range(1, 4))
-        {
-            case 1:
-                    tempItem.speedMulti += pool;
-                break;
-            case 2:
-                    tempItem.handleMulti += pool;
-                break;
-            case 3:
-                    tempItem.EnergieMulti += pool;
-                break;
-        }
+		}
+		pool = Mathf.Round (pool);
+		switch (Random.Range (1, 4)) {
+		case 1:
+			_tempItem.speedMulti += pool;
+			break;
+		case 2:
+			_tempItem.handleMulti += pool;
+			break;
+		case 3:
+			_tempItem.EnergieMulti += pool;
+			break;
+		}
 
-        if (!quickMode)
-        {
-            if(true/*envoyer tempItem a interface de choix qui retournetas trus si le nouveau est accepter*/)
-            {
-                saveItem(tempItem);
-            }
-        }
-        else
-        {
-            Debug.Log(tempItem.speedMulti + " - " + tempItem.handleMulti + " - " + tempItem.EnergieMulti);
+		if (!quickMode) {
+			ItemUIBehaviour.Instance.OpenUI ();
+		} else {
+			saveItem(_tempItem);
+		}
+	}
 
-            saveItem(tempItem);
+	public void OnItemPick(bool newItemWasPicked) {
+		if(newItemWasPicked)
+        {
+            saveItem(_tempItem);
         }
-
+		ItemUIBehaviour.Instance.CloseUI ();
     }
 
     private void saveItem(ItemStats item)

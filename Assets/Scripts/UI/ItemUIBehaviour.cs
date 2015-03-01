@@ -4,6 +4,8 @@ using System.Collections;
 using DG.Tweening;
 
 public class ItemUIBehaviour : MonoBehaviour {
+	public static ItemUIBehaviour Instance { get; private set; }
+
 	public Color normalColor;
 	public Color selectedColor;
 	public float pickAnimDuration;
@@ -19,11 +21,11 @@ public class ItemUIBehaviour : MonoBehaviour {
 	private Image _newItemPanel;
 
 	private bool _uiIsActive = false;
-
-	private float _heldZ = 0;
-	private float _newZ = 0;
+	private bool _newItemIsPicked = true;
 
 	void Awake () {
+		Instance = this;
+
 		Transform contentPanel = transform.Find ("Canvas").Find ("Content Panel");
 		_heldItemPanel = contentPanel.Find ("Held Item Panel").GetComponent<Image>();
 		_newItemPanel = contentPanel.Find ("New Item Panel").GetComponent<Image>();
@@ -39,9 +41,6 @@ public class ItemUIBehaviour : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.T)) {
 			OpenUI ();
-		}
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			CloseUI ();
 		}
 
 		if (_uiIsActive) {
@@ -67,9 +66,15 @@ public class ItemUIBehaviour : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.D)) {
 			PickNewItem();
 		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			StatManager.Instance.OnItemPick(_newItemIsPicked);
+		}
 	}
 
 	private void PickHeldItem() {
+		_newItemIsPicked = false;
+
 		Vector3 heldPos = _heldItemPanel.rectTransform.anchoredPosition3D;
 		Vector3 newPos = _newItemPanel.rectTransform.anchoredPosition3D;
 
@@ -81,6 +86,8 @@ public class ItemUIBehaviour : MonoBehaviour {
 	}
 
 	private void PickNewItem() {
+		_newItemIsPicked = true;
+
 		Vector3 heldPos = _heldItemPanel.rectTransform.anchoredPosition3D;
 		Vector3 newPos = _newItemPanel.rectTransform.anchoredPosition3D;
 
