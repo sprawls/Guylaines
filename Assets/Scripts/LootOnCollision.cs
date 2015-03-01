@@ -25,7 +25,6 @@ public class LootOnCollision : MonoBehaviour {
         {
             itemStr = collision.gameObject.GetComponentInParent<Item>().basePower;
             Destroy(collision.gameObject.transform.parent.gameObject);
-            Debug.Log(itemStr);
         }
 
     }
