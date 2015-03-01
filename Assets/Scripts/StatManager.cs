@@ -109,7 +109,7 @@ public class StatManager : MonoBehaviour {
 			_tempItem.EnergieMulti += pool;
 			break;
 		}
-        soundPlayer.playSlowMo();
+        //soundPlayer.playSlowMo();
 		if (!quickMode) {
 			ItemUIBehaviour.Instance.OpenUI (_tempItem);
             controler.StartBullteTime(2.0f);
