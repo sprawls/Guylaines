@@ -43,11 +43,8 @@ MonoBehaviour:
   availableItem:
   - {fileID: 11424458, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
   availablePrefab:
-  - {fileID: 11482580, guid: 69b72e67d3e924f4a93284ada858942a, type: 2}
-  - {fileID: 11420664, guid: 0a76dcc640a3eb14aa353c6cf1967c75, type: 2}
-  - {fileID: 11429624, guid: 2fe2c61155564b04b80bfdb766159c6f, type: 2}
-  - {fileID: 11482580, guid: 69b72e67d3e924f4a93284ada858942a, type: 2}
-  layerMin: 0
+  - {fileID: 11483008, guid: cc6c6fefa0e43ec4f8ce45e1b3ad56df, type: 2}
+  layerMin: 1
   layerMax: -1
   currentLayer: 0
 --- !u!1001 &100100000

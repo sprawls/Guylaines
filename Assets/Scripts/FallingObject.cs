@@ -8,33 +8,38 @@ public class FallingObject : MonoBehaviour {
 
     private Transform player;
     private bool fallen = false;
-    private RotatingPlatform rp;
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Ship Prefab").transform;
-        TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
-
-        RotatingPlatform[] rps = gameObject.GetComponentsInChildren<RotatingPlatform>();
-        rp = rps.ToList().OneAtRandom(tg.rand);
+        init();
 	}
+
+    public virtual void init()
+    {
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        float distance = Vector3.Distance(player.position, transform.position);
-
-        /*
-        Debug.Log("Start");
-        Debug.Log(player.localPosition);
-        Debug.Log(transform.localPosition);
-        Debug.Log(distance);
-        Debug.Log(fallDistance);
-         //*/
+        Vector3 p1 = player.position;
+        Vector3 p2 = transform.position;
+        p1.y = 0;
+        p2.y = 0;
+        float distance = Vector3.Distance(p1,p2);
         
-	    if(!fallen && rp != null && distance < fallDistance)
+	    if(!fallen && distance < fallDistance)
         {
             fallen = true;
-            rp.ManuallyRotate();
+            DoSomethingWhenNear();
         }
 	}
+
+    public virtual void DoSomethingWhenNear()
+    {
+        TerrainGenerator tg = FindObjectOfType<TerrainGenerator>();
+        RotatingPlatform[] rps = gameObject.GetComponentsInChildren<RotatingPlatform>();
+        RotatingPlatform rp = rps.ToList().OneAtRandom(tg.rand);
+        rp.ManuallyRotate();
+    }
 }
