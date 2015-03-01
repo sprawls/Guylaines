@@ -10,7 +10,7 @@ public class TerrainFloor : Floor {
         transform.position = new Vector3(middle.x,0,middle.y);
         ter.transform.localPosition = new Vector3(- size.x /2, 0,  - size.y/2);
 
-        TerrainData td = ter.terrainData;
+        TerrainData td = Instantiate(ter.terrainData) as TerrainData;
         Vector3 scale = td.size;
         scale.x = this.size.x;
         scale.z = this.size.y;
@@ -19,6 +19,7 @@ public class TerrainFloor : Floor {
         updateTerrainData(ref td);
 
         ter.terrainData = td;
+        GetComponentInChildren<TerrainCollider>().terrainData = td; ;
 	}
 
     private void generateHeightMap()
