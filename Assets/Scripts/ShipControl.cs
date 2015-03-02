@@ -80,9 +80,14 @@ public class ShipControl : MonoBehaviour {
 			StartCoroutine (SuperTiltPlanner());
 		}
 
-		//Move it
-		if(isDead == false) {
-			transform.position += new Vector3(sideSpeed,0,forwardSpeed); //Move the ship
+		//Move & Tilt 
+		if(isDead == false) { //Move the ship based on its rotation
+			float newZ = transform.rotation.eulerAngles.z;
+			Vector3 horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
+			horizontalVectorSpeed = Quaternion.AngleAxis(newZ,transform.forward) * horizontalVectorSpeed;
+
+			transform.position += horizontalVectorSpeed; //Move the ship horizontally
+			transform.position += new Vector3(0,0,forwardSpeed); //Move the ship forward
 			TiltShip(); //Tilt the ship
 		}
 
