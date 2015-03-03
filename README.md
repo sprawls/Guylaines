@@ -2,14 +2,10 @@
 WonderJAM 2015
 
 **Les Guylaines**
-
-Alex Arsenault-Desjardins
-
-Frédéric Bolduc
-
-Martin Lavoie
-
-Alexis Lessard
+> Alex Arsenault-Desjardins
+> Frédéric Bolduc
+> Martin Lavoie
+> Alexis Lessard
 
 
 
