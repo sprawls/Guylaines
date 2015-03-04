@@ -30,14 +30,21 @@ public class ShipControl : MonoBehaviour {
 	private RotatingPlatform rotatePlatform;
 	private Translation translation;
 
-	////////////////////////// Tilt on Fire //////////////////////////
-	public float tiltCooldown = 3f;
+	////////////////////////// SUPER TILT //////////////////////////
+	public float tiltCooldown = 0.5f;
 	public float tiltTime = 1.5f;
-	private float tiltTimeAnimation = 1f;
+	private float tiltTimeAnimation = 0.3f;
 	public GameObject[] objectsToSuperTilt;
 	private bool isSuperTilting = false;
+	private bool isCurrentlyTilted = false;
 
-    private const float bulletTimeDivisor = 1.25f;
+	////////////////////////// BArrel Roll  //////////////////////////
+	public float barrelRollCooldown = 3f;
+	private float barrelRollTimeAnimation = 0.8f;
+	private bool isBarrelRollin = false;
+    
+	////////////////////////// ALEX stuff //////////////////////////
+	private const float bulletTimeDivisor = 1.25f;
     private const int slowSmothness = 15;
 
     private float old_speedIncrementPerLevel;
@@ -75,10 +82,33 @@ public class ShipControl : MonoBehaviour {
                 StabilizeSideSpeed();
         }
 		//Check isTilting
-		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false&& !slowMoActive) {
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false && !slowMoActive) {
+			Debug.Log ("SuperTilt Activated");
 			isSuperTilting = true;
-			StartCoroutine (SuperTiltPlanner());
+			isCurrentlyTilted = true;
+			StartCoroutine ("SuperTiltPlanner");
 		}
+		if(Input.GetAxis("Fire1") == 0 && isCurrentlyTilted == true && isSuperTilting == true && isDead == false&& !slowMoActive) {
+			Debug.Log ("SuperTilt Deactivated");
+			isCurrentlyTilted = false;
+			StopCoroutine ("SuperTiltPlanner");
+			StopCoroutine(SuperTilt(new Vector3(0,0,0), new Vector3(0,0,90),tiltTimeAnimation));
+			StartCoroutine (SuperTiltUnplanner());
+		}
+
+
+		//Check Barrel Roll
+		if((Input.GetAxis("BarrelRollRight") > 0 || Input.GetButtonDown("BarrelRollRight")) && isSuperTilting == false && isBarrelRollin == false && isDead == false&& !slowMoActive) {
+			Debug.Log ("Super Barrel Roll Activated Right");
+			isBarrelRollin = true;
+			StartCoroutine (SuperBarrelRollPlanner(false));
+		}
+		if((Input.GetAxis("BarrelRollLeft") < 0 || Input.GetButtonDown("BarrelRollLeft")) && isSuperTilting == false && isBarrelRollin == false && isDead == false&& !slowMoActive) {
+			Debug.Log ("Super Barrel Roll Activated Left");
+			isBarrelRollin = true;
+			StartCoroutine (SuperBarrelRollPlanner(true));
+		}
+
 
 		//Move & Tilt 
 		if(isDead == false) { //Move the ship based on its rotation
@@ -106,10 +136,10 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	void UpdateControlStat() {
-		if(StatManager.Instance.Speed.Level != 0) control = (StatManager.Instance.Handling.Level / StatManager.Instance.Speed.Level);
-		control = Mathf.Clamp(control,1f,3f);
+		//if(StatManager.Instance.Speed.Level != 0) control = (StatManager.Instance.Handling.Level / StatManager.Instance.Speed.Level);
+		//control = Mathf.Clamp(control,1f,3f);
 		//Remove control by stat for test
-		control = 2f;
+		//control = 2f;
 		//Change side Speed limit
 		float LevelBonusSideSpeed = Mathf.Lerp (0f,8f,StatManager.Instance.Handling.Level/10000f);
 
@@ -290,25 +320,38 @@ public class ShipControl : MonoBehaviour {
 		isSuperTilting = false;
 	}
 
+	private IEnumerator SuperBarrelRollPlanner(bool isLeft) {
+		isBarrelRollin = true;
+		if(isLeft) StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,720),barrelRollTimeAnimation));
+		else StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,-720),barrelRollTimeAnimation));
+		yield return new WaitForSeconds(barrelRollTimeAnimation);
+		yield return new WaitForSeconds(barrelRollCooldown);
+		isBarrelRollin = false;
+	}
+
 	private IEnumerator SuperTiltPlanner() {
 		//START ANIMATION
-		StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,450),tiltTimeAnimation));
+		StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,90),tiltTimeAnimation));
 		yield return new WaitForSeconds(tiltTimeAnimation);
 		//TILTED TIME
-		for(float i = 0; i< 1; i += Time.deltaTime/tiltTime) {
+		while(true) {
 			foreach (GameObject g in objectsToSuperTilt) {
 				if(g!= null) g.transform.localEulerAngles = new Vector3(0,0,90);
 			}
 			yield return null;
 		}
+
+
+	}
+
+	private IEnumerator SuperTiltUnplanner() {
 		//END ANIMATION
 		//yield return new WaitForSeconds(tiltTime);
-		StartCoroutine (SuperTilt(new Vector3(0,0,90), new Vector3(0,0,0),tiltTimeAnimation));
+		StartCoroutine (SuperTilt(new Vector3(0,0,objectsToSuperTilt[0].transform.rotation.eulerAngles.z), new Vector3(0,0,0),tiltTimeAnimation));
 		yield return new WaitForSeconds(tiltTimeAnimation);
 		//COOLDOWN
-		yield return new WaitForSeconds(tiltCooldown);
 		isSuperTilting = false;
-
+		isCurrentlyTilted = false;
 	}
 
 	private IEnumerator fadeOutSong() {

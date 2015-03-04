@@ -12,7 +12,7 @@ GameObject:
   - 82: {fileID: 8273266}
   m_Layer: 0
   m_Name: LNFManager
-  m_TagString: Untagged
+  m_TagString: LNF
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,9 @@ AudioSource:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173266}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24385098, guid: 750ff9501cfab7f48b61d76a22aec637,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -87,6 +89,16 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11473266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,13 +115,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
   - {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
   songs:
-  - {fileID: 8300000, guid: d5e67fa97eb874ce8ac7bd80498286a1, type: 3}
-  - {fileID: 8300000, guid: f9486208389cc49118041ec7754a51e8, type: 3}
-  - {fileID: 8300000, guid: 76e6d7e26520f4752bf0d5a98f043ab0, type: 3}
+  - {fileID: 8300000, guid: 8bec0a29c52854ee98371e1f96a02108, type: 3}
+  - {fileID: 8300000, guid: 1e88791ba09ae46b69900fd6485d023f, type: 3}
+  - {fileID: 8300000, guid: ee625e79dccc644268fdffa0ebc6cb06, type: 3}
   drops:
-  - {fileID: 8300000, guid: 34f5689609cbb46f482df7bff4541b63, type: 3}
-  - {fileID: 8300000, guid: 52998e1a7b3394ab7a879372697d8cd0, type: 3}
-  - {fileID: 8300000, guid: aaec3bf3dcb9141b38402d39e35a74c3, type: 3}
+  - {fileID: 8300000, guid: 44002bc0ed4da49748c84677b4847658, type: 3}
+  - {fileID: 8300000, guid: 10d3e88bf258a49feabe409721d655db, type: 3}
+  - {fileID: 8300000, guid: b4a3db97de0114b649b6092cd214c297, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -121,4 +133,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173266}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
