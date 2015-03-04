@@ -462,6 +462,14 @@ Prefab:
       propertyPath: tiltCooldown
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11431744, guid: 4ed44adaa57f53542a31067def0251cf, type: 2}
+      propertyPath: BarrelRollSideSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11431744, guid: 4ed44adaa57f53542a31067def0251cf, type: 2}
+      propertyPath: barrelRollTimeAnimation
+      value: .649999976
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ed44adaa57f53542a31067def0251cf, type: 2}
   m_IsPrefabParent: 0
