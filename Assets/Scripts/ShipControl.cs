@@ -189,7 +189,7 @@ public class ShipControl : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.05f);
 		Time.timeScale = 0.05f;
-		LNF.audio.pitch = 0.5f;
+		LNF.GetComponent<AudioSource>().pitch = 0.5f;
 		StartCoroutine(fadeOutSong());
 		yield return new WaitForSeconds(1.5f*(Time.timeScale)); // 
 		Time.timeScale = 1f;
@@ -223,7 +223,7 @@ public class ShipControl : MonoBehaviour {
         {
 
             Time.timeScale /= (bulletTimeDivisor);
-            LNF.audio.pitch = Mathf.Min(1, Time.timeScale*2);
+            LNF.GetComponent<AudioSource>().pitch = Mathf.Min(1, Time.timeScale*2);
             speedIncrementPerLevel /= (bulletTimeDivisor);
             startSpeed /= (bulletTimeDivisor);
             sideSpeedLimit /= (bulletTimeDivisor);
@@ -253,7 +253,7 @@ public class ShipControl : MonoBehaviour {
             for (int i = 1; i < slowSmothness / 2 && slowMoActive; i++)
             {
                 Time.timeScale *= (bulletTimeDivisor);
-                LNF.audio.pitch = Mathf.Min(1, Time.timeScale * 2);
+                LNF.GetComponent<AudioSource>().pitch = Mathf.Min(1, Time.timeScale * 2);
                 speedIncrementPerLevel *= (bulletTimeDivisor);
                 startSpeed *= (bulletTimeDivisor);
                 sideSpeedLimit *= (bulletTimeDivisor);
@@ -270,7 +270,7 @@ public class ShipControl : MonoBehaviour {
             sideSpeedLimit = old_sideSpeedLimit;
             ChangeSideSpeed(0);
             Time.timeScale = 1f;
-            LNF.audio.pitch = Time.timeScale;
+            LNF.GetComponent<AudioSource>().pitch = Time.timeScale;
             slowMoActive = false;
             itemChoseLock = true;
             
@@ -313,7 +313,7 @@ public class ShipControl : MonoBehaviour {
 
 	private IEnumerator fadeOutSong() {
 		for(float i=1; i>=0; i-= Time.deltaTime/4f) {
-			LNF.audio.volume = i;
+			LNF.GetComponent<AudioSource>().volume = i;
 			yield return null;
 		}
 	}

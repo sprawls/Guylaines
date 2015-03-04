@@ -36,7 +36,7 @@ public class MoveCameraFromSpeed : MonoBehaviour {
 			transform.localPosition = cameraAngle*distanceMultiplier;
 			//Change FOV
 			float lerpedFOV = Mathf.Lerp(startFOV,endFOV,distanceMultiplier/speedForMax);
-			camera.fieldOfView = lerpedFOV;
+			GetComponent<Camera>().fieldOfView = lerpedFOV;
 		}
 	}
 

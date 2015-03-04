@@ -18,7 +18,7 @@ public class GiveRandomZForce : MonoBehaviour {
 		float randY = Random.Range (150,300)*shipControl.forwardSpeed;
 		float randZ = Random.Range (500,1100)*shipControl.forwardSpeed;
 		objForce = new Vector3(randX,randY,randZ);
-		rigidbody.isKinematic = true;
+		GetComponent<Rigidbody>().isKinematic = true;
 
 	}
 	
@@ -31,7 +31,7 @@ public class GiveRandomZForce : MonoBehaviour {
 	}
 
 	void GiveForce() {
-		rigidbody.isKinematic = false;
-		rigidbody.AddForce(objForce);
+		GetComponent<Rigidbody>().isKinematic = false;
+		GetComponent<Rigidbody>().AddForce(objForce);
 	}
 }

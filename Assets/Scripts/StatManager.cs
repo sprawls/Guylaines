@@ -19,11 +19,12 @@ public class StatManager : MonoBehaviour {
 
 	void Awake() {
 		Instance = this;
+		controller = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
+		holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
 	}
 
 	void Start () {
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipControl>();
-        holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ItemHolder>();
+        
 
         loadItem();
         _speed = new Stat(_item.speedMulti, UIManager.Instance.speedWidget);
