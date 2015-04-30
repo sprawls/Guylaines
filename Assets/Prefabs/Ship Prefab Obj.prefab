@@ -5881,19 +5881,22 @@ MonoBehaviour:
   forwardSpeed: 0
   sideSpeed: 0
   tiltAngle: 0
-  control: 1
+  control: 2.5
   stabilizingControlratio: .5
-  sideSpeedLimit: .5
-  maxTiltAngle: 10
+  sideSpeedLimit: 1
+  maxTiltAngle: 11
   slowMoActive: 0
   slowMoEnded: 0
-  tiltCooldown: 3
+  tiltCooldown: .5
   tiltTime: 1.5
   objectsToSuperTilt:
   - {fileID: 115774}
   - {fileID: 131748}
+  barrelRollCooldown: 3
+  BarrelRollSideSpeed: 2
+  barrelRollTimeAnimation: .649999976
   itemChoseLock: 1
-  shakeshakeshake: {fileID: 0}
+  shakeshakeshake: {fileID: 11431796}
   speedToConstantShake: 3
   maxShakeAmount: .449999988
   speedForMaxShake: 16
@@ -5908,7 +5911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33389c39d4f8c439fb0131d0f58f1677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 11431744}
 --- !u!114 &11431748
 MonoBehaviour:
   m_ObjectHideFlags: 1

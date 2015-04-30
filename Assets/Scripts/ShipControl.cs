@@ -3,19 +3,25 @@ using System.Collections;
 
 public class ShipControl : MonoBehaviour {
 
+
 	////////////////////////// General //////////////////////////
+	[Header("Component")]
 	public Transform modelAndCam;
 	public Transform model;
 	public MoveCameraFromSpeed cameraScript;
 	public LNFManager LNF;
 	public bool isDead = false;
+
 	////////////////////////// Forward Speed //////////////////////////
+	[Header("Forward Speed")]
 	public float forwardSpeed;
 
     private float speedIncrementPerLevel = 0.01f;
 	private float speedIncrementPerSecond = 0.0f;
 	private float startSpeed = 2.0f;
+
 	////////////////////////// Side Speed //////////////////////////
+	[Header("Side Speed")]
 	public float sideSpeed; //lerp from 0 to maxSideSpeed using curSideSpeedMultiplier as "t"
 	public float tiltAngle;
 	public float control; //change in sideSpeed per second( 1 means it takes 1sec to reach max sidespeed; 2 means it takes 0.5sec)
@@ -25,12 +31,15 @@ public class ShipControl : MonoBehaviour {
 	private float curSideSpeedMultiplier = 0; //Variable between 0 and 1 dictating speed
 	private float deadTiltZone = 0.025f; // if sidespeed is lower than this, it equals 0
     public bool slowMoActive = false;
+
 	////////////////////////// Death //////////////////////////
+	[Header("Death")]
 	[HideInInspector] public bool slowMoEnded = false;
 	private RotatingPlatform rotatePlatform;
 	private Translation translation;
 
 	////////////////////////// SUPER TILT //////////////////////////
+	[Header("SUPER TILT")]
 	public float tiltCooldown = 0.5f;
 	public float tiltTime = 1.5f;
 	private float tiltTimeAnimation = 0.3f;
@@ -39,6 +48,7 @@ public class ShipControl : MonoBehaviour {
 	private bool isCurrentlyTilted = false;
 
 	////////////////////////// BArrel Roll  //////////////////////////
+	[Header("Barrel Roll")]
 	public float barrelRollCooldown = 3f;
 	public float BarrelRollSideSpeed = 2f;
 	private float OverriddenSideSpeed;
@@ -47,6 +57,7 @@ public class ShipControl : MonoBehaviour {
 	private bool isBarrelRollin = false;
     
 	////////////////////////// ALEX stuff //////////////////////////
+	[Header("Alex Stuff")] // Really ? -_-
 	private const float bulletTimeDivisor = 1.25f;
     private const int slowSmothness = 15;
 
@@ -54,7 +65,9 @@ public class ShipControl : MonoBehaviour {
     private float old_startSpeed;
     private float old_sideSpeedLimit;
     public bool itemChoseLock = true;
+
 	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
+	 [Header("SHAKE SHAKE SHAKE")]
 	public ShakeShakeShake shakeshakeshake;
 	public float speedToConstantShake = 3f;
 	public float maxShakeAmount = 0.5f;
@@ -72,14 +85,14 @@ public class ShipControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (sideSpeed);
 		//Calculate Forward Speed
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
 		//Calculate Side Speed
-        if (!slowMoActive)
-        {
-            UpdateControlStat();
-            if (Input.GetAxis("Horizontal") != 0)
+		if (!slowMoActive && !isBarrelRollin) {
+            //UpdateControlStat();
+            if (Input.GetAxis("Horizontal") != 0 )
                 ChangeSideSpeed(Input.GetAxis("Horizontal"));
             else
                 StabilizeSideSpeed();
@@ -118,8 +131,11 @@ public class ShipControl : MonoBehaviour {
 		if(isDead == false) { //Move the ship based on its rotation
 			float newZ = transform.rotation.eulerAngles.z;
 			Vector3 horizontalVectorSpeed;
-			if(isBarrelRollin) horizontalVectorSpeed = new Vector3(OverriddenSideSpeed,0,0);
-			else horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
+			if(isBarrelRollin) {
+				//horizontalVectorSpeed = new Vector3(OverriddenSideSpeed,0,0);
+				sideSpeed = OverriddenSideSpeed;
+			}
+			horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
 			horizontalVectorSpeed = Quaternion.AngleAxis(newZ,transform.forward) * horizontalVectorSpeed;
 
 			transform.position += horizontalVectorSpeed; //Move the ship horizontally
@@ -153,8 +169,9 @@ public class ShipControl : MonoBehaviour {
         if (!slowMoActive)
         {
             sideSpeedLimit = 0.5f + LevelBonusSideSpeed;
+
         }
-		////Debug.Log(sideSpeedLimit + "       " + StatManager.Instance.Handling.Level);
+
 		
 	}
 
@@ -330,9 +347,11 @@ public class ShipControl : MonoBehaviour {
 		if (isLeft) {
 			StartCoroutine (SuperTilt (new Vector3 (0, 0, 0), new Vector3 (0, 0, 720), barrelRollTimeAnimation));
 			OverriddenSideSpeed = -BarrelRollSideSpeed;
+			curSideSpeedMultiplier = -1;
 		} else {
 			StartCoroutine (SuperTilt (new Vector3 (0, 0, 0), new Vector3 (0, 0, -720), barrelRollTimeAnimation));
 			OverriddenSideSpeed = BarrelRollSideSpeed;
+			curSideSpeedMultiplier = 1;
 		}
 		yield return new WaitForSeconds(barrelRollTimeAnimation);
 		isBarrelRollin = false;
