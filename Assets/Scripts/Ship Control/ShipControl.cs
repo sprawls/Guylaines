@@ -85,7 +85,6 @@ public class ShipControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (sideSpeed);
 		//Calculate Forward Speed
         forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
 
