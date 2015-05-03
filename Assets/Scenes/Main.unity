@@ -717,10 +717,12 @@ MonoBehaviour:
   objectsToSuperTilt:
   - {fileID: 1123736196}
   - {fileID: 1638994193}
-  barrelRollCooldown: 3
+  barrelRollCooldown: .5
   BarrelRollSideSpeed: 2
-  barrelRollTimeAnimation: .649999976
+  barrelRollTimeAnimation: .5
   itemChoseLock: 1
+  specialPower: {fileID: 0}
+  specialPowerCooldown: 3
   shakeshakeshake: {fileID: 2037157946}
   speedToConstantShake: 3
   maxShakeAmount: .449999988

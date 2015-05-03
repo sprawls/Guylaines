@@ -49,7 +49,7 @@ public class ShipControl : MonoBehaviour {
 
 	////////////////////////// BArrel Roll  //////////////////////////
 	[Header("Barrel Roll")]
-	public float barrelRollCooldown = 3f;
+	public float barrelRollCooldown = 1f;
 	public float BarrelRollSideSpeed = 2f;
 	private float OverriddenSideSpeed;
 	public float barrelRollTimeAnimation = 0.8f;
@@ -66,8 +66,13 @@ public class ShipControl : MonoBehaviour {
     private float old_sideSpeedLimit;
     public bool itemChoseLock = true;
 
+	////////////////////////// Special POWER //////////////////////////
+	[Header("Special Power")]
+	public SpecialPower specialPower;
+	public float specialPowerCooldown = 3f;
+
 	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
-	 [Header("SHAKE SHAKE SHAKE")]
+	[Header("SHAKE SHAKE SHAKE")]
 	public ShakeShakeShake shakeshakeshake;
 	public float speedToConstantShake = 3f;
 	public float maxShakeAmount = 0.5f;
@@ -86,32 +91,53 @@ public class ShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Calculate Forward Speed
-        forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
-
+		CalculateForwardSpeed ();
 		//Calculate Side Speed
-		if (!slowMoActive && !isBarrelRollin) {
-            //UpdateControlStat();
-            if (Input.GetAxis("Horizontal") != 0 )
-                ChangeSideSpeed(Input.GetAxis("Horizontal"));
-            else
-                StabilizeSideSpeed();
-        }
+		CalculateSideSpeed ();
 		//Check isTilting
-		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false && !slowMoActive) {
-			Debug.Log ("SuperTilt Activated");
-			isSuperTilting = true;
-			StartCoroutine ("SuperTiltPlanner");
-		}
-		if(Input.GetAxis("Fire1") == 0 && isCurrentlyTilted == true && isSuperTilting == true && isDead == false&& !slowMoActive) {
-			Debug.Log ("SuperTilt Deactivated");
-			isCurrentlyTilted = false;
-			StopCoroutine ("SuperTiltPlanner");
-			StopCoroutine(SuperTilt(new Vector3(0,0,0), new Vector3(0,0,90),tiltTimeAnimation));
-			StartCoroutine (SuperTiltUnplanner());
-		}
-
-
+		CheckSuperPower ();
 		//Check Barrel Roll
+		CheckBarrelRoll ();
+		//Move & Tilt 
+		MoveShip ();
+		//Add SHAKESHAKESHAKE on speed
+		CheckShake();
+
+	}
+
+
+	void MoveShip() {
+		if(isDead == false) { //Move the ship based on its rotation
+			float newZ = transform.rotation.eulerAngles.z;
+			Vector3 horizontalVectorSpeed;
+			if(isBarrelRollin) {
+				//horizontalVectorSpeed = new Vector3(OverriddenSideSpeed,0,0);
+				sideSpeed = OverriddenSideSpeed;
+			}
+			horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
+			horizontalVectorSpeed = Quaternion.AngleAxis(newZ,transform.forward) * horizontalVectorSpeed;
+			
+			transform.position += horizontalVectorSpeed; //Move the ship horizontally
+			transform.position += new Vector3(0,0,forwardSpeed); //Move the ship forward
+			TiltShip(); //Tilt the ship
+		}
+	}
+
+	void CalculateForwardSpeed() {
+		forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
+	}
+
+	void CalculateSideSpeed() {
+		if (!slowMoActive && !isBarrelRollin) {
+			//UpdateControlStat();
+			if (Input.GetAxis("Horizontal") != 0 )
+				ChangeSideSpeed(Input.GetAxis("Horizontal"));
+			else
+				StabilizeSideSpeed();
+		}
+	}
+
+	void CheckBarrelRoll() {
 		if((Input.GetAxis("BarrelRollRight") > 0 || Input.GetButtonDown("BarrelRollRight")) && isSuperTilting == false && barrelRollOnCD == false && isDead == false&& !slowMoActive) {
 			Debug.Log ("Super Barrel Roll Activated Right");
 			isBarrelRollin = true;
@@ -124,27 +150,21 @@ public class ShipControl : MonoBehaviour {
 			barrelRollOnCD = true;
 			StartCoroutine (SuperBarrelRollPlanner(true));
 		}
+	}
 
-
-		//Move & Tilt 
-		if(isDead == false) { //Move the ship based on its rotation
-			float newZ = transform.rotation.eulerAngles.z;
-			Vector3 horizontalVectorSpeed;
-			if(isBarrelRollin) {
-				//horizontalVectorSpeed = new Vector3(OverriddenSideSpeed,0,0);
-				sideSpeed = OverriddenSideSpeed;
-			}
-			horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
-			horizontalVectorSpeed = Quaternion.AngleAxis(newZ,transform.forward) * horizontalVectorSpeed;
-
-			transform.position += horizontalVectorSpeed; //Move the ship horizontally
-			transform.position += new Vector3(0,0,forwardSpeed); //Move the ship forward
-			TiltShip(); //Tilt the ship
+	void CheckSuperPower() {
+		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false && !slowMoActive) {
+			Debug.Log ("SuperTilt Activated");
+			isSuperTilting = true;
+			StartCoroutine ("SuperTiltPlanner");
 		}
-
-		//Add SHAKESHAKESHAKE on speed
-		CheckShake();
-
+		if(Input.GetAxis("Fire1") == 0 && isCurrentlyTilted == true && isSuperTilting == true && isDead == false&& !slowMoActive) {
+			Debug.Log ("SuperTilt Deactivated");
+			isCurrentlyTilted = false;
+			StopCoroutine ("SuperTiltPlanner");
+			StopCoroutine(SuperTilt(new Vector3(0,0,0), new Vector3(0,0,90),tiltTimeAnimation));
+			StartCoroutine (SuperTiltUnplanner());
+		}
 	}
 
 	void CheckShake() {
