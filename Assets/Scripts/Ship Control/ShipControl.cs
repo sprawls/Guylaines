@@ -19,6 +19,7 @@ public class ShipControl : MonoBehaviour {
     private float speedIncrementPerLevel = 0.01f;
 	private float speedIncrementPerSecond = 0.0f;
 	private float startSpeed = 2.0f;
+	[HideInInspector] public float additionalSpeed = 0f;
 
 	////////////////////////// Side Speed //////////////////////////
 	[Header("Side Speed")]
@@ -68,8 +69,10 @@ public class ShipControl : MonoBehaviour {
 
 	////////////////////////// Special POWER //////////////////////////
 	[Header("Special Power")]
-	public SpecialPower specialPower;
+	public GameObject SpecialPowerObj;
+	private SpecialPower specialPower;
 	public float specialPowerCooldown = 3f;
+	private bool specialPowerOnCooldown = false;
 
 	////////////////////////// SHAKE SHAKE SHAKE //////////////////////////
 	[Header("SHAKE SHAKE SHAKE")]
@@ -94,14 +97,18 @@ public class ShipControl : MonoBehaviour {
 		CalculateForwardSpeed ();
 		//Calculate Side Speed
 		CalculateSideSpeed ();
-		//Check isTilting
-		CheckSuperPower ();
-		//Check Barrel Roll
-		CheckBarrelRoll ();
-		//Move & Tilt 
+
+
+		if (!isDead && !slowMoActive) {
+			//Check Super Power
+			CheckSpecialPower ();
+			//Check Barrel Roll
+			CheckBarrelRoll ();
+		}
+		//Move & Tilt
 		MoveShip ();
 		//Add SHAKESHAKESHAKE on speed
-		CheckShake();
+		CheckShake ();
 
 	}
 
@@ -125,6 +132,7 @@ public class ShipControl : MonoBehaviour {
 
 	void CalculateForwardSpeed() {
 		forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
+		forwardSpeed += additionalSpeed;
 	}
 
 	void CalculateSideSpeed() {
@@ -152,7 +160,19 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
-	void CheckSuperPower() {
+	void CheckSpecialPower() {
+		//OLD_SuperPower(); //old super power before refactor (infinite vertical tilt)
+		if(Input.GetAxis("Fire1") != 0 && !specialPowerOnCooldown && !isDead && !slowMoActive) {
+			Debug.Log ("Super Power");
+			specialPowerOnCooldown = true;
+			StartCoroutine(StartSpecialPowerCooldown ());
+			specialPower = (Instantiate(SpecialPowerObj)).GetComponent<SpecialPower> ();
+			specialPower.Activate(this);
+		}
+
+	}
+
+	void OLD_SuperPower() {
 		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false && !slowMoActive) {
 			Debug.Log ("SuperTilt Activated");
 			isSuperTilting = true;
@@ -355,6 +375,12 @@ public class ShipControl : MonoBehaviour {
 			StartCoroutine (SuperTilt(new Vector3(0,0,0), new Vector3(0,0,degrees),time));
 			StartCoroutine(GiveBackSuperTilt(time));
 		}
+	}
+
+	private IEnumerator StartSpecialPowerCooldown() {
+		specialPowerOnCooldown = true;
+		yield return new WaitForSeconds (specialPowerCooldown);
+		specialPowerOnCooldown = false;
 	}
 
 	private IEnumerator GiveBackSuperTilt(float time) {

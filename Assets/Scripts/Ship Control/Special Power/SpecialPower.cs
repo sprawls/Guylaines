@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class SpecialPower : MonoBehaviour {
-
+public class SpecialPower : MonoBehaviour {
+	
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +14,10 @@ public abstract class SpecialPower : MonoBehaviour {
 	
 	}
 
-	public abstract void Activate ();
+	public virtual void Activate (ShipControl controls){
+
+
+	}
 
 
 }

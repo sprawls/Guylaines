@@ -704,6 +704,7 @@ MonoBehaviour:
   LNF: {fileID: 1768149201}
   isDead: 0
   forwardSpeed: 0
+  additionalSpeed: 0
   sideSpeed: 0
   tiltAngle: 0
   control: 2.5
@@ -721,7 +722,7 @@ MonoBehaviour:
   BarrelRollSideSpeed: 2
   barrelRollTimeAnimation: .5
   itemChoseLock: 1
-  specialPower: {fileID: 0}
+  SpecialPowerObj: {fileID: 158554, guid: be8cf19dfff188448825952f26bfc8c9, type: 2}
   specialPowerCooldown: 3
   shakeshakeshake: {fileID: 2037157946}
   speedToConstantShake: 3
