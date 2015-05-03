@@ -1,17 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class XpOnCollision : MonoBehaviour {
 	
     public GameObject GlowParticul;
     private ShipControl shipControl;
     private GameObject playerObj;
+	
+	private XpLink xpLink; //Creates link inbetween ship and objects giving xp to add feedback
 
     void Awake()
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
         shipControl = playerObj.GetComponentInChildren<ShipControl>();
+		xpLink = GetComponent<XpLink> ();
     }
+
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.tag == "Obstacle" && !shipControl.isDead) {
+			xpLink.AddObjectToList(collision.collider.gameObject);
+		}
+	}
 
     void OnCollisionStay(Collision collision)
     {
@@ -54,6 +64,8 @@ public class XpOnCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Obstacle" && !shipControl.isDead)
         {
+			xpLink.RemoveObjectToList(collision.collider.gameObject); //Remove GameObject from colliding obj
+
             XpInformation XpInfo=collision.gameObject.GetComponent<XpInformation>();
             int XpType = XpInfo.XpType;
             if (XpType > 0)
