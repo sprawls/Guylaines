@@ -81,6 +81,12 @@ public class ShipControl : MonoBehaviour {
 	public float maxShakeAmount = 0.5f;
 	public float speedForMaxShake = 12f;
 
+	////////////////////////// Inputs //////////////////////////
+	 public bool Input_Left = false;
+	 public bool Input_Right = false;
+	 public bool Input_Special = false;
+
+
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
 		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
@@ -138,10 +144,14 @@ public class ShipControl : MonoBehaviour {
 	void CalculateSideSpeed() {
 		if (!slowMoActive && !isBarrelRollin) {
 			//UpdateControlStat();
-			if (Input.GetAxis("Horizontal") != 0 )
-				ChangeSideSpeed(Input.GetAxis("Horizontal"));
-			else
+			if ((Input_Left || Input_Right) && !(Input_Left && Input_Right) ) {
+				if(Input_Left) ChangeSideSpeed(-1);
+				else if(Input_Right) ChangeSideSpeed(1);
+			}
+			else {
 				StabilizeSideSpeed();
+			}
+				
 		}
 	}
 

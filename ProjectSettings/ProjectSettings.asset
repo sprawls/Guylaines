@@ -5,7 +5,7 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   targetGlesGraphics: 1
   targetIOSGraphics: -1
@@ -14,7 +14,7 @@ PlayerSettings:
   companyName: Les Guylaines
   productName: Electric Universe
   cloudProjectId: 
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 7a8e4beba6b9948e6a6703d30acde416, type: 3}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
@@ -74,7 +74,7 @@ PlayerSettings:
     16:10: 0
     16:9: 1
     Others: 0
-  bundleIdentifier: com.Company.ProductName
+  bundleIdentifier: com.Guylaines.ElectricUniverse
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -121,20 +121,20 @@ PlayerSettings:
   iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/Alex/Documents/Github/Guylaines/user.keystore
+  AndroidKeyaliasName: androidtest_1
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
   m_AndroidBanners:
   - width: 320
     height: 180
-    banner: {fileID: 0}
+    banner: {fileID: 2800000, guid: b8eac033bd49f0f4a8914a7454a2ec3c, type: 3}
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 04550512a36deb34887e513ee0f31545, type: 3}
       m_Size: 128
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Black Background
