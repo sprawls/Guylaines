@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TouchButton : MonoBehaviour {
 
@@ -8,14 +9,18 @@ public class TouchButton : MonoBehaviour {
 	public bool isRight = false;
 
 	private InputManager inputManager;
-	private int amountOfPresses = 0;
+
+
+	//New input
+	public List<int> inputIds = new List<int>(); //Ids of input on this buttoon right now
 
 	void Start() {
 		inputManager = GameObject.FindGameObjectWithTag ("InputManager").GetComponentInChildren<InputManager> ();
 	}
 
 	void Update() {
-		if (amountOfPresses > 0) {
+
+		if (inputIds.Count > 0) {
 			if (isMiddle) {
 				inputManager.AddMiddleButton (gameObject);
 			}
@@ -32,20 +37,27 @@ public class TouchButton : MonoBehaviour {
 		}
 	}
 
-	void OnTouchDown() {
-		amountOfPresses ++;
+
+
+	void FingerOn(int id) {
+		if (!inputIds.Contains (id)) {
+			inputIds.Add(id);
+		}
 	}
 
-	void OnTouchUp() {
-		amountOfPresses --;
+	void FingerOff(int id) {
+		if (inputIds.Contains (id)) {
+			inputIds.Remove(id);
+		}
 	}
 
-	void OnTouchStay() {
-
-	}
-
-	void OnTouchExit() {
-
+	void DoubleClickOn(int id) {
+		if (isLeft) {
+			inputManager.AddDoubleClickLeft (gameObject);
+		}
+		if (isRight) {
+			inputManager.AddDoubleClickRight (gameObject);	
+		}
 	}
 	
 }

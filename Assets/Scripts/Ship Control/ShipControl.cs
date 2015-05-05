@@ -82,9 +82,12 @@ public class ShipControl : MonoBehaviour {
 	public float speedForMaxShake = 12f;
 
 	////////////////////////// Inputs //////////////////////////
-	 public bool Input_Left = false;
-	 public bool Input_Right = false;
-	 public bool Input_Special = false;
+	public bool Input_Left = false;
+	public bool Input_Right = false;
+	public bool Input_Special = false;
+	public bool Input_LeftRoll_OneTime = false;
+	public bool Input_RightRoll_OneTime = false;
+
 
 
 	void Awake() {
@@ -156,13 +159,13 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	void CheckBarrelRoll() {
-		if((Input.GetAxis("BarrelRollRight") > 0 || Input.GetButtonDown("BarrelRollRight")) && isSuperTilting == false && barrelRollOnCD == false && isDead == false&& !slowMoActive) {
+		if( Input_RightRoll_OneTime && isSuperTilting == false && barrelRollOnCD == false && isDead == false&& !slowMoActive) {
 			Debug.Log ("Super Barrel Roll Activated Right");
 			isBarrelRollin = true;
 			barrelRollOnCD = true;
 			StartCoroutine (SuperBarrelRollPlanner(false));
 		}
-		if((Input.GetAxis("BarrelRollLeft") < 0 || Input.GetButtonDown("BarrelRollLeft")) && isSuperTilting == false && barrelRollOnCD == false && isDead == false&& !slowMoActive) {
+		if( Input_LeftRoll_OneTime && isSuperTilting == false && barrelRollOnCD == false && isDead == false&& !slowMoActive) {
 			Debug.Log ("Super Barrel Roll Activated Left");
 			isBarrelRollin = true;
 			barrelRollOnCD = true;
@@ -172,7 +175,7 @@ public class ShipControl : MonoBehaviour {
 
 	void CheckSpecialPower() {
 		//OLD_SuperPower(); //old super power before refactor (infinite vertical tilt)
-		if(Input.GetAxis("Fire1") != 0 && !specialPowerOnCooldown && !isDead && !slowMoActive) {
+		if(Input_Special && !specialPowerOnCooldown && !isDead && !slowMoActive) {
 			Debug.Log ("Super Power");
 			specialPowerOnCooldown = true;
 			StartCoroutine(StartSpecialPowerCooldown ());
@@ -182,6 +185,7 @@ public class ShipControl : MonoBehaviour {
 
 	}
 
+	/*
 	void OLD_SuperPower() {
 		if(Input.GetAxis("Fire1") != 0 && isSuperTilting == false && isDead == false && !slowMoActive) {
 			Debug.Log ("SuperTilt Activated");
@@ -196,6 +200,7 @@ public class ShipControl : MonoBehaviour {
 			StartCoroutine (SuperTiltUnplanner());
 		}
 	}
+	*/
 
 	void CheckShake() {
 		if(forwardSpeed > speedToConstantShake) {
