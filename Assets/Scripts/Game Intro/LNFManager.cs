@@ -20,12 +20,15 @@ public class LNFManager : MonoBehaviour {
 
 		SelectSkybox ();
 		StartDrop ();
+
+
 	}
 
 	void Update() {
 		if (!_audio.isPlaying) {
 			StartSong();
 		}
+
 	}
 
 	private bool dropHasFinished() {

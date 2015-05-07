@@ -21,10 +21,12 @@ public class InputManager : MonoBehaviour {
 		MiddleButtonsActive = new List<GameObject> ();
 		DoubleClickedLeft = false;
 		DoubleClickedRight = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		CheckKeyboardControls (); //This could be put in another script
 
 		if(LeftButtonsActive.Count > 0) shipControl.Input_Left = true;

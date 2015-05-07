@@ -37,7 +37,7 @@ public class ItemUIBehaviour : MonoBehaviour {
 		_handlingWidget = graph.Find ("Handling").GetComponent<BidirectionalSlider>();
 		_energyWidget = graph.Find ("Energy").GetComponent<BidirectionalSlider>();
 
-		_rotationTweenParams = new TweenParams ().SetEase (Ease.OutCubic).OnComplete (TweenItemValues);
+		_rotationTweenParams =  new TweenParams ().SetEase (Ease.OutCubic).OnComplete (TweenItemValues);
 	}
 
 	void Update() {

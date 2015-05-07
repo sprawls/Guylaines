@@ -1,46 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &158554
+--- !u!1 &147906
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 453570}
-  - 114: {fileID: 11409194}
+  - 4: {fileID: 460290}
+  - 114: {fileID: 11485706}
   m_Layer: 0
-  m_Name: SpecialPowerObj_Boost
+  m_Name: Option Singleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &453570
+--- !u!4 &460290
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158554}
+  m_GameObject: {fileID: 147906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.9009209, y: 11.6985483, z: 103.545479}
+  m_LocalPosition: {x: 114.252701, y: 66.5522919, z: -163.858871}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11409194
+--- !u!114 &11485706
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158554}
+  m_GameObject: {fileID: 147906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf32b51a5d3024045a98512d65d871b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 82b80a1aa07f0464e915c489adbc4b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activationTime: 2
-  boostSpeed: 6
+  isUsingTiltControls: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -50,5 +49,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 158554}
+  m_RootGameObject: {fileID: 147906}
   m_IsPrefabParent: 1
