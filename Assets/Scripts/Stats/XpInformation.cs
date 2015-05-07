@@ -8,7 +8,7 @@ public class XpInformation : MonoBehaviour {
 	void Start () {
         _xpType = Random.Range(0, 4);
         meshRend = GetComponentInChildren<MeshRenderer>();
-        Color col = Color.white;
+		Color col = Color.white;
         switch (_xpType)
         {
             case 1:
@@ -20,6 +20,10 @@ public class XpInformation : MonoBehaviour {
             case 3:
                 col = Color.yellow;
                 break;
+			case 0:
+				Destroy (this);
+				break;
+
         }
         meshRend.material.color = col;
 	}
@@ -30,6 +34,9 @@ public class XpInformation : MonoBehaviour {
         set { this._xpType = value; }
     }
 
+	public Color getColor() {
+		return(meshRend.material.color);
+	}
 	
 	// Update is called once per frame
 	void Update () {

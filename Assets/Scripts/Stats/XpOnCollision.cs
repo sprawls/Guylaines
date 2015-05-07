@@ -19,7 +19,8 @@ public class XpOnCollision : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == "Obstacle" && !shipControl.isDead) {
-			xpLink.AddObjectToList(collision.collider.gameObject);
+			Color c = collision.gameObject.GetComponent<XpInformation>().getColor();
+			xpLink.AddObjectToList(collision.collider.gameObject,c);
 		}
 	}
 
