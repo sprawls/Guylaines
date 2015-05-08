@@ -51,6 +51,7 @@ public class InputManager : MonoBehaviour {
 			shipControl.Input_RightRoll_OneTime = false;
 	}
 
+
 	// ADD BUTTONS METHODS //
 	//Movement Left
 	public void AddLeftButton(GameObject g) {

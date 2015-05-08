@@ -128,6 +128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 3
+--- !u!114 &186589002
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11496208, guid: 08215e32117fa4ea58745a18cb77e902,
+    type: 2}
+  m_PrefabInternal: {fileID: 1164974458}
+  m_Script: {fileID: 2109663825, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &637484136
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,3 +4194,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2109000104}
   m_Mesh: {fileID: 4300000, guid: a5778336d8c410043ab11b61feac0925, type: 3}
+--- !u!1 &2132739467
+GameObject:
+  m_PrefabParentObject: {fileID: 193414, guid: 08215e32117fa4ea58745a18cb77e902, type: 2}
+  m_PrefabInternal: {fileID: 1164974458}
+--- !u!114 &2132739472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2132739467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62660a6be110dc4b963c0a3aaf99e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle_tilt: {fileID: 186589002}
