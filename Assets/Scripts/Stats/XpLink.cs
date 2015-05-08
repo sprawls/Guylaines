@@ -10,6 +10,8 @@ public class XpLink : MonoBehaviour {
 	}
 
 	public GameObject xpLinkObject;
+	private float maxLinkDistance = 80;
+
 	private List<xpLinkObjects> currentXpLinks; //objects to create link with
 	private Transform ship;
 
@@ -22,8 +24,18 @@ public class XpLink : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		for(int i = 0; i< currentXpLinks.Count; i++) {
-			currentXpLinks[i].lineRenderer.SetPosition(0,ship.position);
-			currentXpLinks[i].lineRenderer.SetPosition(1,currentXpLinks[i].gameObject.transform.position);
+			if(ship != null && currentXpLinks[i].gameObject != null) {
+				if((ship.position - currentXpLinks[i].gameObject.transform.position).magnitude < maxLinkDistance) {
+					currentXpLinks[i].lineRenderer.SetPosition(0,ship.position);
+					currentXpLinks[i].lineRenderer.SetPosition(1,currentXpLinks[i].gameObject.transform.position);
+				} else {
+					DestroyXPLinkObject(currentXpLinks[i]);
+					currentXpLinks.RemoveAt(i);
+				}
+			} else {
+				currentXpLinks.RemoveAt(i);
+			}
+
 		}
 	}
 

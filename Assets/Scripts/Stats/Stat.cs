@@ -2,6 +2,7 @@
 
 public class Stat {
 	public const int XP_TO_LEVEL = 100;
+	public int[] xpNeeded = {100,500,1300,2500,4100,6100,8500,11300,14500,18100,22100};
 
 	private StatWidget _widget;
 
@@ -13,7 +14,7 @@ public class Stat {
     public Stat(float multi, StatWidget widget)
     {
 		_widget = widget;
-		
+
 		Multiplier = multi;
 		XP = 0;
 		Level = 1;
@@ -25,7 +26,12 @@ public class Stat {
 		XP += (int)(value * Multiplier);
         if (Level < 9999)
         {
-            Level = 1 + XP / XP_TO_LEVEL;
+			if(xpNeeded[_level-1] != null) {
+				//Level = 1 + XP / xpNeeded[_level-1];
+				Level = 1 + XP / XP_TO_LEVEL;
+			} else {
+				Level = 1 + XP / 10000000;
+			}
         }
         else
         {

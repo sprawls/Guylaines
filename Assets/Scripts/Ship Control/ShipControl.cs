@@ -88,6 +88,7 @@ public class ShipControl : MonoBehaviour {
 	public bool Input_LeftRoll_OneTime = false;
 	public bool Input_RightRoll_OneTime = false;
 
+	private float SpeedDeltaTimeAdjuster = 50f;
 
 
 	void Awake() {
@@ -133,8 +134,8 @@ public class ShipControl : MonoBehaviour {
 			horizontalVectorSpeed = new Vector3(sideSpeed,0,0);
 			horizontalVectorSpeed = Quaternion.AngleAxis(newZ,transform.forward) * horizontalVectorSpeed;
 			
-			transform.position += horizontalVectorSpeed; //Move the ship horizontally
-			transform.position += new Vector3(0,0,forwardSpeed); //Move the ship forward
+			transform.position += horizontalVectorSpeed * Time.deltaTime * SpeedDeltaTimeAdjuster; //Move the ship horizontally
+			transform.position += new Vector3(0,0,forwardSpeed) * Time.deltaTime * SpeedDeltaTimeAdjuster; //Move the ship forward
 			TiltShip(); //Tilt the ship
 		}
 	}

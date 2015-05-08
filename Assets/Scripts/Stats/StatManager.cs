@@ -44,6 +44,7 @@ public class StatManager : MonoBehaviour {
 		HandleDebugKeys();
 		UpdateDistance ();
 
+		//TODO : Put this elsewhere !
 		if (Input.GetButtonDown ("Quit")) {
 			Debug.Log ("Quit");
 		}
