@@ -35,7 +35,10 @@ public class InputManager : MonoBehaviour {
 		if(RightButtonsActive.Count > 0) shipControl.Input_Right = true;
 		else shipControl.Input_Right = false;
 
-		if(MiddleButtonsActive.Count > 0) shipControl.Input_Special = true;
+		if (MiddleButtonsActive.Count > 0) {
+			shipControl.Input_Special = true;
+			MiddleButtonsActive.Clear();
+		}
 		else shipControl.Input_Special = false;
 
 		if (DoubleClickedLeft == true) {

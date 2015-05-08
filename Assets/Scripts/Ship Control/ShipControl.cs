@@ -88,7 +88,7 @@ public class ShipControl : MonoBehaviour {
 	public bool Input_LeftRoll_OneTime = false;
 	public bool Input_RightRoll_OneTime = false;
 
-	private float SpeedDeltaTimeAdjuster = 50f;
+	private float SpeedDeltaTimeAdjuster = 40f;
 
 
 	void Awake() {
