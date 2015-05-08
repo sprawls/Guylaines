@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2faa4aaf92a2b4669a05f443e4b0d8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countdownValue: 0
 --- !u!222 &22208138
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -179,4 +180,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 108136}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

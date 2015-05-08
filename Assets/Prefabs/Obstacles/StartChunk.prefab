@@ -49,6 +49,7 @@ MonoBehaviour:
   layerMin: 0
   layerMax: 0
   currentLayer: 0
+  maxPoints: 0
   freeZoneLength: 200
 --- !u!1001 &100100000
 Prefab:
@@ -61,4 +62,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148088}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

@@ -1,57 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &187686
+--- !u!1 &160576
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 487686}
-  - 114: {fileID: 11487686}
+  - 4: {fileID: 460576}
+  - 114: {fileID: 11460576}
   m_Layer: 0
-  m_Name: MonoY
+  m_Name: TerrainGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &487686
+--- !u!4 &460576
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187686}
+  m_GameObject: {fileID: 160576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.01200247, y: -103.227913, z: 301.360443}
+  m_LocalPosition: {x: 236.57811, y: 40.3503418, z: 319.853638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11487686
+--- !u!114 &11460576
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187686}
+  m_GameObject: {fileID: 160576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65b7bc564532541429ee166b64ae573f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f51177fb7958ee42a2a7173f74e1374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floors:
-  - {fileID: 11421002, guid: ec6b7d59d5ae9014186290c0bea3a28f, type: 2}
-  availableItem:
-  - {fileID: 11424458, guid: db1992bd4e28ada499ad4a4fbc8d0973, type: 2}
-  availablePrefab:
-  - {fileID: 11483008, guid: cc6c6fefa0e43ec4f8ce45e1b3ad56df, type: 2}
-  NbOfUsedPrefab: 0
-  layerMin: 6
-  layerMax: -1
-  currentLayer: 0
-  maxPoints: 0
-  monoObject:
-  - {fileID: 11415094, guid: 71df670c31d3fce4e97e3ec054521ecf, type: 2}
+  timeInitialization: 1
+  seed: 0
+  forcedWidth: 0
+  sizeChunk: 800
+  loadDistance: 400
+  ChunkSpecifier:
+  - {fileID: 11431040, guid: 15cdb5f192cab2f4eb025c561dfb1c0d, type: 2}
+  - {fileID: 11448088, guid: 497001cc1ae149e43a75edf1b301b236, type: 2}
+  - {fileID: 11487686, guid: 8d4fe5f3d6f11ab4f9345b3725693fc9, type: 2}
+  layer: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -61,6 +58,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 187686}
+  m_RootGameObject: {fileID: 160576}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

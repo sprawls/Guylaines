@@ -248,9 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8ef69f8f9df4ec98ad678a7f229223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelText: {fileID: 11494896}
-  multiplierText: {fileID: 0}
-  xpSlider: {fileID: 0}
 --- !u!114 &11494882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -734,4 +731,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194900}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

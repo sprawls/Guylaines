@@ -90,7 +90,10 @@ public class ShipControl : MonoBehaviour {
 
 	private float SpeedDeltaTimeAdjuster = 40f;
 
-
+	////////////////////////// CANNON //////////////////////////
+	public Player_BossTurret bossTurret;
+	private bool cannonIsOn = false;
+	
 	void Awake() {
 		rotatePlatform = (RotatingPlatform) gameObject.GetComponentInChildren<RotatingPlatform>();
 		translation = (Translation) gameObject.GetComponentInChildren<Translation>();
@@ -120,8 +123,27 @@ public class ShipControl : MonoBehaviour {
 		//Add SHAKESHAKESHAKE on speed
 		CheckShake ();
 
+		//DEBUG CANNON BOSS
+		if (Input.GetKeyDown (KeyCode.Z) && bossTurret.canChangeActivation) {
+			if(cannonIsOn) {
+				DeactivateTurretMode();
+				cannonIsOn = false;
+			} else {
+				ActivateTurretMode();
+				cannonIsOn = true;
+			}
+		}
 	}
 
+	public void ActivateTurretMode(){
+		bossTurret.gameObject.SetActive (true);
+		bossTurret.Activate ();
+	}
+
+	public void DeactivateTurretMode() {
+		bossTurret.Deactivate ();
+		//bossTurret.gameObject.SetActive (false);
+	}
 
 	void MoveShip() {
 		if(isDead == false) { //Move the ship based on its rotation
