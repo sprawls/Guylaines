@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 
+
+
 public class ItemUIBehaviour : MonoBehaviour {
 	public static ItemUIBehaviour Instance { get; private set; }
 

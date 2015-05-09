@@ -1,17 +1,27 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public class Player_BossTurret : MonoBehaviour {
 
-	//Components
+	//Components Model
+	[Header("Animation Components")]
 	public GameObject CannonModel;
+	public GameObject Model;
+
+	//components Particles
+	[Header("Particles Components")]
 	public ParticleSystem chargeParticles;
 	public ParticleSystem readyParticles;
+    public GameObject shootParticles;
 
-	public bool canChangeActivation = true;
+	[Header("Stats")]
 
 	//Stats
 	public float reloadTime = 5f;
+
+	//States
+	[HideInInspector] public bool canChangeActivation = true;
 	private bool shoot_ready;
 
 
@@ -32,13 +42,17 @@ public class Player_BossTurret : MonoBehaviour {
 	}
 
 	public void Activate() {
-		StartCoroutine (CannonAnimation (25, 90));
+		StartCoroutine (ActivateCoroutine ());
+		StartCoroutine(ModelAnimation(new Vector3(0,-0.5f,0), new Vector3(0,0,0)));
+		StartCoroutine (CannonAnimation (90, 25));
 		StartCoroutine (Reload ());
 	}
 
 	public void Deactivate() {
-		StartCoroutine (CannonAnimation (90, 25));
-
+        StopAllCoroutines();
+		StartCoroutine (CannonAnimation (25, 90));
+		StartCoroutine(ModelAnimation(new Vector3(0,0,0), new Vector3(0,-0.5f,0)));
+		StartCoroutine (DeactivateCoroutine ());
 
 		chargeParticles.Stop ();
 		readyParticles.Stop ();
@@ -46,18 +60,51 @@ public class Player_BossTurret : MonoBehaviour {
 	}
 
 	void Shoot() {
-		readyParticles.Emit (100);
+        //Visuals
+        Vector3 target = new Vector3(0, 100, 500);
+        ShowShootParticles(target);
+		//Logic
+        //TODO ONCE BOSS IS PARTLY DONE
+
+        //Start Reload
 		StartCoroutine (Reload ());
 	}
-	
+
+    void ShowShootParticles(Vector3 targetPosition) {
+        GameObject newParticles = ((GameObject)Instantiate(shootParticles, chargeParticles.transform.position, Quaternion.identity));
+        SetBeamValues beamValues = newParticles.GetComponentInChildren<SetBeamValues>();
+        beamValues.SetBeamPositions(Vector3.zero, targetPosition);
+        readyParticles.Emit(100);
+    }
 
 	IEnumerator CannonAnimation(float s, float e) {
 		canChangeActivation = false;
 		for (float i = 0; i < 1; i += Time.deltaTime/animationTime_Activation) {
-			CannonModel.transform.localEulerAngles = new Vector3(Mathf.Lerp (e,s,i), 0,0 );
+			CannonModel.transform.localEulerAngles = new Vector3(Mathf.Lerp (s,e,i), 0,0 );
 			yield return null;
 		}
+		CannonModel.transform.localEulerAngles = new Vector3(e,0,0);
 		canChangeActivation = true;
+
+	}
+
+	IEnumerator ModelAnimation(Vector3 s, Vector3 e) {
+		for (float i = 0; i < 1; i += Time.deltaTime/animationTime_Activation) {
+			Model.transform.localPosition = Vector3.Lerp (s,e,i);
+			yield return null;
+		}
+		Model.transform.localPosition = e;
+	}
+
+	IEnumerator ActivateCoroutine() {
+		Model.SetActive (true);
+		yield return new WaitForSeconds (animationTime_Activation);
+
+	}
+
+	IEnumerator DeactivateCoroutine() {
+		yield return new WaitForSeconds (animationTime_Activation);
+		Model.SetActive (false);
 	}
 
 	IEnumerator Reload() {

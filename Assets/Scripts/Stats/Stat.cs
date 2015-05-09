@@ -26,7 +26,7 @@ public class Stat {
 		XP += (int)(value * Multiplier);
         if (Level < 9999)
         {
-			if(xpNeeded[_level-1] != null) {
+			if(xpNeeded.Length > Level-1) {
 				//Level = 1 + XP / xpNeeded[_level-1];
 				Level = 1 + XP / XP_TO_LEVEL;
 			} else {

@@ -88,7 +88,7 @@ public class ShipControl : MonoBehaviour {
 	public bool Input_LeftRoll_OneTime = false;
 	public bool Input_RightRoll_OneTime = false;
 
-	private float SpeedDeltaTimeAdjuster = 40f;
+	[HideInInspector] public float SpeedDeltaTimeAdjuster = 40f;
 
 	////////////////////////// CANNON //////////////////////////
 	public Player_BossTurret bossTurret;
