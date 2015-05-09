@@ -38,7 +38,6 @@ public class SetBeamValues : MonoBehaviour {
 	}
 
     public void SetBeamPositions(Vector3 start, Vector3 end) {
-        Debug.Log(lineRenderer);
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
         curStartPos = start;

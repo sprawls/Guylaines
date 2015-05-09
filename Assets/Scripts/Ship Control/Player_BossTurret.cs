@@ -14,11 +14,13 @@ public class Player_BossTurret : MonoBehaviour {
 	public ParticleSystem chargeParticles;
 	public ParticleSystem readyParticles;
     public GameObject shootParticles;
+    public GameObject hitParticles;
 
 	[Header("Stats")]
 
 	//Stats
 	public float reloadTime = 5f;
+    private LayerMask bossLayerMask = (1 << 12); //Only Boss Layer
 
 	//States
 	[HideInInspector] public bool canChangeActivation = true;
@@ -36,7 +38,6 @@ public class Player_BossTurret : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.X) && shoot_ready) {
-			Debug.Log ("Shoot");
 			Shoot ();
 		}
 	}
@@ -60,11 +61,20 @@ public class Player_BossTurret : MonoBehaviour {
 	}
 
 	void Shoot() {
+        //Logic
+        //TODO ONCE BOSS IS PARTLY DONE
+        Debug.DrawRay(chargeParticles.transform.position, new Vector3(0, 80, 500), Color.white, 5f);
+
+        RaycastHit hit;
+        if (Physics.Raycast(chargeParticles.transform.position, new Vector3(0, 80, 500).normalized,out hit, new Vector3(0, 80, 500).magnitude, bossLayerMask)) {
+            Debug.Log(hit.collider.gameObject);
+            Instantiate(hitParticles, hit.point, Quaternion.identity);
+        }
+
         //Visuals
         Vector3 target = new Vector3(0, 100, 500);
         ShowShootParticles(target);
-		//Logic
-        //TODO ONCE BOSS IS PARTLY DONE
+		
 
         //Start Reload
 		StartCoroutine (Reload ());
@@ -76,6 +86,7 @@ public class Player_BossTurret : MonoBehaviour {
         beamValues.SetBeamPositions(Vector3.zero, targetPosition);
         readyParticles.Emit(100);
     }
+
 
 	IEnumerator CannonAnimation(float s, float e) {
 		canChangeActivation = false;

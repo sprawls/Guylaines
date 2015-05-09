@@ -84,7 +84,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &194766
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173218}
   m_LocalRotation: {x: -.698243856, y: 0, z: 0, w: .715860069}
-  m_LocalPosition: {x: 0, y: .435000002, z: .00899999961}
+  m_LocalPosition: {x: 0, y: .479999989, z: .0109999999}
   m_LocalScale: {x: 1, y: 1.00010324, z: 1.00010324}
   m_Children: []
   m_Father: {fileID: 466544}
@@ -144,7 +144,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125836}
-  m_LocalRotation: {x: .216439635, y: 0, z: 0, w: .976296008}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: .667000055, z: -.361000061}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children:
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc3597ac61c68d4288f6237b4734057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rate: .5
 --- !u!114 &11441078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,9 +264,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CannonModel: {fileID: 125836}
+  Model: {fileID: 179562}
   chargeParticles: {fileID: 19883466}
   readyParticles: {fileID: 19821742}
+  shootParticles: {fileID: 176776, guid: d5c547811945cf24eaa6cf325b09a0ba, type: 2}
+  hitParticles: {fileID: 155032, guid: f8bb1fe359a987e4a9bb45996c931aa8, type: 2}
   reloadTime: 5
+  canChangeActivation: 1
 --- !u!114 &11467552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc3597ac61c68d4288f6237b4734057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rate: .5
 --- !u!198 &19821742
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -284,12 +290,12 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173218}
   lengthInSec: 5
-  startDelay: 2
+  startDelay: 0
   speed: 1
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -431,10 +437,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294243572
+        rgba: 4289440767
       minMaxState: 0
     startSize:
-      scalar: .300000012
+      scalar: .25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -449,7 +455,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .333333313
+          value: .200000003
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -487,7 +493,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: .00999999978
-    angle: 50
+    angle: 30
     length: 5
     boxX: .200000003
     boxY: .100000001
@@ -500,7 +506,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 15
+      scalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -623,7 +629,7 @@ ParticleSystem:
           rgba: 4294967295
         key2:
           serializedVersion: 2
-          rgba: 0
+          rgba: 4278190080
         key3:
           serializedVersion: 2
           rgba: 0
@@ -648,15 +654,15 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 11758
-        atime2: 32189
-        atime3: 65535
+        atime1: 4048
+        atime2: 19082
+        atime3: 32189
         atime4: 65535
         atime5: 0
         atime6: 0
         atime7: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 3
+        m_NumAlphaKeys: 4
       minGradient:
         key0:
           serializedVersion: 2
@@ -1297,12 +1303,12 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144868}
   lengthInSec: 5
-  startDelay: 2
+  startDelay: 1
   speed: 1
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -2327,7 +2333,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_MaxParticleSize: .5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0

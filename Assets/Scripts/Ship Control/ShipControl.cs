@@ -162,8 +162,13 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+    public float getForwardSpeed() {
+        return (startSpeed + additionalSpeed);
+    }
+
 	void CalculateForwardSpeed() {
-		forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level);
+		//forwardSpeed = startSpeed + (speedIncrementPerLevel* StatManager.Instance.Speed.Level); //Removed since rework
+        forwardSpeed = startSpeed;
 		forwardSpeed += additionalSpeed;
 	}
 
