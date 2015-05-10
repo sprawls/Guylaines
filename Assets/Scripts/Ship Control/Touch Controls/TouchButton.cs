@@ -7,6 +7,7 @@ public class TouchButton : MonoBehaviour {
 	public bool isMiddle = false;
 	public bool isLeft = false;
 	public bool isRight = false;
+    public bool isShoot = false;
 
 	private InputManager inputManager;
 
@@ -30,6 +31,9 @@ public class TouchButton : MonoBehaviour {
 			if (isRight) {
 				inputManager.AddRightButton (gameObject);	
 			}
+            if (isShoot) {
+                inputManager.AddShootButton(gameObject);
+            }
 		} else {
 			inputManager.RemoveMiddleButton(gameObject);
 			inputManager.RemoveLeftButton(gameObject);

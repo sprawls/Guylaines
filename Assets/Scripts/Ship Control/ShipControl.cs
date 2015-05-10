@@ -87,6 +87,7 @@ public class ShipControl : MonoBehaviour {
 	public bool Input_Special = false;
 	public bool Input_LeftRoll_OneTime = false;
 	public bool Input_RightRoll_OneTime = false;
+    public bool Input_Shoot = false;
 
 	[HideInInspector] public float SpeedDeltaTimeAdjuster = 40f;
 
@@ -117,6 +118,8 @@ public class ShipControl : MonoBehaviour {
 			CheckSpecialPower ();
 			//Check Barrel Roll
 			CheckBarrelRoll ();
+            //Check Shoot
+            CheckShoot();
 		}
 		//Move & Tilt
 		MoveShip ();
@@ -212,6 +215,12 @@ public class ShipControl : MonoBehaviour {
 		}
 
 	}
+
+    void CheckShoot() {
+        if (Input_Shoot && cannonIsOn) {
+            bossTurret.Shoot();
+        }
+    }
 
 	/*
 	void OLD_SuperPower() {

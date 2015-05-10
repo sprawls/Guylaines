@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour {
 	public List<GameObject> MiddleButtonsActive;
 	public bool DoubleClickedLeft = false;
 	public bool DoubleClickedRight = false;
+    public bool ShootButtonClicked = false;
 
 
 	void Start() {
@@ -21,6 +22,7 @@ public class InputManager : MonoBehaviour {
 		MiddleButtonsActive = new List<GameObject> ();
 		DoubleClickedLeft = false;
 		DoubleClickedRight = false;
+        ShootButtonClicked = false;
 
 	}
 	
@@ -29,6 +31,7 @@ public class InputManager : MonoBehaviour {
 
 		CheckKeyboardControls (); //This could be put in another script
 
+        //Mouvement Buttons
 		if(LeftButtonsActive.Count > 0) shipControl.Input_Left = true;
 		else shipControl.Input_Left = false;
 
@@ -41,6 +44,7 @@ public class InputManager : MonoBehaviour {
 		}
 		else shipControl.Input_Special = false;
 
+        //DoubleClicks
 		if (DoubleClickedLeft == true) {
 			DoubleClickedLeft = false;
 			shipControl.Input_LeftRoll_OneTime = true;
@@ -52,6 +56,14 @@ public class InputManager : MonoBehaviour {
 			shipControl.Input_RightRoll_OneTime = true;
 		} else
 			shipControl.Input_RightRoll_OneTime = false;
+
+        //Shoot Button
+        if (ShootButtonClicked == true) {
+            ShootButtonClicked = false;
+            shipControl.Input_Shoot = true;
+        } else {
+            shipControl.Input_Shoot = false;
+        }
 	}
 
 
@@ -84,6 +96,10 @@ public class InputManager : MonoBehaviour {
 	public void AddDoubleClickRight(GameObject g) {
 		DoubleClickedRight = true;
 	}
+    //Shoot Button
+    public void AddShootButton(GameObject g) {
+        ShootButtonClicked = true;
+    }
 
 
 
@@ -113,5 +129,9 @@ public class InputManager : MonoBehaviour {
 		if (Input.GetAxis("BarrelRollRight") > 0 || Input.GetButtonDown("BarrelRollRight")) {
 			AddDoubleClickRight(gameObject);
 		}
+        //Shoot
+        if (Input.GetKeyDown(KeyCode.X)) {
+            AddShootButton(gameObject);
+        }
 	}
 }

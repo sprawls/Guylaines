@@ -8,6 +8,7 @@ public class Player_BossTurret : MonoBehaviour {
 	[Header("Animation Components")]
 	public GameObject CannonModel;
 	public GameObject Model;
+    public GameObject CannonReadyUI;
 
 	//components Particles
 	[Header("Particles Components")]
@@ -37,9 +38,7 @@ public class Player_BossTurret : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.X) && shoot_ready) {
-			Shoot ();
-		}
+		
 	}
 
 	public void Activate() {
@@ -60,24 +59,24 @@ public class Player_BossTurret : MonoBehaviour {
 		shoot_ready = false;
 	}
 
-	void Shoot() {
-        //Logic
-        //TODO ONCE BOSS IS PARTLY DONE
-        Debug.DrawRay(chargeParticles.transform.position, new Vector3(0, 80, 500), Color.white, 5f);
+	public void Shoot() {
+        if (shoot_ready) {
+            //todo : Logic
+            Vector3 target = new Vector3(0, 100, 500); //Basic target if we miss
 
-        RaycastHit hit;
-        if (Physics.Raycast(chargeParticles.transform.position, new Vector3(0, 80, 500).normalized,out hit, new Vector3(0, 80, 500).magnitude, bossLayerMask)) {
-            Debug.Log(hit.collider.gameObject);
-            Instantiate(hitParticles, hit.point, Quaternion.identity);
+            RaycastHit hit;
+            if (Physics.Raycast(chargeParticles.transform.position, new Vector3(0, 80, 500).normalized, out hit, new Vector3(0, 80, 500).magnitude, bossLayerMask)) {
+                Debug.Log("Hit object " + hit.collider.gameObject + "   at position  " + hit.point);
+                ((GameObject)Instantiate(hitParticles, hit.point, Quaternion.identity)).AddComponent<FollowPlayerSpeed>();
+                target = hit.point - chargeParticles.transform.position;
+            }
+
+            //Visuals
+            ShowShootParticles(target);
+
+            //Start Reload
+            StartCoroutine(Reload());
         }
-
-        //Visuals
-        Vector3 target = new Vector3(0, 100, 500);
-        ShowShootParticles(target);
-		
-
-        //Start Reload
-		StartCoroutine (Reload ());
 	}
 
     void ShowShootParticles(Vector3 targetPosition) {
@@ -85,6 +84,14 @@ public class Player_BossTurret : MonoBehaviour {
         SetBeamValues beamValues = newParticles.GetComponentInChildren<SetBeamValues>();
         beamValues.SetBeamPositions(Vector3.zero, targetPosition);
         readyParticles.Emit(100);
+    }
+
+    void ToggleCannonUI(bool on) {
+        if (on) {
+            CannonReadyUI.SetActive(true);
+        } else {
+            CannonReadyUI.SetActive(false);
+        }
     }
 
 
@@ -116,15 +123,18 @@ public class Player_BossTurret : MonoBehaviour {
 	IEnumerator DeactivateCoroutine() {
 		yield return new WaitForSeconds (animationTime_Activation);
 		Model.SetActive (false);
+        ToggleCannonUI(false);
 	}
 
-	IEnumerator Reload() {
-		shoot_ready = false;
-		chargeParticles.Play ();
-		readyParticles.Stop ();
-		yield return new WaitForSeconds (reloadTime);
-		chargeParticles.Stop ();
-		readyParticles.Play ();
-		shoot_ready = true;
-	}
+    IEnumerator Reload() {
+        ToggleCannonUI(false);
+        shoot_ready = false;
+        chargeParticles.Play();
+        readyParticles.Stop();
+        yield return new WaitForSeconds(reloadTime);
+        chargeParticles.Stop();
+        readyParticles.Play();
+        shoot_ready = true;
+        ToggleCannonUI(true);
+    }
 }
