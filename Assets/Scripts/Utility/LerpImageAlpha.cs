@@ -22,7 +22,6 @@ public class LerpImageAlpha : MonoBehaviour {
 
 
     void OnEnable() {
-        Debug.Log("FSDDSFSDFS");
         StopAllCoroutines();
         StartLerp();
     }

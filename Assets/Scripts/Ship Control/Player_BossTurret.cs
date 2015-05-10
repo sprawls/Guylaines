@@ -63,13 +63,21 @@ public class Player_BossTurret : MonoBehaviour {
         if (shoot_ready) {
             //todo : Logic
             Vector3 target = new Vector3(0, 100, 500); //Basic target if we miss
-
             RaycastHit hit;
             if (Physics.Raycast(chargeParticles.transform.position, new Vector3(0, 80, 500).normalized, out hit, new Vector3(0, 80, 500).magnitude, bossLayerMask)) {
-                Debug.Log("Hit object " + hit.collider.gameObject + "   at position  " + hit.point);
+                //Debug.Log("Hit object " + hit.collider.gameObject + "   at position  " + hit.point);
+                //Logic
+                Boss boss = hit.collider.gameObject.GetComponentInParent<Boss>();
+                Debug.Log(boss);
+                if (boss != null) {
+                    boss.Boss_hit();
+                }
+
+                //Visual
                 ((GameObject)Instantiate(hitParticles, hit.point, Quaternion.identity)).AddComponent<FollowPlayerSpeed>();
                 target = hit.point - chargeParticles.transform.position;
             }
+
 
             //Visuals
             ShowShootParticles(target);

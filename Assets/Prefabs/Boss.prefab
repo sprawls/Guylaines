@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 494288}
+  - 114: {fileID: 11418388}
   m_Layer: 12
   m_Name: Boss
   m_TagString: Untagged
@@ -131,6 +132,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .0992726237, y: .0603244081, z: .00582789071}
   m_Center: {x: 0, y: -.0122366613, z: -.00888272561}
+--- !u!114 &11418388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69624ea5291094a4a997f363f6265184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossDeathParticles: {fileID: 0}
 --- !u!114 &11457562
 MonoBehaviour:
   m_ObjectHideFlags: 1
