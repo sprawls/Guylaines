@@ -54,9 +54,12 @@ public class Player_BossTurret : MonoBehaviour {
 		StartCoroutine(ModelAnimation(new Vector3(0,0,0), new Vector3(0,-0.5f,0)));
 		StartCoroutine (DeactivateCoroutine ());
 
+        StopCoroutine("Reload");
 		chargeParticles.Stop ();
 		readyParticles.Stop ();
 		shoot_ready = false;
+        ToggleCannonUI(false);
+
 	}
 
 	public void Shoot() {
@@ -68,7 +71,6 @@ public class Player_BossTurret : MonoBehaviour {
                 //Debug.Log("Hit object " + hit.collider.gameObject + "   at position  " + hit.point);
                 //Logic
                 Boss boss = hit.collider.gameObject.GetComponentInParent<Boss>();
-                Debug.Log(boss);
                 if (boss != null) {
                     boss.Boss_hit();
                 }
@@ -83,7 +85,7 @@ public class Player_BossTurret : MonoBehaviour {
             ShowShootParticles(target);
 
             //Start Reload
-            StartCoroutine(Reload());
+            StartCoroutine("Reload");
         }
 	}
 
@@ -95,6 +97,7 @@ public class Player_BossTurret : MonoBehaviour {
     }
 
     void ToggleCannonUI(bool on) {
+        Debug.Log("Toggle : " + on);
         if (on) {
             CannonReadyUI.SetActive(true);
         } else {
@@ -104,14 +107,11 @@ public class Player_BossTurret : MonoBehaviour {
 
 
 	IEnumerator CannonAnimation(float s, float e) {
-		canChangeActivation = false;
 		for (float i = 0; i < 1; i += Time.deltaTime/animationTime_Activation) {
 			CannonModel.transform.localEulerAngles = new Vector3(Mathf.Lerp (s,e,i), 0,0 );
 			yield return null;
 		}
 		CannonModel.transform.localEulerAngles = new Vector3(e,0,0);
-		canChangeActivation = true;
-
 	}
 
 	IEnumerator ModelAnimation(Vector3 s, Vector3 e) {
@@ -123,14 +123,17 @@ public class Player_BossTurret : MonoBehaviour {
 	}
 
 	IEnumerator ActivateCoroutine() {
+        canChangeActivation = false;
 		Model.SetActive (true);
 		yield return new WaitForSeconds (animationTime_Activation);
-
+        canChangeActivation = true;
 	}
 
 	IEnumerator DeactivateCoroutine() {
+        canChangeActivation = false;
 		yield return new WaitForSeconds (animationTime_Activation);
 		Model.SetActive (false);
+        canChangeActivation = true;
         ToggleCannonUI(false);
 	}
 

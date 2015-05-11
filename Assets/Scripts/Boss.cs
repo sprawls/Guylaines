@@ -37,6 +37,9 @@ public class Boss : MonoBehaviour {
 
     void Kill() {
         if (bossDeathParticles != null) Instantiate(bossDeathParticles,transform.position,Quaternion.identity);
+        ChunkManager chunkM = GameObject.FindGameObjectWithTag("ChunkManager").GetComponent<ChunkManager>();
+        chunkM.BossDeath();
+
         Destroy(gameObject);
     }
 }

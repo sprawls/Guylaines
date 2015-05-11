@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 47.5, z: 158}
+  m_LocalPosition: {x: -475, y: 48, z: 158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 457762}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69624ea5291094a4a997f363f6265184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossDeathParticles: {fileID: 0}
+  bossDeathParticles: {fileID: 155032, guid: f8bb1fe359a987e4a9bb45996c931aa8, type: 2}
 --- !u!114 &11457562
 MonoBehaviour:
   m_ObjectHideFlags: 1

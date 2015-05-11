@@ -11,6 +11,7 @@ TagManager:
   - Holder
   - LNF
   - InputManager
+  - ChunkManager
   layers:
   - Default
   - TransparentFX

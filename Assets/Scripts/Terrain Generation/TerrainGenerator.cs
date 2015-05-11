@@ -43,8 +43,8 @@ public class TerrainGenerator : MonoBehaviour
     }
 	// Use this for initialization
 	void Start () {
-        
-        player = GameObject.Find("Ship Prefab");
+
+        player = (GameObject)GameObject.FindGameObjectWithTag("Player");
         ChunkSpecifier.Sort(delegate(Chunk c1, Chunk c2)
         {
             if (c1.layerMin < c2.layerMin) return -1;

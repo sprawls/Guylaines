@@ -127,25 +127,32 @@ public class ShipControl : MonoBehaviour {
 		CheckShake ();
 
 		//DEBUG CANNON BOSS
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            Debug.Log(bossTurret.canChangeActivation);
+        }
 		if (Input.GetKeyDown (KeyCode.Z) && bossTurret.canChangeActivation) {
 			if(cannonIsOn) {
 				DeactivateTurretMode();
-				cannonIsOn = false;
 			} else {
-				ActivateTurretMode();
-				cannonIsOn = true;
+				ActivateTurretMode();	
 			}
 		}
 	}
 
 	public void ActivateTurretMode(){
+
 		bossTurret.gameObject.SetActive (true);
 		bossTurret.Activate ();
+        cannonIsOn = true;
+        
 	}
 
 	public void DeactivateTurretMode() {
+       
 		bossTurret.Deactivate ();
 		//bossTurret.gameObject.SetActive (false);
+        cannonIsOn = false;
+       
 	}
 
 	void MoveShip() {
