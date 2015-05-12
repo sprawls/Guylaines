@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour {
     private bool inBossPhase = false;
 
 	// Use this for initialization
-	void Start () {
+    void Awake() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ShipControl>();
+    }
+	void Start () {
+        
         chunkManager = GameObject.FindGameObjectWithTag("ChunkManager").GetComponent<ChunkManager>();
 
         //Start
-        StartBossPhase();
+        StartCoroutine(TEMP_BossCooldown());
         chunkManager.CreateNewChuckSpecifier_Level(3, 3, 3);
 	}
 	
@@ -48,7 +51,8 @@ public class GameManager : MonoBehaviour {
 
     void SpawnBoss() {
         //instantiate boss
-        Vector3 pos = player.transform.position + new Vector3(0, 50, 250);
+        //Vector3 targetPos = player.transform.position + new Vector3(0, 50, 250);
+        Vector3 pos = player.transform.position;
         Instantiate(boss, pos, Quaternion.identity);
         //Activate turret
         player.ActivateTurretMode();
