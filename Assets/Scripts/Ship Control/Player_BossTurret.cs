@@ -97,7 +97,6 @@ public class Player_BossTurret : MonoBehaviour {
     }
 
     void ToggleCannonUI(bool on) {
-        Debug.Log("Toggle : " + on);
         if (on) {
             CannonReadyUI.SetActive(true);
         } else {
@@ -134,7 +133,6 @@ public class Player_BossTurret : MonoBehaviour {
 		yield return new WaitForSeconds (animationTime_Activation);
 		Model.SetActive (false);
         canChangeActivation = true;
-        ToggleCannonUI(false);
 	}
 
     IEnumerator Reload() {
@@ -146,6 +144,6 @@ public class Player_BossTurret : MonoBehaviour {
         chargeParticles.Stop();
         readyParticles.Play();
         shoot_ready = true;
-        ToggleCannonUI(true);
+        if(readyParticles.gameObject.active) ToggleCannonUI(true);
     }
 }

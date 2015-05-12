@@ -126,17 +126,7 @@ public class ShipControl : MonoBehaviour {
 		//Add SHAKESHAKESHAKE on speed
 		CheckShake ();
 
-		//DEBUG CANNON BOSS
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            Debug.Log(bossTurret.canChangeActivation);
-        }
-		if (Input.GetKeyDown (KeyCode.Z) && bossTurret.canChangeActivation) {
-			if(cannonIsOn) {
-				DeactivateTurretMode();
-			} else {
-				ActivateTurretMode();	
-			}
-		}
+	
 	}
 
 	public void ActivateTurretMode(){

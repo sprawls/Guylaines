@@ -25,7 +25,8 @@ public class SetBeamValues : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (BeamFollowPlayerSpeed && ship != null) {
-            float speed = (ship.forwardSpeed + ship.additionalSpeed) * Time.deltaTime * ship.SpeedDeltaTimeAdjuster;
+            float speed = ship.getForwardSpeed();
+            speed = speed * Time.deltaTime * ship.SpeedDeltaTimeAdjuster;
             //Add speed to vectors
             curStartPos += new Vector3(0,0,speed);
             curEndPos += new Vector3(0, 0, speed);

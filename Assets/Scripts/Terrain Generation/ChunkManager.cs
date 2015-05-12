@@ -8,17 +8,12 @@ public class ChunkManager : MonoBehaviour {
     public List<Chunk> PossibleChunks;
     public List<Chunk> PossibleBossChunks;
 
-    //TEMP :: 
-    public GameObject boss;
-    private ShipControl player;
 
 	// Use this for initialization
 	void Start () {
 
-        //TEMP  
-        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ShipControl>();
-        StartCoroutine(TEMP_BossCooldown());
-        CreateNewChuckSpecifier_Level(3, 3, 3);
+
+
 	}
 	
 	// Update is called once per frame
@@ -67,21 +62,5 @@ public class ChunkManager : MonoBehaviour {
         newList.Add(allChunks[n]);
     }
 
-    public void BossDeath() {
-        //TEMP ::: StartCooldown till next boss, this will later be handled by a stat 
-        StartCoroutine(TEMP_BossCooldown());
-        player.DeactivateTurretMode();
-        CreateNewChuckSpecifier_Level(3, 3, 3);
-    }
-
-    IEnumerator TEMP_BossCooldown() {
-        yield return new WaitForSeconds(30f);
-        CreateNewChuckSpecifier_Boss(1, 1, 1);
-        yield return new WaitForSeconds(5f);
-        //instantiate boss
-        Vector3 pos = player.transform.position + new Vector3(0, 50, 150);
-        Instantiate(boss,pos,Quaternion.identity);
-        //Activate turret
-        player.ActivateTurretMode();
-    }
+   
 }

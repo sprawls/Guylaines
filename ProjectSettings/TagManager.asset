@@ -12,6 +12,7 @@ TagManager:
   - LNF
   - InputManager
   - ChunkManager
+  - GameManager
   layers:
   - Default
   - TransparentFX
